@@ -35,6 +35,20 @@ Then, in each project:
 /sumi:ship            # final gate and PR draft
 ```
 
+## Model routing — spend Opus only where it matters
+
+Sumitsubo routes work by role instead of running everything on one model:
+
+| Role | Model (balanced) | Does |
+|---|---|---|
+| `scout` | Haiku | Finds files, reads versions and docs, summarizes |
+| `builder` | Sonnet | Implements briefed tasks and slices, runs checks |
+| `architect` | Opus | Architecture, data models, migrations, slicing, trade-offs |
+| review lenses | Sonnet (Opus for high-risk security) | Context-free reviews |
+| session | `opusplan` | Opus while planning, Sonnet while executing |
+
+Switch per project with `/sumi:models balanced|economy|performance`. Profiles are applied by passing the model on every delegation, so agents never need editing.
+
 ## Companions
 
 Installing `sumi` and `sumi-design` also installs, as dependencies, curated pieces of Impeccable, Ponytail, Taste, Emil Kowalski's skills and Superpowers, referenced from their upstream repos (see [THIRD-PARTY.md](THIRD-PARTY.md)). Sumitsubo decides when each one is used; the full install adds about 6k tokens of always-on context.

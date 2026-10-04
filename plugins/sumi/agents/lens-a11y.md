@@ -3,6 +3,7 @@ name: lens-a11y
 description: Context-free review lens for accessibility (WCAG 2.2 AA): semantics, names, keyboard, focus, contrast, motion, forms, live regions. Use from /sumi:review when a diff touches markup, components, styles or interaction; give it only the diff range and lineage.
 tools: Read, Grep, Glob, Bash
 model: sonnet
+effort: medium
 color: yellow
 ---
 

@@ -12,7 +12,7 @@ const lines = [];
 const branch = currentBranch(root);
 const stack = Array.isArray(config.stack) ? config.stack.join(', ') : String(config.stack ?? '');
 const protectedBranches = config.protectedBranches ?? ['main', 'master'];
-lines.push(`Sumitsubo project. Branch: ${branch ?? 'unknown'}. Stack: ${stack || 'not set'}. Line budget per slice: ${config.lineBudget ?? 400}.`);
+lines.push(`Sumitsubo project. Branch: ${branch ?? 'unknown'}. Stack: ${stack || 'not set'}. Line budget per slice: ${config.lineBudget ?? 400}. Model profile: ${config.modelProfile ?? 'balanced'} (see sumi:model-routing).`);
 if (branch && protectedBranches.includes(branch) && config.requireFeatureBranch !== false) {
   lines.push(`You are on protected branch "${branch}": create a feature branch before editing code.`);
 }

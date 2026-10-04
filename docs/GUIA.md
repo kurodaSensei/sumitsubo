@@ -35,6 +35,25 @@ Sumitsubo es tu framework personal de IA para diseño y desarrollo web con Claud
 6. `/sumi-design:critique` sobre las pantallas: lente de diseño más la crítica y el audit de Impeccable.
 7. `/sumi:ship`: checks, criterios con evidencia y borrador del PR (simple o encadenado).
 
+## Modelos: Opus solo donde vale la pena
+
+Sumitsubo reparte el trabajo por rol para ahorrar tokens sin perder calidad:
+
+| Rol | Modelo (perfil balanced) | Qué hace |
+|---|---|---|
+| `scout` | Haiku | Busca archivos, lee versiones y documentación, resume |
+| `builder` | Sonnet | Implementa tareas y slices delegados, corre los checks |
+| `architect` | Opus | Arquitectura, modelo de datos, migraciones, división en slices |
+| Lentes de review | Sonnet (seguridad en Opus) | Reviews sin el contexto del autor |
+| Sesión principal | `opusplan` | Opus mientras planea, Sonnet mientras ejecuta |
+
+Cambia el perfil por proyecto con `/sumi:models balanced|economy|performance`:
+- **balanced** (por defecto): la tabla de arriba.
+- **economy**: todo en Sonnet salvo búsquedas y reviews simples en Haiku. Para proyectos pequeños o cuando estés cerca del límite de tu plan.
+- **performance**: Opus para decisiones y reviews, para trabajo delicado.
+
+Al cerrar una feature, el log anota cuántas delegaciones hubo por rol, para comparar perfiles entre proyectos.
+
 ## Lo que hacen los hooks (solo en proyectos con `.sumi/config.json`)
 
 - Bloquean el push y el commit a main/master/production, y pide confirmación para force push y para `reset --hard`.

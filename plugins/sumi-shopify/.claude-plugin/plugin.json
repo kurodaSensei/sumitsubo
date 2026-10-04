@@ -1,6 +1,6 @@
 {
   "name": "sumi-shopify",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Shopify Online Store 2.0 stack pack: Liquid, sections, blocks, schemas, snippets, theme performance and CLI workflow.",
   "author": {
     "name": "Alfredo Rodríguez"

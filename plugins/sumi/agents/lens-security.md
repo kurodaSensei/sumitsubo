@@ -2,7 +2,8 @@
 name: lens-security
 description: Context-free review lens for security: injection and XSS, authN/authZ, secrets, input validation, Firestore/Supabase rules, CSRF/nonces, unsafe dependencies, data exposure. Use from /sumi:review on high-risk diffs (auth, payments, permissions, data model, rules, APIs, webhooks); give it only the diff range and lineage.
 tools: Read, Grep, Glob, Bash
-model: inherit
+model: opus
+effort: high
 color: yellow
 ---
 

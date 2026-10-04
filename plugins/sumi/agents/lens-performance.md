@@ -3,6 +3,7 @@ name: lens-performance
 description: Context-free review lens for web performance: Core Web Vitals impact (LCP, INP, CLS), bundle size, images, fonts, third parties, rendering strategy, caching and data fetching waterfalls. Use from /sumi:review when a diff touches pages, components, dependencies, assets or data loading; give it only the diff range and lineage.
 tools: Read, Grep, Glob, Bash
 model: sonnet
+effort: medium
 color: yellow
 ---
 

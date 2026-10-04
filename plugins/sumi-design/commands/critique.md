@@ -6,7 +6,7 @@ argument-hint: "[files, route, or git range]"
 Target: $ARGUMENTS (default: visual files changed since the merge-base with the main branch).
 
 1. Confirm `DESIGN.md` exists. If not, stop and suggest `/sumi-design:direction`.
-2. Launch `sumi-design:lens-design` as a subagent with ONLY: the target (range/files/routes), the path to `DESIGN.md` and `design/brief.md`, and a dev server URL if one is running. Do not pass your own reasoning.
+2. Launch `sumi-design:lens-design` as a subagent (model per `sumi:model-routing`: `lens` for regular screens, `lens-high` for the home/hero or a full redesign) with ONLY: the target (range/files/routes), the path to `DESIGN.md` and `design/brief.md`, and a dev server URL if one is running. Do not pass your own reasoning.
 3. In parallel, if Impeccable is installed, run its critique and audit on the same target; if Emil Kowalski's `review-animations` is installed and motion changed, run it too.
 4. Merge findings, verify each blocker/major yourself, drop what you can disprove, and order by severity.
 5. Fix blockers and majors using tokens only. If a fix needs a new token, add it to DESIGN.md first.

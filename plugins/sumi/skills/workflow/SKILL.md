@@ -48,6 +48,8 @@ Before implementing a slice, forecast its size in changed lines. The budget is ~
 
 ## 5. Delegation briefs
 
+Route by role (`sumi:model-routing`): facts → `sumi:scout`, decisions → `sumi:architect`, implementation → `sumi:builder`, passing the `model` for the project's profile on every call.
+
 A subagent starts with zero context. Every brief contains: goal, exact files/paths, constraints and conventions that apply (name the skills), the acceptance check it must run, and the output you expect back (diff summary + evidence). Prefer one well-briefed subagent over several vague ones. Run independent subagents in parallel.
 
 ## 6. Pre-commit risk assessment

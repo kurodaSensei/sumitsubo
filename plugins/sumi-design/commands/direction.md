@@ -5,7 +5,7 @@ argument-hint: "[project or client name] [links to current site, competitors or 
 
 Project and references: $ARGUMENTS
 
-Follow `sumi-design:design-direction` stage by stage. Do not skip stages and do not write UI code during this command.
+Follow `sumi-design:design-direction` stage by stage. This is a decision-heavy command: run it with the architect-level model of the project's profile (`sumi:model-routing`), and use `sumi:scout` agents for the fact-gathering parts (repo, current site, competitors). Do not skip stages and do not write UI code during this command.
 
 1. Stage 0: check which companion skills are available (Impeccable, Taste, Emil Kowalski). Mention missing ones once and continue.
 2. Stage 1: build `design/brief.md`. Gather facts from the repo and any links first; then ask the user the remaining questions in one batch, with recommended answers.

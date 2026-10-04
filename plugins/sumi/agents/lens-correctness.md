@@ -3,6 +3,7 @@ name: lens-correctness
 description: Context-free review lens for correctness and reliability: logic errors, edge cases, error handling, data integrity, race conditions, types and test adequacy. Use from /sumi:review on a frozen diff; give it only the diff range and the lineage note, never the implementation conversation.
 tools: Read, Grep, Glob, Bash
 model: sonnet
+effort: medium
 color: yellow
 ---
 
