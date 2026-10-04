@@ -32,6 +32,7 @@ Rules:
 - One note per seam, next to the code it describes. No ponytail notes for things nobody would build anyway.
 - The reverse rule: adding complexity beyond the request (layers, options, generic helpers, plugins) needs a one-line justification in the feature file or PR. Simplicity is the default and does not need defending; complexity does.
 - When a trigger happens, implement the extension and delete the note in the same change.
+- Compatible with the Ponytail plugin (DietrichGebert/ponytail), which uses the same marker: if it is installed, its rules and `/ponytail-review` / `/ponytail-debt` apply too; the `extend when <trigger>` part is Sumitsubo's addition.
 - `/sumi:ship` lists the notes added in the diff under "Deliberate simplifications" in the PR, so the client and reviewers see the seams.
 
 ## Size and shape
