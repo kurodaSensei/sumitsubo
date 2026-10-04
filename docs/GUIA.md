@@ -14,11 +14,10 @@ Sumitsubo es tu framework personal de IA para diseño y desarrollo web con Claud
 2. En Claude Code:
    ```
    /plugin marketplace add <tu-usuario>/sumitsubo
-   /plugin install sumi@sumitsubo
-   /plugin install sumi-design@sumitsubo
+   /plugin install sumi-design@sumitsubo   # trae sumi y todos los compañeros
    /plugin install sumi-nuxt@sumitsubo
    ```
-3. Instala los compañeros de diseño con `/sumi-design:deps`: Impeccable, Taste y las skills de Emil Kowalski. No vienen incluidos dentro de Sumitsubo; así se actualizan solos y respetan sus licencias.
+3. Los compañeros se instalan solos como dependencias: Impeccable, Ponytail, 5 skills de Taste, 3 de Emil Kowalski y 5 de Superpowers. Sumitsubo no los copia: los referencia desde el repo de cada autor, así que se actualizan desde ahí y respetan sus licencias. `/sumi-design:deps` verifica que estén y detecta copias duplicadas.
 
 ## Flujo en un proyecto nuevo de cliente
 

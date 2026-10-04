@@ -68,6 +68,21 @@ Review per slice, not per micro-task.
 - If a feature exceeds one reviewable unit, plan **chained PRs**: each PR builds on the previous one and ends in a final tracker PR that merges to main; or, for small fast-moving work, each slice merges to main independently. Record the choice in the feature file.
 - Use `/sumi:ship` to run the final checks and draft the PR description.
 
+## Companions (installed as dependencies of `sumi`)
+
+Sumitsubo owns the process (tiers, feature file, budgets, reviews). Companion skills are called at specific moments; they never replace the tier decision.
+
+| Moment | Companion skill | How Sumitsubo uses it |
+|---|---|---|
+| Any bug, failing test or unexpected behavior | `systematic-debugging` (superpowers-debugging) | Root cause before any fix; the fix is then a normal T0/T1 change with a regression test |
+| Implementing logic with branches, or any bug fix | `test-driven-development` (superpowers-tdd) | Write the failing test first when the project has a test runner; the passing test is the task's evidence |
+| Before ticking a task, closing a slice or saying "done" | `verification-before-completion` (superpowers-verification) | Run the checks and paste the evidence; aligns with "done means verified" |
+| Parallel subagents or risky experiments | `using-git-worktrees` (superpowers-worktrees) | One worktree per parallel slice so agents don't collide |
+| Processing lens findings from `/sumi:review` | `receiving-code-review` (superpowers-review-intake) | Verify each finding against the code before applying it; push back on wrong ones |
+| Every change | `ponytail` | Minimal solution first; seams marked with `ponytail:` notes (see `sumi:code-quality`) |
+
+Deliberately NOT included from superpowers: its session bootstrap, brainstorming, writing/executing plans, subagent-driven development and branch finishing. Sumitsubo's tiers, feature file, `/sumi:review` and `/sumi:ship` cover those, and two competing workflows in one session degrade both.
+
 ## Anti-patterns
 
 - Creating a feature file for a one-line fix, or skipping it for a migration.

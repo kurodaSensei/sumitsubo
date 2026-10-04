@@ -17,7 +17,9 @@ function frontmatter(p) {
 
 const mk = json(join(root, '.claude-plugin/marketplace.json'));
 let skills = 0, agents = 0, commands = 0;
+let companions = 0;
 for (const p of mk?.plugins ?? []) {
+  if (typeof p.source !== 'string') { companions++; if (!p.description) errors.push(`${p.name}: companion without description`); continue; } // upstream reference, validated by `claude plugin validate`
   const dir = join(root, p.source);
   const pj = json(join(dir, '.claude-plugin/plugin.json'));
   if (!pj) continue;
@@ -60,6 +62,6 @@ for (const f of walk(join(root, 'plugins')).filter((x) => x.endsWith('.md'))) {
     if (!existsSync(join(root, 'plugins', pluginDir, m[1]))) errors.push(`${f}: broken reference ${m[1]}`);
   }
 }
-console.log(`plugins: ${mk?.plugins?.length ?? 0}, skills: ${skills}, agents: ${agents}, commands: ${commands}`);
+console.log(`plugins: ${(mk?.plugins?.length ?? 0) - companions} local + ${companions} companions, skills: ${skills}, agents: ${agents}, commands: ${commands}`);
 if (errors.length) { console.log('ERRORS:\n- ' + errors.join('\n- ')); process.exit(1); }
 console.log('OK');

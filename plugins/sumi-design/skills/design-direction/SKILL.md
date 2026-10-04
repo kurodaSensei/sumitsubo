@@ -7,13 +7,13 @@ description: The Sumitsubo creative-direction process that runs BEFORE any visua
 
 Generic AI design is what happens when the model fills every unspecified decision with the statistical average. The cure is to leave nothing unspecified: decide the direction deliberately, in writing, before anything is drawn or coded. This process produces `DESIGN.md`; every later screen is built from it.
 
-## Stage 0 — Tools check
+## Stage 0 — Companions
 
-Check which companion skills are available and use them at the marked stages:
-- **Impeccable** (`impeccable` commands, `PRODUCT.md`): product context, critique, audit, polish.
-- **Taste** (`design-taste-frontend` and its variants): calibrating variance, motion intensity and density dials; style families.
-- **Emil Kowalski skills** (`emil-design-eng`, `animation-vocabulary`, `review-animations`…): motion and interaction craft. Load one or two at a time.
-If any are missing, continue (this process stands alone) and suggest `/sumi-design:deps`.
+Installed automatically as dependencies of `sumi-design` (referenced from their upstream repos):
+- **Impeccable** (`impeccable`): product context (`PRODUCT.md`), critique, audit, polish, anti-pattern detectors. Stages 1 and 6.
+- **Taste** (`taste` = design-taste-frontend, plus style families `taste-minimalist`, `taste-brutalist`, `taste-soft`, `taste-redesign`): variance / motion / density dials and style references. Stage 3; `taste-redesign` for redesigns of existing sites.
+- **Emil Kowalski** (`emil-design-eng`, `emil-review-animations`, `emil-animation-vocabulary`): motion craft and motion audits. Stage 6 and `sumi-design:motion`.
+If any is missing (e.g. installed without dependencies), run `/sumi-design:deps`.
 
 ## Stage 1 — Discovery brief
 

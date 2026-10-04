@@ -5,44 +5,245 @@
   },
   "metadata": {
     "description": "A personal AI framework for web design & development with Claude Code: engineering quality, accessibility, performance and design without AI slop.",
-    "version": "0.2.0"
+    "version": "0.3.0"
   },
   "plugins": [
     {
       "name": "sumi",
       "source": "./plugins/sumi",
       "description": "Engineering core: adaptive workflow (trivial → delegated → feature file), line budgets, risk gates, context-free review lenses, HTML/CSS/JS/a11y/performance standards and safety hooks.",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "name": "sumi-design",
       "source": "./plugins/sumi-design",
       "description": "Anti-slop design direction: brief, anti-references, three divergent directions, cross-project repetition ledger, DESIGN.md tokens and motion rules. Orchestrates Impeccable, Taste and Emil Kowalski skills.",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "name": "sumi-nuxt",
       "source": "./plugins/sumi-nuxt",
       "description": "Nuxt 3/4 + Vue 3 + Firebase/Firestore stack pack: composables, SSR/hydration safety, data modeling, security rules, Tailwind.",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "name": "sumi-react",
       "source": "./plugins/sumi-react",
       "description": "React 19 + Next.js App Router stack pack: server/client boundaries, data fetching and caching, forms and actions, component architecture.",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "name": "sumi-shopify",
       "source": "./plugins/sumi-shopify",
       "description": "Shopify Online Store 2.0 stack pack: Liquid, sections, blocks, schemas, snippets, theme performance and CLI workflow.",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "name": "sumi-wordpress",
       "source": "./plugins/sumi-wordpress",
       "description": "Native WordPress block themes (FSE, Gutenberg) with no build step: theme.json as the design system, HTML templates and PHP patterns, custom dynamic blocks (block.json + render.php) with plain-JS editors, core APIs over plugins, performance and token audits.",
-      "version": "0.2.0"
+      "version": "0.3.0"
+    },
+    {
+      "name": "impeccable",
+      "description": "[companion · pbakaus/impeccable · Apache-2.0] Design critique, audit, polish and anti-pattern detection. Referenced from upstream.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/pbakaus/impeccable.git",
+        "path": "plugin"
+      },
+      "category": "companion"
+    },
+    {
+      "name": "ponytail",
+      "description": "[companion · DietrichGebert/ponytail · MIT] Minimalism rules against over-engineering; origin of the ponytail: comment convention. Referenced from upstream.",
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      },
+      "category": "companion"
+    },
+    {
+      "name": "taste",
+      "description": "[companion · Leonxlnx/taste-skill · MIT] design-taste-frontend: brief-driven anti-slop frontend design with variance/motion/density dials.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Leonxlnx/taste-skill.git",
+        "path": "skills/taste-skill"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
+    },
+    {
+      "name": "taste-minimalist",
+      "description": "[companion · Leonxlnx/taste-skill · MIT] minimalist-ui style family.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Leonxlnx/taste-skill.git",
+        "path": "skills/minimalist-skill"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
+    },
+    {
+      "name": "taste-brutalist",
+      "description": "[companion · Leonxlnx/taste-skill · MIT] industrial-brutalist-ui style family.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Leonxlnx/taste-skill.git",
+        "path": "skills/brutalist-skill"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
+    },
+    {
+      "name": "taste-soft",
+      "description": "[companion · Leonxlnx/taste-skill · MIT] high-end-visual-design (soft, premium) style family.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Leonxlnx/taste-skill.git",
+        "path": "skills/soft-skill"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
+    },
+    {
+      "name": "taste-redesign",
+      "description": "[companion · Leonxlnx/taste-skill · MIT] redesign-existing-projects: audit-first redesigns.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Leonxlnx/taste-skill.git",
+        "path": "skills/redesign-skill"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
+    },
+    {
+      "name": "emil-design-eng",
+      "description": "[companion · emilkowalski/skill · MIT] Design-engineering and motion taste layer.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/emilkowalski/skill.git",
+        "path": "skills/emil-design-eng"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
+    },
+    {
+      "name": "emil-review-animations",
+      "description": "[companion · emilkowalski/skill · MIT] Motion audits with before/after/why.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/emilkowalski/skill.git",
+        "path": "skills/review-animations"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
+    },
+    {
+      "name": "emil-animation-vocabulary",
+      "description": "[companion · emilkowalski/skill · MIT] Shared vocabulary for easing, springs and duration.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/emilkowalski/skill.git",
+        "path": "skills/animation-vocabulary"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
+    },
+    {
+      "name": "superpowers-debugging",
+      "description": "[companion · obra/superpowers · MIT] systematic-debugging: root cause before fixes.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/obra/superpowers.git",
+        "path": "skills/systematic-debugging"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
+    },
+    {
+      "name": "superpowers-tdd",
+      "description": "[companion · obra/superpowers · MIT] test-driven-development: red, green, refactor.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/obra/superpowers.git",
+        "path": "skills/test-driven-development"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
+    },
+    {
+      "name": "superpowers-verification",
+      "description": "[companion · obra/superpowers · MIT] verification-before-completion: evidence before claiming done.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/obra/superpowers.git",
+        "path": "skills/verification-before-completion"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
+    },
+    {
+      "name": "superpowers-worktrees",
+      "description": "[companion · obra/superpowers · MIT] using-git-worktrees: isolated workspaces for parallel work.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/obra/superpowers.git",
+        "path": "skills/using-git-worktrees"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
+    },
+    {
+      "name": "superpowers-review-intake",
+      "description": "[companion · obra/superpowers · MIT] receiving-code-review: verify feedback before applying it.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/obra/superpowers.git",
+        "path": "skills/receiving-code-review"
+      },
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "category": "companion"
     }
   ]
 }

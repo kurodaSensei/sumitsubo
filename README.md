@@ -20,8 +20,7 @@ An opinionated AI framework for web design and development with **Claude Code**.
 ```bash
 # in Claude Code
 /plugin marketplace add <github-user>/sumitsubo        # or a local path: /plugin marketplace add ~/AI\ Setup/sumitsubo
-/plugin install sumi@sumitsubo
-/plugin install sumi-design@sumitsubo
+/plugin install sumi-design@sumitsubo                  # installs sumi + all companions as dependencies
 /plugin install sumi-nuxt@sumitsubo                    # plus the stack packs you use
 ```
 
@@ -29,12 +28,16 @@ Then, in each project:
 
 ```
 /sumi:init            # detect stack, write the managed CLAUDE.md block, create .sumi/
-/sumi-design:deps          # check / install Impeccable, Taste, Emil Kowalski skills
+/sumi-design:deps          # verify companions and find leftover duplicates
 /sumi-design:direction     # new UI project: brief → 3 directions → DESIGN.md
 /sumi:feature <idea>  # large work: single feature file with criteria and evidence
 /sumi:review          # review the current slice with context-free lenses
 /sumi:ship            # final gate and PR draft
 ```
+
+## Companions
+
+Installing `sumi` and `sumi-design` also installs, as dependencies, curated pieces of Impeccable, Ponytail, Taste, Emil Kowalski's skills and Superpowers, referenced from their upstream repos (see [THIRD-PARTY.md](THIRD-PARTY.md)). Sumitsubo decides when each one is used; the full install adds about 6k tokens of always-on context.
 
 ## Principles
 
