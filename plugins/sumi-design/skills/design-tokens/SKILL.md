@@ -41,7 +41,7 @@ description: How to write and use DESIGN.md — the single source of truth for a
   | all other roles | same name | `bg-surface`, `bg-accent`, `ring-focus` |
 - **Nuxt/Next**: same `tokens.css` imported globally; fonts through `@nuxt/fonts` / `next/font` with the families in DESIGN.md.
 - **Shopify**: brand-level tokens become `settings_schema.json` settings (color schemes, font pickers, ranges) output as CSS variables in the layout; section-level overrides map to the same variable names.
-- **WordPress block themes**: `theme.json` `settings.color.palette`, `typography.fontFamilies` / `fontSizes` (fluid), `spacing.spacingSizes`, `custom` for radius/motion; classic/Timber themes use `tokens.css`.
+- **WordPress block themes**: `theme.json` `settings.color.palette`, `typography.fontFamilies` / `fontSizes` (fluid), `spacing.spacingSizes`, `custom` for radius/motion (the house approach for WordPress: see `sumi-wordpress:wp-block-theme`).
 
 ## Contrast verification (required)
 

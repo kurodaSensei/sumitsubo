@@ -1,16 +1,17 @@
 {
   "name": "sumi-wordpress",
   "version": "0.1.0",
-  "description": "WordPress stack pack: modern theme architecture (block themes and Timber/Twig), ACF, security, performance and WooCommerce.",
+  "description": "Native WordPress block themes (FSE, Gutenberg) with no build step: theme.json as the design system, HTML templates and PHP patterns, custom dynamic blocks (block.json + render.php) with plain-JS editors, core APIs over plugins, performance and token audits.",
   "author": {
     "name": "Alfredo Rodríguez"
   },
   "license": "MIT",
   "keywords": [
     "wordpress",
-    "php",
-    "timber",
-    "woocommerce"
+    "gutenberg",
+    "block-theme",
+    "fse",
+    "theme-json"
   ],
   "dependencies": [
     "sumi"

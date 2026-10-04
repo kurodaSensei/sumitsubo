@@ -51,6 +51,6 @@ Vive en `~/.sumi/design-ledger.json`, fuera de los repos, y por eso cubre a todo
 
 ## Origen del contenido
 
-- Lo genérico de ai-guidelines (accesibilidad, HTML, JS, SCSS, Shopify, WordPress) está reescrito y generalizado. No quedó nada específico de la empresa ni de sus clientes.
+- Lo genérico de ai-guidelines (accesibilidad, HTML, JS, SCSS, Shopify) está reescrito y generalizado. El paquete de WordPress sigue el método de tus propios temas de bloques nativos (como Summers): theme.json, patterns, bloques dinámicos sin build y auditoría de tokens. No quedó nada específico de la empresa ni de sus clientes.
 - Las ideas de Gentle AI (flujo escalonado, archivo único de feature, presupuesto de 400 líneas, lentes sin contexto, tags de sync) están adaptadas, no copiadas.
 - Impeccable, Taste y Emil Kowalski se orquestan como dependencias externas.

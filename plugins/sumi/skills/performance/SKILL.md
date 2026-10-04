@@ -1,6 +1,6 @@
 ---
 name: performance
-description: Web performance with Core Web Vitals as acceptance criteria — budgets, LCP, INP and CLS playbooks, images, fonts, JavaScript and third-party cost, caching and delivery, rendering strategy, and how to measure (lab and field) with evidence. Use when building pages or components, adding dependencies, scripts, images or fonts, choosing rendering strategy, or when something is slow. Framework-agnostic baseline: when a stack pack skill (nuxt-data-ssr, react-performance, shopify-performance-a11y, wp-security-performance) applies, use it for stack specifics.
+description: Web performance with Core Web Vitals as acceptance criteria — budgets, LCP, INP and CLS playbooks, images, fonts, JavaScript and third-party cost, caching and delivery, rendering strategy, and how to measure (lab and field) with evidence. Use when building pages or components, adding dependencies, scripts, images or fonts, choosing rendering strategy, or when something is slow. Framework-agnostic baseline: when a stack pack skill (nuxt-data-ssr, react-performance, shopify-performance-a11y, wp-performance-audit) applies, use it for stack specifics.
 ---
 
 # Performance — Core Web Vitals as Requirements

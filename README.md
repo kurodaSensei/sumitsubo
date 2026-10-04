@@ -13,7 +13,7 @@ An opinionated AI framework for web design and development with **Claude Code**.
 | `sumi-nuxt` | Nuxt 4 + Vue 3.5 + Firebase/Firestore + Tailwind v4. |
 | `sumi-react` | React 19 + Next.js App Router, caching, Server Actions, testing. |
 | `sumi-shopify` | Online Store 2.0 themes: Liquid, sections/blocks, storefront JS, performance and e-commerce a11y. |
-| `sumi-wordpress` | Block themes and Timber/Twig, ACF and custom blocks, security, performance, WooCommerce. |
+| `sumi-wordpress` | Native block themes (Gutenberg/FSE), no build: theme.json design system, templates and patterns, dynamic blocks with plain-JS editors, core APIs over plugins, token audits. |
 
 ## Install
 
