@@ -1,0 +1,48 @@
+{
+  "name": "forge",
+  "owner": {
+    "name": "Alfredo Rodríguez"
+  },
+  "metadata": {
+    "description": "A personal AI framework for web design & development with Claude Code: engineering quality, accessibility, performance and design without AI slop.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "forge-core",
+      "source": "./plugins/forge-core",
+      "description": "Engineering core: adaptive workflow (trivial → delegated → feature file), line budgets, risk gates, context-free review lenses, HTML/CSS/JS/a11y/performance standards and safety hooks.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "forge-design",
+      "source": "./plugins/forge-design",
+      "description": "Anti-slop design direction: brief, anti-references, three divergent directions, cross-project repetition ledger, DESIGN.md tokens and motion rules. Orchestrates Impeccable, Taste and Emil Kowalski skills.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "forge-nuxt",
+      "source": "./plugins/forge-nuxt",
+      "description": "Nuxt 3/4 + Vue 3 + Firebase/Firestore stack pack: composables, SSR/hydration safety, data modeling, security rules, Tailwind.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "forge-react",
+      "source": "./plugins/forge-react",
+      "description": "React 19 + Next.js App Router stack pack: server/client boundaries, data fetching and caching, forms and actions, component architecture.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "forge-shopify",
+      "source": "./plugins/forge-shopify",
+      "description": "Shopify Online Store 2.0 stack pack: Liquid, sections, blocks, schemas, snippets, theme performance and CLI workflow.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "forge-wordpress",
+      "source": "./plugins/forge-wordpress",
+      "description": "WordPress stack pack: modern theme architecture (block themes and Timber/Twig), ACF, security, performance and WooCommerce.",
+      "version": "0.1.0"
+    }
+  ]
+}
