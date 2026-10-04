@@ -1,5 +1,5 @@
 {
-  "name": "forge",
+  "name": "sumitsubo",
   "owner": {
     "name": "Alfredo Rodríguez"
   },
@@ -9,38 +9,38 @@
   },
   "plugins": [
     {
-      "name": "forge-core",
-      "source": "./plugins/forge-core",
+      "name": "sumi",
+      "source": "./plugins/sumi",
       "description": "Engineering core: adaptive workflow (trivial → delegated → feature file), line budgets, risk gates, context-free review lenses, HTML/CSS/JS/a11y/performance standards and safety hooks.",
       "version": "0.1.0"
     },
     {
-      "name": "forge-design",
-      "source": "./plugins/forge-design",
+      "name": "sumi-design",
+      "source": "./plugins/sumi-design",
       "description": "Anti-slop design direction: brief, anti-references, three divergent directions, cross-project repetition ledger, DESIGN.md tokens and motion rules. Orchestrates Impeccable, Taste and Emil Kowalski skills.",
       "version": "0.1.0"
     },
     {
-      "name": "forge-nuxt",
-      "source": "./plugins/forge-nuxt",
+      "name": "sumi-nuxt",
+      "source": "./plugins/sumi-nuxt",
       "description": "Nuxt 3/4 + Vue 3 + Firebase/Firestore stack pack: composables, SSR/hydration safety, data modeling, security rules, Tailwind.",
       "version": "0.1.0"
     },
     {
-      "name": "forge-react",
-      "source": "./plugins/forge-react",
+      "name": "sumi-react",
+      "source": "./plugins/sumi-react",
       "description": "React 19 + Next.js App Router stack pack: server/client boundaries, data fetching and caching, forms and actions, component architecture.",
       "version": "0.1.0"
     },
     {
-      "name": "forge-shopify",
-      "source": "./plugins/forge-shopify",
+      "name": "sumi-shopify",
+      "source": "./plugins/sumi-shopify",
       "description": "Shopify Online Store 2.0 stack pack: Liquid, sections, blocks, schemas, snippets, theme performance and CLI workflow.",
       "version": "0.1.0"
     },
     {
-      "name": "forge-wordpress",
-      "source": "./plugins/forge-wordpress",
+      "name": "sumi-wordpress",
+      "source": "./plugins/sumi-wordpress",
       "description": "WordPress stack pack: modern theme architecture (block themes and Timber/Twig), ACF, security, performance and WooCommerce.",
       "version": "0.1.0"
     }

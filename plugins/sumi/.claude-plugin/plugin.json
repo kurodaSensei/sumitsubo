@@ -1,0 +1,16 @@
+{
+  "name": "sumi",
+  "version": "0.1.0",
+  "description": "Engineering core: adaptive workflow (trivial → delegated → feature file), line budgets, risk gates, context-free review lenses, HTML/CSS/JS/a11y/performance standards and safety hooks.",
+  "author": {
+    "name": "Alfredo Rodríguez"
+  },
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "code-quality",
+    "accessibility",
+    "performance",
+    "review"
+  ]
+}

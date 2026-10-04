@@ -1,6 +1,6 @@
-# forge
+# Sumitsubo
 
-> Working name — will be renamed with `scripts/rename.sh <name>`.
+> **Sumitsubo** (墨壺) is the Japanese carpenter's ink line: it marks the true line before any cut is made. This framework does the same — direction first, then the work. Short name and command prefix: **sumi** (墨, ink).
 
 An opinionated AI framework for web design and development with **Claude Code**. It encodes how a senior design engineer works: process that scales with the request, code quality without slop, accessibility and performance as acceptance criteria, and — above all — **design that doesn't look like every other AI-generated site**.
 
@@ -8,32 +8,32 @@ An opinionated AI framework for web design and development with **Claude Code**.
 
 | Plugin | What it gives you |
 |---|---|
-| `forge-core` | Adaptive workflow (T0 direct → T1 delegated → T2 feature file), ~400-line slice budget, risk gates, receipt-based reviews with context-free lenses (correctness, a11y, performance, security), standards for HTML, CSS, JS/TS, a11y (WCAG 2.2 AA) and performance (Core Web Vitals), git and secret guard hooks. |
-| `forge-design` | Creative-direction process (brief → anti-references → three divergent directions → DESIGN.md), anti-slop catalog, cross-project **design ledger** so you never repeat fonts/palettes/layouts across clients, token system with contrast checker, motion rules, design lens, Claude Design bridge. Orchestrates Impeccable, Taste and Emil Kowalski's skills. |
-| `forge-nuxt` | Nuxt 4 + Vue 3.5 + Firebase/Firestore + Tailwind v4. |
-| `forge-react` | React 19 + Next.js App Router, caching, Server Actions, testing. |
-| `forge-shopify` | Online Store 2.0 themes: Liquid, sections/blocks, storefront JS, performance and e-commerce a11y. |
-| `forge-wordpress` | Block themes and Timber/Twig, ACF and custom blocks, security, performance, WooCommerce. |
+| `sumi` | Adaptive workflow (T0 direct → T1 delegated → T2 feature file), ~400-line slice budget, risk gates, receipt-based reviews with context-free lenses (correctness, a11y, performance, security), standards for HTML, CSS, JS/TS, a11y (WCAG 2.2 AA) and performance (Core Web Vitals), git and secret guard hooks. |
+| `sumi-design` | Creative-direction process (brief → anti-references → three divergent directions → DESIGN.md), anti-slop catalog, cross-project **design ledger** so you never repeat fonts/palettes/layouts across clients, token system with contrast checker, motion rules, design lens, Claude Design bridge. Orchestrates Impeccable, Taste and Emil Kowalski's skills. |
+| `sumi-nuxt` | Nuxt 4 + Vue 3.5 + Firebase/Firestore + Tailwind v4. |
+| `sumi-react` | React 19 + Next.js App Router, caching, Server Actions, testing. |
+| `sumi-shopify` | Online Store 2.0 themes: Liquid, sections/blocks, storefront JS, performance and e-commerce a11y. |
+| `sumi-wordpress` | Block themes and Timber/Twig, ACF and custom blocks, security, performance, WooCommerce. |
 
 ## Install
 
 ```bash
 # in Claude Code
-/plugin marketplace add <github-user>/forge        # or a local path: /plugin marketplace add ~/AI\ Setup/forge
-/plugin install forge-core@forge
-/plugin install forge-design@forge
-/plugin install forge-nuxt@forge                    # plus the stack packs you use
+/plugin marketplace add <github-user>/sumitsubo        # or a local path: /plugin marketplace add ~/AI\ Setup/sumitsubo
+/plugin install sumi@sumitsubo
+/plugin install sumi-design@sumitsubo
+/plugin install sumi-nuxt@sumitsubo                    # plus the stack packs you use
 ```
 
 Then, in each project:
 
 ```
-/forge-core:init            # detect stack, write the managed CLAUDE.md block, create .forge/
-/forge-design:deps          # check / install Impeccable, Taste, Emil Kowalski skills
-/forge-design:direction     # new UI project: brief → 3 directions → DESIGN.md
-/forge-core:feature <idea>  # large work: single feature file with criteria and evidence
-/forge-core:review          # review the current slice with context-free lenses
-/forge-core:ship            # final gate and PR draft
+/sumi:init            # detect stack, write the managed CLAUDE.md block, create .sumi/
+/sumi-design:deps          # check / install Impeccable, Taste, Emil Kowalski skills
+/sumi-design:direction     # new UI project: brief → 3 directions → DESIGN.md
+/sumi:feature <idea>  # large work: single feature file with criteria and evidence
+/sumi:review          # review the current slice with context-free lenses
+/sumi:ship            # final gate and PR draft
 ```
 
 ## Principles
@@ -53,7 +53,7 @@ plugins/<plugin>/
   .claude-plugin/plugin.json
   skills/<skill>/SKILL.md (+ references/, scripts/)
   agents/*.md      commands/*.md      hooks/hooks.json      templates/
-scripts/validate.mjs   scripts/rename.sh
+scripts/validate.mjs
 docs/GUIA.md (Spanish guide)   docs/ARCHITECTURE.md
 ```
 
@@ -62,9 +62,9 @@ docs/GUIA.md (Spanish guide)   docs/ARCHITECTURE.md
 ```bash
 node scripts/validate.mjs           # structure, frontmatter, references
 claude plugin validate .            # official marketplace validation
-claude plugin validate --strict plugins/forge-core
+claude plugin validate --strict plugins/sumi
 ```
 
 ## Credits
 
-Concepts inspired by Gentle AI (Gentleman Programming). Design companions are separate projects with their own licenses — see [THIRD-PARTY.md](THIRD-PARTY.md). forge itself is MIT licensed.
+Concepts inspired by Gentle AI (Gentleman Programming). Design companions are separate projects with their own licenses — see [THIRD-PARTY.md](THIRD-PARTY.md). Sumitsubo itself is MIT licensed.

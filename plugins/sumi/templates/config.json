@@ -1,0 +1,10 @@
+{
+  "$comment": "Sumitsubo project config. Read by Sumitsubo hooks and commands.",
+  "stack": [],
+  "protectedBranches": ["main", "master", "production"],
+  "requireFeatureBranch": true,
+  "lineBudget": 400,
+  "performanceBudget": { "lcpMs": 2500, "inpMs": 200, "cls": 0.1, "jsKbGzipInitial": 170 },
+  "a11yLevel": "WCAG22-AA",
+  "delivery": "single"
+}

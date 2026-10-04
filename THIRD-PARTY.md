@@ -1,8 +1,8 @@
 # Third-party projects
 
-forge orchestrates — but does not include or redistribute — these independent projects. Install them separately (`/forge-design:deps`); each keeps its own license.
+Sumitsubo orchestrates — but does not include or redistribute — these independent projects. Install them separately (`/sumi-design:deps`); each keeps its own license.
 
-| Project | Repository | License | Role in forge |
+| Project | Repository | License | Role in Sumitsubo |
 |---|---|---|---|
 | Impeccable | github.com/pbakaus/impeccable | Apache-2.0 | Product context, critique, audit, polish, anti-pattern detectors |
 | Taste | github.com/Leonxlnx/taste-skill | MIT | Variance / motion / density dials, style families |

@@ -1,0 +1,19 @@
+{
+  "name": "sumi-design",
+  "version": "0.1.0",
+  "description": "Anti-slop design direction: brief, anti-references, three divergent directions, cross-project repetition ledger, DESIGN.md tokens and motion rules. Orchestrates Impeccable, Taste and Emil Kowalski skills.",
+  "author": {
+    "name": "Alfredo Rodríguez"
+  },
+  "license": "MIT",
+  "keywords": [
+    "design",
+    "ui",
+    "anti-slop",
+    "motion",
+    "design-system"
+  ],
+  "dependencies": [
+    "sumi"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "sumi-react",
+  "version": "0.1.0",
+  "description": "React 19 + Next.js App Router stack pack: server/client boundaries, data fetching and caching, forms and actions, component architecture.",
+  "author": {
+    "name": "Alfredo Rodríguez"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "nextjs",
+    "typescript"
+  ],
+  "dependencies": [
+    "sumi"
+  ]
+}
