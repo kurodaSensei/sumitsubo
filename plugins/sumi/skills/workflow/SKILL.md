@@ -43,7 +43,7 @@ Rules:
 Before implementing a slice, forecast its size in changed lines. The budget is ~400 changed lines per slice — the range where review stays effective.
 
 - Over budget: split into slices that each leave the codebase working and are independently reviewable. Each slice = one commit (or one PR on teams).
-- Work inside the budget as a constraint, not a suggestion: the best solution that fits, not the most impressive one. Exceeding it requires a one-line written justification in the feature file.
+- Work inside the budget as a constraint, not a suggestion: the best solution that fits, not the most impressive one. Exceeding it requires a one-line written justification in the feature file. When you cut scope to fit, mark each seam with a `ponytail:` note (`sumi:code-quality`) instead of half-building the extension.
 - Generated files, lockfiles and snapshots do not count.
 
 ## 5. Delegation briefs

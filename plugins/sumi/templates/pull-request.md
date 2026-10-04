@@ -14,6 +14,9 @@
 - Performance: <Lighthouse or web-vitals numbers, before → after>
 - Screenshots / preview: <links>
 
+## Deliberate simplifications
+- `path/to/file:LINE` — <what was simplified>; extend when <trigger>
+
 ## Risk
 <low | medium | high> — <why, and what the rollback is>
 

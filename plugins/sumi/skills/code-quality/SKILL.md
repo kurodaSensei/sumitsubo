@@ -16,6 +16,24 @@ Write the code a senior engineer would be happy to maintain in two years. Correc
 5. **Fail loudly at the right level.** Handle errors where you can do something meaningful (retry, fallback, user message). Otherwise let them propagate. Never swallow (`catch {}`), never log-and-continue silently.
 6. **Delete freely.** Remove dead code, unused imports, stale flags and commented-out blocks. Git remembers.
 
+## Deliberate simplicity: `ponytail:` notes
+
+Over-engineering usually comes from fear of the future. Answer that fear in writing instead of in code: build the simple version and leave a `ponytail:` comment at the seam.
+
+```ts
+// ponytail: single currency (COP) hardcoded; extend when the client sells abroad (add a currency field + Intl.NumberFormat per locale).
+```
+
+Format: `ponytail: <what was simplified>; extend when <concrete trigger> (<how>)`. In the file's comment syntax (`//`, `#`, `/* */`, `{% comment %}`, `<!-- -->`).
+
+Rules:
+- Use it whenever you skip an abstraction, option, configuration, plugin or generalization that someone might reasonably expect. The note is the justification for NOT building it.
+- The trigger must be concrete and observable ("when there are 3+ payment providers", "if the client needs to edit them"), never "if needed" or "in the future".
+- One note per seam, next to the code it describes. No ponytail notes for things nobody would build anyway.
+- The reverse rule: adding complexity beyond the request (layers, options, generic helpers, plugins) needs a one-line justification in the feature file or PR. Simplicity is the default and does not need defending; complexity does.
+- When a trigger happens, implement the extension and delete the note in the same change.
+- `/sumi:ship` lists the notes added in the diff under "Deliberate simplifications" in the PR, so the client and reviewers see the seams.
+
 ## Size and shape
 
 - Functions do one thing; if you need "and" to describe it, split it. Aim < 40 lines.

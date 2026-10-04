@@ -72,7 +72,7 @@ Pages, menus, options and template parts customized in the Site Editor live in t
 
 ## Comments: mark deliberate simplicity
 
-When you consciously choose the simple path, leave a `ponytail:` comment saying what was simplified and when to extend it ("ponytail: fixed map of 6 categories, no term-meta UI; add one if the client needs to edit them"). It keeps scope honest and tells the next person where the seams are.
+Apply the global `ponytail:` convention from `sumi:code-quality`. Typical WordPress seams: a fixed PHP map instead of a term-meta UI ("ponytail: fixed map of 6 categories, no term-meta UI; extend when the client needs to edit them"), a `has_block()` heuristic for conditional assets, a hardcoded option before a settings page exists.
 
 ## Slop tells
 

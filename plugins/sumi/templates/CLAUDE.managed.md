@@ -1,4 +1,4 @@
-<!-- sumi:begin v0.1.0 — managed by /sumi:sync. Edit outside this block; changes inside are overwritten. -->
+<!-- sumi:begin v0.2.0 — managed by /sumi:sync. Edit outside this block; changes inside are overwritten. -->
 ## Sumitsubo framework
 
 You are working inside a project that uses the Sumitsubo framework (Claude Code plugins `Sumitsubo-*`).
@@ -7,7 +7,7 @@ You are working inside a project that uses the Sumitsubo framework (Claude Code 
 
 **Workflow.** Before implementing anything, apply `sumi:workflow`: classify the request (T0 direct / T1 delegated / T2 feature file), refute uncertainty with evidence before asking, respect the ~400-line slice budget, assess risk before each commit. Active feature files live in `.sumi/tasks/`.
 
-**Quality bar.** Follow `sumi:code-quality` on every change. No speculative abstractions, no dead code, no invented APIs: when unsure of an API, read the installed source or the official docs. Accessibility (WCAG 2.2 AA, `sumi:a11y`) and performance budgets (`sumi:performance`) are acceptance criteria, not polish.
+**Quality bar.** Follow `sumi:code-quality` on every change. No speculative abstractions, no dead code, no invented APIs. Build the simple version and mark deliberate simplifications with `ponytail: <what>; extend when <trigger>` comments; complexity beyond the request needs a written justification: when unsure of an API, read the installed source or the official docs. Accessibility (WCAG 2.2 AA, `sumi:a11y`) and performance budgets (`sumi:performance`) are acceptance criteria, not polish.
 
 **Design.** Any visual or UI work starts from `DESIGN.md` (created by `/sumi-design:direction`). Never introduce fonts, colors, radii, shadows or motion that are not tokens there. If `DESIGN.md` does not exist and the task is visual, propose running the direction process first.
 

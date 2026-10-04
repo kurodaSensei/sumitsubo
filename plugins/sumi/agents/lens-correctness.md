@@ -16,6 +16,7 @@ Check, in order:
 5. Types honest (no `any`/casts hiding problems); APIs used exist in the installed versions (check node_modules or lockfiles when unsure).
 6. Tests: run the project's test command if available. Are the new branches covered? Would the tests fail if the code were wrong?
 7. Code-quality bar from `sumi:code-quality` (dead code, speculative abstractions, slop tells).
+8. Over-engineering vs. deliberate simplicity: flag complexity the lineage doesn't require (extra layers, options, generic helpers, new dependencies) as a finding. Accept simplifications marked with a `ponytail:` note unless they cause a real bug now; flag a note whose trigger is vague ("if needed") or has already happened.
 
 ## Output format (return exactly this)
 
