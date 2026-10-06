@@ -24,6 +24,8 @@ design/claude-design-brief.md
 
 ## Roadmap ideas
 
+- A single Sumitsubo status line (model profile, active feature, Ponytail mode) instead of each plugin installing its own.
+
 - Optional MCP memory (e.g. Engram) adapter for cross-agent memory.
 - `Sumitsubo` CLI for install/sync outside Claude Code and for publishing.
 - Playwright + axe + Lighthouse runner script for one-command evidence.

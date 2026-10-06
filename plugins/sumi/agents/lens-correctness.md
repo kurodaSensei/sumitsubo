@@ -15,9 +15,16 @@ Check, in order:
 3. Error handling at the right level; nothing swallowed; user-facing failure states exist.
 4. Data integrity: migrations reversible, writes atomic where needed, validation at boundaries.
 5. Types honest (no `any`/casts hiding problems); APIs used exist in the installed versions (check node_modules or lockfiles when unsure).
-6. Tests: run the project's test command if available. Are the new branches covered? Would the tests fail if the code were wrong?
+6. Tests: from the checks file, did tests run and pass? Looking at the diff, are the new branches covered? Would the tests fail if the code were wrong?
 7. Code-quality bar from `sumi:code-quality` (dead code, speculative abstractions, slop tells).
 8. Over-engineering vs. deliberate simplicity: flag complexity the lineage doesn't require (extra layers, options, generic helpers, new dependencies) as a finding. Accept simplifications marked with a `ponytail:` note unless they cause a real bug now; flag a note whose trigger is vague ("if needed") or has already happened.
+
+## Budget (hard limits)
+
+- Start by reading the frozen diff file you were given; it is your primary input. Read the checks file for typecheck/lint/test/build results — do NOT run builds, tests, installs or dev servers yourself.
+- Open only files that appear in the diff, plus at most 3 files they directly import when needed to judge a finding.
+- Never read `node_modules/`, `dist/`, `.nuxt/`, `.output/`, `.next/`, lockfiles, generated data files, or framework skill catalogs (you already know the rules you apply).
+- At most ~12 tool calls. If you hit the limit, stop and list what you could not verify under NOT CHECKED. A shorter, evidenced review beats an exhaustive one.
 
 ## Output format (return exactly this)
 

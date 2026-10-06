@@ -16,5 +16,21 @@
     "jsKbGzipInitial": 170
   },
   "a11yLevel": "WCAG22-AA",
-  "delivery": "single"
+  "delivery": "single",
+  "review": {
+    "maxLenses": 3,
+    "exclude": [
+      "package-lock.json",
+      "pnpm-lock.yaml",
+      "yarn.lock",
+      "bun.lock",
+      "node_modules/**",
+      "dist/**",
+      ".nuxt/**",
+      ".output/**",
+      ".next/**",
+      "build/**",
+      "coverage/**"
+    ]
+  }
 }

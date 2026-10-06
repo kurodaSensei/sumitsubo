@@ -15,7 +15,7 @@ Spend expensive reasoning only where it changes the outcome. Facts are cheap, im
 | **builder** | `sumi:builder` | Implement a briefed task or slice, write tests, run checks |
 | **architect** | `sumi:architect` | Architecture, data model, migrations, security design, slicing a large feature, trade-offs |
 | **lens** | `sumi:lens-correctness`, `lens-a11y`, `lens-performance`, `sumi-design:lens-design` | Reviews of medium-risk slices |
-| **lens-high** | same lenses + `sumi:lens-security` | Reviews of high-risk slices |
+| **lens-high** | `lens-correctness` + `sumi:lens-security` (+ one more at most) | Reviews of high-risk slices |
 
 ## Profiles (`.sumi/config.json` → `"modelProfile"`)
 
@@ -30,7 +30,7 @@ Spend expensive reasoning only where it changes the outcome. Facts are cheap, im
 
 - `balanced`: the default. Opus only for decisions and high-risk review.
 - `economy`: small projects, tight plan limits, or routine maintenance.
-- `performance`: complex or high-stakes work where quality beats cost.
+- `performance`: complex or high-stakes work where quality beats cost. Opus-heavy: use it for a specific feature, then switch back.
 
 The agents' frontmatter holds the `balanced` values. For other profiles, **pass `model` explicitly on every delegation** (the per-call value overrides the agent's frontmatter). Read the profile from `.sumi/config.json` once per session; default to `balanced` if absent.
 
@@ -39,7 +39,7 @@ The agents' frontmatter holds the `balanced` values. For other profiles, **pass 
 1. **Need facts?** Send a scout. Never spend the session model on searching or reading many files. Several independent questions → several scouts in parallel.
 2. **Need a decision that is expensive to undo?** Send the architect with the facts the scouts gathered. Record its decision in the feature file.
 3. **Need code?** T0 work stays in the session. T1/T2 tasks go to a builder with a complete brief (`sumi:workflow` §5).
-4. **Need review?** Lenses per `/sumi:review`, with `lens` or `lens-high` models by risk.
+4. **Need review?** Lenses per `/sumi:review` — at most 3, each on a frozen diff with a tool budget — with `lens` or `lens-high` models by risk. Routine changes use `--quick` (one lens on the scout model).
 5. **Design direction** (`/sumi-design:direction`) is a decision: run it in the session with the architect-level model for the profile (in `balanced`, plan mode under `opusplan` uses Opus).
 6. Escalate one level when a cheaper model fails twice at the same task; note it in the process log. Do not escalate preemptively.
 

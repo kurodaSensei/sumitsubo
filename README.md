@@ -47,7 +47,7 @@ Sumitsubo routes work by role instead of running everything on one model:
 | review lenses | Sonnet (Opus for high-risk security) | Context-free reviews |
 | session | `opusplan` | Opus while planning, Sonnet while executing |
 
-Switch per project with `/sumi:models balanced|economy|performance`. Profiles are applied by passing the model on every delegation, so agents never need editing.
+Switch per project with `/sumi:models balanced|economy|performance`. Reviews are budgeted too: the diff and the checks are computed once, lenses get a hard tool budget, at most 3 run per review, and ranges larger than a slice are split. Profiles are applied by passing the model on every delegation, so agents never need editing.
 
 ## Companions
 

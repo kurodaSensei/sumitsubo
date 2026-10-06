@@ -16,5 +16,7 @@ Initialize the Sumitsubo framework in this repository. Arguments (optional stack
    - Otherwise insert the block at the top, preserving everything else verbatim.
    - Never delete or rewrite user content outside the markers.
 4. **Recommend plugins** for what was detected (only those not already enabled): `sumi-nuxt`, `sumi-react`, `sumi-shopify`, `sumi-wordpress`, and `sumi-design` for any project with UI. Show the exact `/plugin install <name>@sumitsubo` commands.
-5. **Models**: ask which model profile to use (`balanced` recommended, `economy`, `performance`), write it as `modelProfile`, and offer to set the matching session model as `/sumi:models` does.
-6. **Report** in the user's language: detected stack, files created/changed, and the next step (usually `/sumi-design:direction` for new UI projects or `/sumi:feature` for a new feature).
+5. **Models**: set `modelProfile` to `balanced` unless the user explicitly asks for another profile (`economy` for small sites or tight plan limits; `performance` only on explicit request — it is Opus-heavy). Then, with one confirmation, write `"model": "opusplan"` (or the profile's session model) to `.claude/settings.local.json` (personal, not committed), creating the file if needed and never touching other keys.
+   Generated folders the project produces (e.g. a content build step) go into `review.exclude` in `.sumi/config.json`.
+6. **Status line note**: if Ponytail asks to add its status line to `~/.claude/settings.json` and the edit is blocked, explain that it is optional and cosmetic; its suggested path includes a version number and would break on update.
+7. **Report** in the user's language: detected stack, files created/changed, and the next step (usually `/sumi-design:direction` for new UI projects or `/sumi:feature` for a new feature).

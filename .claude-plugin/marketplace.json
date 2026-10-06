@@ -5,44 +5,44 @@
   },
   "metadata": {
     "description": "A personal AI framework for web design & development with Claude Code: engineering quality, accessibility, performance and design without AI slop.",
-    "version": "0.4.0"
+    "version": "0.5.0"
   },
   "plugins": [
     {
       "name": "sumi",
       "source": "./plugins/sumi",
       "description": "Engineering core: adaptive workflow (trivial → delegated → feature file), line budgets, risk gates, context-free review lenses, HTML/CSS/JS/a11y/performance standards and safety hooks.",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "name": "sumi-design",
       "source": "./plugins/sumi-design",
       "description": "Anti-slop design direction: brief, anti-references, three divergent directions, cross-project repetition ledger, DESIGN.md tokens and motion rules. Orchestrates Impeccable, Taste and Emil Kowalski skills.",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "name": "sumi-nuxt",
       "source": "./plugins/sumi-nuxt",
       "description": "Nuxt 3/4 + Vue 3 + Firebase/Firestore stack pack: composables, SSR/hydration safety, data modeling, security rules, Tailwind.",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "name": "sumi-react",
       "source": "./plugins/sumi-react",
       "description": "React 19 + Next.js App Router stack pack: server/client boundaries, data fetching and caching, forms and actions, component architecture.",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "name": "sumi-shopify",
       "source": "./plugins/sumi-shopify",
       "description": "Shopify Online Store 2.0 stack pack: Liquid, sections, blocks, schemas, snippets, theme performance and CLI workflow.",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "name": "sumi-wordpress",
       "source": "./plugins/sumi-wordpress",
       "description": "Native WordPress block themes (FSE, Gutenberg) with no build step: theme.json as the design system, HTML templates and PHP patterns, custom dynamic blocks (block.json + render.php) with plain-JS editors, core APIs over plugins, performance and token audits.",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "name": "impeccable",

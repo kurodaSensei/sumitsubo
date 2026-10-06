@@ -17,6 +17,19 @@ Process must be justified by the request. Small things get done; uncertain thing
 
 Re-classify when you learn something. A T0 that turns out to touch auth or payments becomes T1 at minimum.
 
+## 1b. Right-size before you plan (scope check)
+
+Your job is to help the user decide, not to use every capability. Before writing a plan, compare it with the **literal request**:
+
+- Would the plan exceed 3 slices, or add subsystems the user did not mention (i18n, a content pipeline, server/API routes, auth, a CMS, search, generated pages, a token generator)?
+- Is there a materially simpler version that satisfies the literal request?
+
+If yes, STOP and present two options before planning in detail: **Minimal** (what was literally asked) and **Extended** (what you would add and why), each with slices, rough line count and what it costs in time and review. Recommend one. The user chooses; record the choice as a decision. A deliberate "go big" from the user is valid — the point is that it is a choice, not a drift.
+
+Re-run this check whenever the plan grows during work (new phase, new subsystem): growth needs the user's OK, not just a process-log line.
+
+Process weight follows the same rule: small sites and simple changes get T0/T1, a single `--quick` review and no feature file. Heavy process on light work is a defect, not rigor.
+
 ## 2. Refute uncertainty before acting
 
 Before writing code for anything non-trivial, list what you are assuming and try to disprove the risky assumptions with evidence: read the code, check versions in lockfiles, run the existing tests, query the docs. Only unresolved, decision-level unknowns go to the user.
@@ -34,7 +47,7 @@ It contains: goal and why, scope and explicit non-goals (what must NOT be built 
 Rules:
 - Mirror the tasks into the session todo list and keep both in sync as you go.
 - Every acceptance criterion must be checkable (a command, a test, a measurable value, a screenshot).
-- Append to the process log at each meaningful step: what changed, what you learned, what is next. Anyone (human or agent) must be able to resume from the file alone.
+- Append to the process log at each meaningful step, one or two lines each: what changed, what you learned, what is next. Anyone must be able to resume from the file alone; it is a log, not a report.
 - Evidence is mandatory to tick a task: test output, a command result, a Lighthouse/axe number, or a screenshot path. "Should work" is not evidence.
 - Set `status:` in the frontmatter (`active`, `blocked`, `done`). The session-start hook surfaces active files.
 
@@ -62,7 +75,7 @@ Before each commit, classify the change:
 | **Medium** | New component or module, dependency or config changes, shared utilities, routing | `/sumi:review` at the end of the slice (1–2 lenses) |
 | **High** | Auth, payments, permissions, data model or migrations, security rules, caching layers, anything irreversible | `/sumi:review` with all relevant lenses before committing; ask the user before irreversible actions |
 
-Review per slice, not per micro-task.
+Review per slice, not per micro-task — and never several slices at once: if a range exceeds ~1.5× the line budget, review it slice by slice (`/sumi:review` enforces this).
 
 ## 7. Shipping
 

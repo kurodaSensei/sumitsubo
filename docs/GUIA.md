@@ -54,6 +54,14 @@ Cambia el perfil por proyecto con `/sumi:models balanced|economy|performance`:
 
 Al cerrar una feature, el log anota cuántas delegaciones hubo por rol, para comparar perfiles entre proyectos.
 
+## Calibrar el esfuerzo (para no gastar de más)
+
+Sumitsubo está pensado para ayudarte a decidir, no para usar toda su potencia siempre:
+- **Control de alcance:** si el plan va más allá de lo que pediste (más de 3 slices o cosas que no mencionaste, como i18n, API o páginas generadas), se detiene y te muestra dos opciones con su costo: **Mínima** y **Extendida**. Tú eliges.
+- **Reviews con presupuesto:** el diff y los checks (tipos, lint, tests, build) se calculan una sola vez. Cada lente tiene un tope de pasos y solo lee lo que cambió. Corren máximo 3 lentes, y un rango más grande que un slice se divide.
+- **`/sumi:review --quick`:** una sola lente barata para cambios pequeños.
+- **Perfil `performance` solo cuando lo pidas:** al iniciar sesión te avisa si está activo o si el proyecto no tiene modelo de sesión configurado.
+
 ## Lo que hacen los hooks (solo en proyectos con `.sumi/config.json`)
 
 - Bloquean el push y el commit a main/master/production, y pide confirmación para force push y para `reset --hard`.
