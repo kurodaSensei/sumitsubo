@@ -2,8 +2,14 @@
 // Structural validation for the marketplace: manifests, frontmatter, references.
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = new URL('..', import.meta.url).pathname;
+// `.pathname` keeps the URL percent-encoding, so a checkout under a directory
+// with a space in its name resolved to `AI%20Setup` and every path missed.
+// Nothing reported it because the marketplace read failed into the error list
+// and the empty plugin loop then validated nothing at all — the validator was
+// a no-op here until it finally crashed in the walk below.
+const root = fileURLToPath(new URL('..', import.meta.url));
 const errors = [];
 const json = (p) => { try { return JSON.parse(readFileSync(p, 'utf8')); } catch (e) { errors.push(`${p}: invalid JSON (${e.message})`); return null; } };
 function frontmatter(p) {
@@ -40,8 +46,26 @@ for (const p of mk?.plugins ?? []) {
     const d = join(dir, kind);
     if (!existsSync(d)) continue;
     for (const f of readdirSync(d).filter((x) => x.endsWith('.md'))) {
-      const fm = frontmatter(join(d, f));
+      const full = join(d, f);
+      const fm = frontmatter(full);
       if (!fm.description) errors.push(`${p.name}/${kind}/${f}: missing description`);
+      if (kind === 'commands') {
+        // Every command has to end by telling the user what happened, in the
+        // one shape `sumi:output` defines. Before that skill existed, nine
+        // commands described that moment in nine different ways and
+        // /sumi:ship described it not at all — which is exactly what this
+        // catches on the tenth command.
+        const body = readFileSync(full, 'utf8');
+        if (!/`sumi:output`/.test(body)) {
+          errors.push(`${p.name}/${kind}/${f}: no reporting step — the last step must be "**Report** per \`sumi:output\`" with its fields`);
+        }
+        // Restating the contract inside a command is how it drifts: the point
+        // of one file is that changing it changes every command at once.
+        const restates = /\b(no emoji|ASCII box|status is a word|lead with the result)\b/i.exec(body);
+        if (restates) {
+          errors.push(`${p.name}/${kind}/${f}: restates the output contract ("${restates[0]}") — reference sumi:output instead`);
+        }
+      }
       kind === 'agents' ? agents++ : commands++;
     }
   }
