@@ -15,3 +15,4 @@ Feature: $ARGUMENTS (default: the single `active` file in `.sumi/tasks/`).
 7. **PR draft.** Fill `${CLAUDE_PLUGIN_ROOT}/templates/pull-request.md` from the feature file and receipt (evidence, risk, rollback). For `delivery: chained-prs`, draft one description per slice with the chain links and a final tracker PR description.
 8. Do not push or open the PR yourself unless the user asks; give them the exact commands (`git push -u origin <branch>`, `gh pr create --fill` or the body file).
 9. Update the feature file: status, process log entry, follow-ups.
+10. **Report** per `sumi:output`. Subject: the branch and feature slug. Body: a table of acceptance criteria × evidence, with any criterion still open marked `open`; below it the checks that ran and their results, and the `ponytail:` notes collected in step 6. Next step: the exact push and PR commands from step 8 — or `/sumi:review` when step 3 found no burned receipt.

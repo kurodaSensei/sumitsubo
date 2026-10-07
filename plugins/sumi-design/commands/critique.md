@@ -11,4 +11,4 @@ Target: $ARGUMENTS (default: visual files changed since the merge-base with the 
 4. Merge findings, verify each blocker/major yourself, drop what you can disprove, and order by severity.
 5. Fix blockers and majors using tokens only. If a fix needs a new token, add it to DESIGN.md first.
 6. Re-run the lens on the fixes. Then a polish pass (Impeccable `polish` if installed): alignment, spacing rhythm, states, copy.
-7. Report in the user's language: what changed, what remains as nits.
+7. **Report** per `sumi:output`. Subject: the screens or files critiqued. Body: a table of findings (severity · where · status), nits kept separate from what was fixed. Next step: the most severe thing still open, or `/sumi:review` when the visual pass is done.

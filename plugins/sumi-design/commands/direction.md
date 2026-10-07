@@ -13,4 +13,4 @@ Follow `sumi-design:design-direction` stage by stage. This is a decision-heavy c
 4. Stage 3: three directions that differ on ≥ 5 axes (`${CLAUDE_PLUGIN_ROOT}/skills/design-direction/references/divergence-axes.md`). Check each against the ledger (`ledger.mjs check`) and fix collisions before presenting.
 5. Present the directions compactly and ask the user to choose or combine. Offer visual previews (small static pages) or a Claude Design brief per direction (`sumi-design:claude-design-bridge`).
 6. After the choice: write `DESIGN.md`, verify contrast with `contrast.mjs` (fix failures), record the project with `ledger.mjs add`, and, if Impeccable is installed, make sure `PRODUCT.md` reflects the brief.
-7. Finish with the next step: implement screens from DESIGN.md, or generate `design/claude-design-brief.md`.
+7. **Report** per `sumi:output`. Subject: the chosen direction. Body: its tokens as a short table, the contrast results from `contrast.mjs`, and the ledger entry written. Next step: implement screens from DESIGN.md, or generate `design/claude-design-brief.md`.
