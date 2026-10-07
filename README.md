@@ -142,4 +142,4 @@ The [documentation site](https://sumitsubo-docs.vercel.app/en) ([source](https:/
 
 ## Credits
 
-Concepts inspired by Gentle AI (Gentleman Programming). Companions are independent projects with their own licenses. Sumitsubo is [MIT](LICENSE) licensed, by [Alfredo Rodríguez](https://github.com/kurodaSensei).
+Concepts inspired by Gentle AI (Gentleman Programming). Companions are independent projects with their own licenses. Sumitsubo is [MIT](LICENSE) licensed, by [Alfredo Romero](https://github.com/kurodaSensei).

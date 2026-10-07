@@ -3,7 +3,7 @@
   "version": "0.5.1",
   "description": "React 19 + Next.js App Router stack pack: server/client boundaries, data fetching and caching, forms and actions, component architecture.",
   "author": {
-    "name": "Alfredo Rodríguez"
+    "name": "Alfredo Romero"
   },
   "license": "MIT",
   "keywords": [
