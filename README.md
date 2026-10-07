@@ -39,6 +39,7 @@ Then, in a project:
 /sumi:feature <idea>        plan large work in one feature file
 /sumi:review                review the current slice with context-free lenses
 /sumi:ship                  final gate and PR draft
+/sumi:doctor                read-only check of the install and this project
 ```
 
 ## How it works
@@ -98,6 +99,7 @@ Switch per project with `/sumi:models balanced | economy | performance`. → [Mo
 | [`/sumi:ship`](https://sumitsubo-docs.vercel.app/en/commands/sumi/ship) | Checks, evidence, deliberate simplifications and the PR draft |
 | [`/sumi:models`](https://sumitsubo-docs.vercel.app/en/commands/sumi/models) | Show or switch the model profile and session model |
 | [`/sumi:sync`](https://sumitsubo-docs.vercel.app/en/commands/sumi/sync) | Update the managed `CLAUDE.md` block and config to the installed version |
+| [`/sumi:doctor`](https://sumitsubo-docs.vercel.app/en/commands/sumi/doctor) | Read-only: marketplace source, version drift, companions, project config |
 | [`/sumi-design:direction`](https://sumitsubo-docs.vercel.app/en/commands/sumi-design/direction) | The full creative-direction process |
 | [`/sumi-design:critique`](https://sumitsubo-docs.vercel.app/en/commands/sumi-design/critique) | Critique screens against `DESIGN.md` and the anti-slop catalog |
 | [`/sumi-design:deps`](https://sumitsubo-docs.vercel.app/en/commands/sumi-design/deps) | Verify companions and find leftover duplicates |
