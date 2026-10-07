@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sumitsubo">
+  <!-- The signature element of DESIGN.md §1 at mark scale: two modules
+       overlapping on a shared column, the one in front carrying the single
+       top-right chamfer, the two of them in different tones because the depth
+       model is tonal and there are no shadows.
+
+       Not a new symbol. PRODUCT.md says there is no logo and there will be
+       none; this is the mark the direction already describes, drawn small.
+
+       Proportions are not the token values. `--chamfer-module` is 20px on a
+       module hundreds of pixels wide; at 64 units that ratio is invisible, so
+       the chamfer is 15/64 and the overlap 7/64 — chosen by rasterising to
+       16px and looking, which is the only test that matters for a favicon.
+
+       The pair is accent + seam rather than the two surface tones: surfaces
+       are near-invisible at icon scale, where this has to survive on whatever
+       colour a browser puts behind a tab. -->
+  <style>
+    .back { fill: #5a8143 }
+    .front { fill: #386616 }
+    @media (prefers-color-scheme: dark) {
+      .back { fill: #557343 }
+      .front { fill: #80ae67 }
+    }
+  </style>
+  <rect class="back" x="7" y="21" width="24" height="37"/>
+  <path class="front" d="M24 6 H43 L58 21 V45 H24 Z"/>
+</svg>

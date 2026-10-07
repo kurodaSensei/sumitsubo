@@ -1,6 +1,6 @@
 {
   "name": "sumi-react",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "React 19 + Next.js App Router stack pack: server/client boundaries, data fetching and caching, forms and actions, component architecture.",
   "author": {
     "name": "Alfredo Rodríguez"
@@ -13,5 +13,7 @@
   ],
   "dependencies": [
     "sumi"
-  ]
+  ],
+  "homepage": "https://sumitsubo-docs.vercel.app/en",
+  "repository": "https://github.com/kurodaSensei/sumitsubo"
 }

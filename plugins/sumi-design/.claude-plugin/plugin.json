@@ -1,6 +1,6 @@
 {
   "name": "sumi-design",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Anti-slop design direction: brief, anti-references, three divergent directions, cross-project repetition ledger, DESIGN.md tokens and motion rules. Orchestrates Impeccable, Taste and Emil Kowalski skills.",
   "author": {
     "name": "Alfredo Rodríguez"
@@ -24,5 +24,7 @@
     "emil-design-eng",
     "emil-review-animations",
     "emil-animation-vocabulary"
-  ]
+  ],
+  "homepage": "https://sumitsubo-docs.vercel.app/en",
+  "repository": "https://github.com/kurodaSensei/sumitsubo"
 }

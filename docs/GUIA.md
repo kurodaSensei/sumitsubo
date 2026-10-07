@@ -1,5 +1,7 @@
 # Guía de Sumitsubo (en español)
 
+> Documentación completa y referencia de cada skill y comando: **[sumitsubo-docs.vercel.app](https://sumitsubo-docs.vercel.app)** · [English](https://sumitsubo-docs.vercel.app/en) · [repo del sitio](https://github.com/kurodaSensei/sumitsubo-docs)
+
 Sumitsubo es tu framework personal de IA para diseño y desarrollo web con Claude Code. Los archivos del framework están en inglés (los modelos siguen mejor las instrucciones así y queda listo para publicarse); Claude te responde siempre en tu idioma.
 
 ## Cómo está organizado
@@ -10,10 +12,10 @@ Sumitsubo es tu framework personal de IA para diseño y desarrollo web con Claud
 
 ## Instalación (una vez)
 
-1. Sube el repo a GitHub (privado por ahora) o úsalo desde tu carpeta local.
+1. Agrega el marketplace desde GitHub, o desde tu carpeta local si estás editando el framework (así tus cambios se toman con `claude plugin marketplace update sumitsubo`).
 2. En Claude Code:
    ```
-   /plugin marketplace add <tu-usuario>/sumitsubo
+   /plugin marketplace add kurodaSensei/sumitsubo        # o: /plugin marketplace add "/Users/kurodasensei/AI Setup/sumitsubo"
    /plugin install sumi-design@sumitsubo   # trae sumi y todos los compañeros
    /plugin install sumi-nuxt@sumitsubo
    ```
@@ -21,7 +23,7 @@ Sumitsubo es tu framework personal de IA para diseño y desarrollo web con Claud
 
 ## Flujo en un proyecto nuevo de cliente
 
-1. `/sumi:init`: detecta el stack, crea `.sumi/` y agrega a `CLAUDE.md` un bloque gestionado entre las marcas `sumi:begin` y `sumi:end`. Lo que escribas fuera de esas marcas nunca se toca.
+1. `/sumi:init`: detecta el stack, crea `.sumi/`, agrega a `CLAUDE.md` un bloque gestionado entre las marcas `sumi:begin` y `sumi:end` (lo que escribas fuera nunca se toca) y deja el perfil `balanced` con `opusplan` como modelo de sesión en `.claude/settings.local.json`.
 2. `/sumi-design:direction Cliente X <links>`:
    - Brief con rasgos de marca escritos como tensiones ("preciso pero cálido"), nunca como adjetivos sueltos.
    - Anti-referencias: clichés del sector, vicios típicos de la IA y lo que ya usaste con clientes anteriores (lo saca del ledger).
@@ -74,6 +76,19 @@ Configúralos en `.sumi/config.json`: ramas protegidas, presupuesto de líneas y
 ## El ledger anti-repetición
 
 Vive en `~/.sumi/design-ledger.json`, fuera de los repos, y por eso cubre a todos tus clientes. Guarda las tipografías, el tono de acento, el layout, la forma y el elemento firma de cada proyecto. Antes de cerrar una dirección se ejecuta `check`, y si choca con alguno de tus últimos 6 proyectos te avisa. Lo que impone la marca del cliente se anota como `--brand-locked` y no cuenta como repetición tuya.
+
+## Actualizar
+
+```bash
+claude plugin marketplace update sumitsubo
+for p in sumi sumi-design sumi-nuxt sumi-react sumi-shopify sumi-wordpress; do claude plugin update $p@sumitsubo; done
+```
+
+Reinicia Claude Code y, en cada proyecto ya inicializado, corre `/sumi:sync` para actualizar el bloque de `CLAUDE.md` y las claves nuevas de `.sumi/config.json`.
+
+## El sitio de documentación
+
+[sumitsubo-docs.vercel.app](https://sumitsubo-docs.vercel.app) se construyó con el propio Sumitsubo (dirección "Kumiko") y genera las páginas de referencia desde este repo. Después de cambiar skills o comandos, actualízalo con `npm run sync` en [su repo](https://github.com/kurodaSensei/sumitsubo-docs) y vuelve a desplegar.
 
 ## Origen del contenido
 

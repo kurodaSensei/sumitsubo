@@ -1,87 +1,145 @@
-# Sumitsubo
+<div align="center">
 
-> **Sumitsubo** (墨壺) is the Japanese carpenter's ink line: it marks the true line before any cut is made. This framework does the same — direction first, then the work. Short name and command prefix: **sumi** (墨, ink).
+<a href="https://sumitsubo-docs.vercel.app/en"><img src=".github/assets/mark.svg" width="72" height="72" alt="Sumitsubo"></a>
 
-An opinionated AI framework for web design and development with **Claude Code**. It encodes how a senior design engineer works: process that scales with the request, code quality without slop, accessibility and performance as acceptance criteria, and — above all — **design that doesn't look like every other AI-generated site**.
+# Sumitsubo 墨壺
 
-## What's inside
+**Mark the line before you cut.**<br>
+A Claude Code framework for web design and development: direction first, then the work.
 
-| Plugin | What it gives you |
-|---|---|
-| `sumi` | Adaptive workflow (T0 direct → T1 delegated → T2 feature file), ~400-line slice budget, risk gates, receipt-based reviews with context-free lenses (correctness, a11y, performance, security), standards for HTML, CSS, JS/TS, a11y (WCAG 2.2 AA) and performance (Core Web Vitals), git and secret guard hooks. |
-| `sumi-design` | Creative-direction process (brief → anti-references → three divergent directions → DESIGN.md), anti-slop catalog, cross-project **design ledger** so you never repeat fonts/palettes/layouts across clients, token system with contrast checker, motion rules, design lens, Claude Design bridge. Orchestrates Impeccable, Taste and Emil Kowalski's skills. |
-| `sumi-nuxt` | Nuxt 4 + Vue 3.5 + Firebase/Firestore + Tailwind v4. |
-| `sumi-react` | React 19 + Next.js App Router, caching, Server Actions, testing. |
-| `sumi-shopify` | Online Store 2.0 themes: Liquid, sections/blocks, storefront JS, performance and e-commerce a11y. |
-| `sumi-wordpress` | Native block themes (Gutenberg/FSE), no build: theme.json design system, templates and patterns, dynamic blocks with plain-JS editors, core APIs over plugins, token audits. |
+[![Version](https://img.shields.io/badge/version-0.5.1-1f2937?style=flat-square)](.claude-plugin/marketplace.json)
+[![License: MIT](https://img.shields.io/badge/license-MIT-1f2937?style=flat-square)](LICENSE)
+[![Claude Code plugins](https://img.shields.io/badge/Claude%20Code-6%20plugins%20%C2%B7%2033%20skills-1f2937?style=flat-square)](#whats-inside)
+[![Docs](https://img.shields.io/badge/docs-sumitsubo--docs.vercel.app-1f2937?style=flat-square)](https://sumitsubo-docs.vercel.app/en)
 
-## Install
+[**Documentation**](https://sumitsubo-docs.vercel.app/en) · [Reference](https://sumitsubo-docs.vercel.app/en/reference) · [Documentación en español](https://sumitsubo-docs.vercel.app) · [Guía en español](docs/GUIA.md)
+
+</div>
+
+---
+
+A *sumitsubo* is the Japanese carpenter's ink line: it snaps the true line onto the wood before any cut is made. This framework does the same for AI-assisted web work. It encodes how a senior design engineer works — process that scales with the request, code without slop, accessibility and performance as acceptance criteria — and, above all, **design that doesn't look like every other AI-generated site**.
+
+Short name and command prefix: **`sumi`** (墨, ink).
+
+## Quick start
 
 ```bash
 # in Claude Code
-/plugin marketplace add <github-user>/sumitsubo        # or a local path: /plugin marketplace add ~/AI\ Setup/sumitsubo
-/plugin install sumi-design@sumitsubo                  # installs sumi + all companions as dependencies
-/plugin install sumi-nuxt@sumitsubo                    # plus the stack packs you use
+/plugin marketplace add kurodaSensei/sumitsubo
+/plugin install sumi-design@sumitsubo     # core + design + all companions
+/plugin install sumi-nuxt@sumitsubo       # plus the stack pack(s) you use
 ```
 
-Then, in each project:
+Then, in a project:
 
+```text
+/sumi:init                  set up .sumi/, the managed CLAUDE.md block and the model profile
+/sumi-design:direction      brief → three divergent directions → DESIGN.md
+/sumi:feature <idea>        plan large work in one feature file
+/sumi:review                review the current slice with context-free lenses
+/sumi:ship                  final gate and PR draft
 ```
-/sumi:init            # detect stack, write the managed CLAUDE.md block, create .sumi/
-/sumi-design:deps          # verify companions and find leftover duplicates
-/sumi-design:direction     # new UI project: brief → 3 directions → DESIGN.md
-/sumi:feature <idea>  # large work: single feature file with criteria and evidence
-/sumi:review          # review the current slice with context-free lenses
-/sumi:ship            # final gate and PR draft
+
+## How it works
+
+```mermaid
+flowchart LR
+    A["/sumi:init"] --> B["/sumi-design:direction<br/>DESIGN.md"]
+    B --> C{"Size of the request"}
+    C -->|small| D["Direct change"]
+    C -->|medium| E["Delegated to a builder"]
+    C -->|large| F["/sumi:feature<br/>feature file + slices"]
+    D --> G["/sumi:review"]
+    E --> G
+    F --> G
+    G --> H["/sumi-design:critique"]
+    H --> I["/sumi:ship"]
 ```
 
-## Model routing — spend Opus only where it matters
+- **Direction before pixels.** A brief with brand tensions, explicit anti-references, three directions that differ on at least five axes, and a `DESIGN.md` whose contrast is verified by script. A cross-project **design ledger** keeps you from repeating fonts, palettes and layouts across clients.
+- **Process proportional to the request.** Small things get done directly; large work gets one organic feature file with acceptance criteria and evidence. A **scope check** stops and asks *Minimal or Extended?* when a plan outgrows what you asked for.
+- **Small houses, not Eiffel towers.** About 400 changed lines per slice. Deliberate simplifications are marked with `ponytail:` comments that say when to extend them.
+- **Fresh eyes, on a budget.** Reviews run as subagents that see a frozen diff and the check results, never the author's reasoning. At most three lenses per review, each with a hard tool budget.
 
-Sumitsubo routes work by role instead of running everything on one model:
+## Model routing
 
-| Role | Model (balanced) | Does |
+Opus only where it changes the outcome:
+
+| Role | Model (`balanced`) | Does |
 |---|---|---|
 | `scout` | Haiku | Finds files, reads versions and docs, summarizes |
 | `builder` | Sonnet | Implements briefed tasks and slices, runs checks |
 | `architect` | Opus | Architecture, data models, migrations, slicing, trade-offs |
-| review lenses | Sonnet (Opus for high-risk security) | Context-free reviews |
-| session | `opusplan` | Opus while planning, Sonnet while executing |
+| Review lenses | Sonnet · Opus for high-risk security | Context-free reviews |
+| Session | `opusplan` | Opus while planning, Sonnet while executing |
 
-Switch per project with `/sumi:models balanced|economy|performance`. Reviews are budgeted too: the diff and the checks are computed once, lenses get a hard tool budget, at most 3 run per review, and ranges larger than a slice are split. Profiles are applied by passing the model on every delegation, so agents never need editing.
+Switch per project with `/sumi:models balanced | economy | performance`. → [Model routing reference](https://sumitsubo-docs.vercel.app/en/skills/sumi/model-routing)
+
+## What's inside
+
+| Plugin | | What it gives you |
+|---|---|---|
+| [`sumi`](https://sumitsubo-docs.vercel.app/en/skills/sumi/workflow) | core | Adaptive workflow, scope check, line budgets, risk gates, budgeted receipt-based reviews, model routing, standards for HTML, CSS, JS/TS, accessibility (WCAG 2.2 AA) and performance (Core Web Vitals), git and secret guard hooks |
+| [`sumi-design`](https://sumitsubo-docs.vercel.app/en/skills/sumi-design/design-direction) | core | Creative direction, anti-slop catalog, design ledger, `DESIGN.md` tokens with contrast checker, motion rules, design lens, Claude Design bridge |
+| [`sumi-nuxt`](https://sumitsubo-docs.vercel.app/en/skills/sumi-nuxt/nuxt-architecture) | stack | Nuxt 4, Vue 3.5, Firebase/Firestore, Tailwind v4 |
+| [`sumi-react`](https://sumitsubo-docs.vercel.app/en/skills/sumi-react/next-app-router) | stack | React 19, Next.js App Router, caching, Server Actions, testing |
+| [`sumi-shopify`](https://sumitsubo-docs.vercel.app/en/skills/sumi-shopify/shopify-liquid) | stack | Online Store 2.0 themes: Liquid, sections and blocks, storefront JS, e-commerce accessibility |
+| [`sumi-wordpress`](https://sumitsubo-docs.vercel.app/en/skills/sumi-wordpress/wp-block-theme) | stack | Native block themes with no build step: `theme.json` design system, dynamic blocks, core APIs over plugins, token audit |
+
+<details>
+<summary><strong>All commands</strong></summary>
+
+| Command | Purpose |
+|---|---|
+| [`/sumi:init`](https://sumitsubo-docs.vercel.app/en/commands/sumi/init) | Detect the stack, create `.sumi/`, write the managed `CLAUDE.md` block, set the model profile |
+| [`/sumi:feature`](https://sumitsubo-docs.vercel.app/en/commands/sumi/feature) | Explore, check scope, refute uncertainty and write the feature file |
+| [`/sumi:review`](https://sumitsubo-docs.vercel.app/en/commands/sumi/review) | Budgeted review of the current slice; `--quick` for small changes |
+| [`/sumi:ship`](https://sumitsubo-docs.vercel.app/en/commands/sumi/ship) | Checks, evidence, deliberate simplifications and the PR draft |
+| [`/sumi:models`](https://sumitsubo-docs.vercel.app/en/commands/sumi/models) | Show or switch the model profile and session model |
+| [`/sumi:sync`](https://sumitsubo-docs.vercel.app/en/commands/sumi/sync) | Update the managed `CLAUDE.md` block and config to the installed version |
+| [`/sumi-design:direction`](https://sumitsubo-docs.vercel.app/en/commands/sumi-design/direction) | The full creative-direction process |
+| [`/sumi-design:critique`](https://sumitsubo-docs.vercel.app/en/commands/sumi-design/critique) | Critique screens against `DESIGN.md` and the anti-slop catalog |
+| [`/sumi-design:deps`](https://sumitsubo-docs.vercel.app/en/commands/sumi-design/deps) | Verify companions and find leftover duplicates |
+
+</details>
 
 ## Companions
 
-Installing `sumi` and `sumi-design` also installs, as dependencies, curated pieces of Impeccable, Ponytail, Taste, Emil Kowalski's skills and Superpowers, referenced from their upstream repos (see [THIRD-PARTY.md](THIRD-PARTY.md)). Sumitsubo decides when each one is used; the full install adds about 6k tokens of always-on context.
+Installing `sumi` and `sumi-design` also installs curated pieces of **Impeccable**, **Ponytail**, **Taste**, **Emil Kowalski's skills** and **Superpowers** as dependencies. They are referenced from their upstream repositories, never copied, so they keep their licenses and update from their authors. Sumitsubo decides when each one runs; the full install adds about 6k tokens of always-on context. See [THIRD-PARTY.md](THIRD-PARTY.md).
 
 ## Principles
 
-1. **Process must be justified.** Trivial requests are done directly; uncertainty is refuted with evidence before asking; large work gets one organic feature file, not a pile of specs.
-2. **Small houses, not Eiffel towers.** ~400 changed lines per slice; the best solution within the constraint.
-3. **Done means verified.** Every task needs evidence: tests run, axe results, Lighthouse numbers, screenshots.
-4. **Fresh eyes.** Reviews run in subagents that see the diff and a factual lineage, never the author's reasoning.
-5. **Nothing visual by default.** Every font, color, radius and animation traces back to DESIGN.md, which comes from a deliberate direction, checked against your own past work.
-6. **Deterministic where possible.** Hooks and scripts (git guards, secret scan, ledger, contrast) do what should never depend on a model's mood.
+1. **Process must be justified.** Help the user decide; don't use every capability by default.
+2. **Small houses, not Eiffel towers.** The best solution within the budget.
+3. **Done means verified.** Tests run, axe results, Lighthouse numbers, screenshots.
+4. **Fresh eyes.** Reviewers never see the author's reasoning.
+5. **Nothing visual by default.** Every font, color, radius and animation traces back to `DESIGN.md`.
+6. **Deterministic where possible.** Hooks and scripts handle what should never depend on a model's mood.
 
 ## Repository layout
 
-```
-.claude-plugin/marketplace.json
+```text
+.claude-plugin/marketplace.json     6 plugins + 15 upstream companions
 plugins/<plugin>/
   .claude-plugin/plugin.json
-  skills/<skill>/SKILL.md (+ references/, scripts/)
-  agents/*.md      commands/*.md      hooks/hooks.json      templates/
+  skills/<skill>/SKILL.md           (+ references/, scripts/)
+  agents/  commands/  hooks/  templates/
 scripts/validate.mjs
-docs/GUIA.md (Spanish guide)   docs/ARCHITECTURE.md
+docs/GUIA.md                        Spanish guide
+docs/ARCHITECTURE.md                layers, project state, roadmap
 ```
 
 ## Development
 
 ```bash
-node scripts/validate.mjs           # structure, frontmatter, references
-claude plugin validate .            # official marketplace validation
+node scripts/validate.mjs                    # structure, frontmatter, references
+claude plugin validate .                     # official marketplace validation
 claude plugin validate --strict plugins/sumi
 ```
 
+The [documentation site](https://sumitsubo-docs.vercel.app/en) ([source](https://github.com/kurodaSensei/sumitsubo-docs)) renders its reference pages from this repository; re-sync it after changing skills or commands.
+
 ## Credits
 
-Concepts inspired by Gentle AI (Gentleman Programming). Design companions are separate projects with their own licenses — see [THIRD-PARTY.md](THIRD-PARTY.md). Sumitsubo itself is MIT licensed.
+Concepts inspired by Gentle AI (Gentleman Programming). Companions are independent projects with their own licenses. Sumitsubo is [MIT](LICENSE) licensed, by [Alfredo Rodríguez](https://github.com/kurodaSensei).

@@ -1,6 +1,6 @@
 {
   "name": "sumi-shopify",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Shopify Online Store 2.0 stack pack: Liquid, sections, blocks, schemas, snippets, theme performance and CLI workflow.",
   "author": {
     "name": "Alfredo Rodríguez"
@@ -13,5 +13,7 @@
   ],
   "dependencies": [
     "sumi"
-  ]
+  ],
+  "homepage": "https://sumitsubo-docs.vercel.app/en",
+  "repository": "https://github.com/kurodaSensei/sumitsubo"
 }
