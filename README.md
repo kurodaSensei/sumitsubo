@@ -134,9 +134,16 @@ docs/ARCHITECTURE.md                layers, project state, roadmap
 
 ```bash
 node scripts/validate.mjs                    # structure, frontmatter, references
+node scripts/check-companions.mjs            # do the 15 companions still resolve upstream?
 claude plugin validate .                     # official marketplace validation
 claude plugin validate --strict plugins/sumi
 ```
+
+Both scripts run in CI: `validate.mjs` on every push, `check-companions.mjs` on
+pull requests and weekly on a schedule. The schedule is the point — the
+companions live in repositories this project does not control, so an author
+renaming a folder breaks `/plugin install` for everyone on a day nobody here
+pushed anything.
 
 The [documentation site](https://sumitsubo-docs.vercel.app/en) ([source](https://github.com/kurodaSensei/sumitsubo-docs)) renders its reference pages from this repository; re-sync it after changing skills or commands.
 

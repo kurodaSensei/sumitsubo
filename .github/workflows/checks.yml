@@ -1,0 +1,38 @@
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  # Manifests, frontmatter and internal references. No network, so it runs on
+  # every push and is never flaky.
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      # This repo shipped for months with no CI, and validate.mjs turned out to
+      # have been a no-op on the author's machine: it built its root from
+      # `new URL().pathname`, which keeps percent-encoding, so a checkout under
+      # a directory with a space resolved to a path that does not exist. It
+      # validated zero plugins and said nothing. A script nobody runs is not a
+      # check.
+      - run: node scripts/validate.mjs
+
+  # The companions live in other people's repositories. They break without
+  # anybody here touching anything, so this also runs on a schedule — see
+  # companions.yml. Here it guards changes to the manifest itself.
+  companions:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node scripts/check-companions.mjs
