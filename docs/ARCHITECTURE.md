@@ -29,10 +29,6 @@ design/claude-design-brief.md
 ~/.sumi/design-ledger.json   cross-project design memory (outside repos)
 ```
 
-## Roadmap ideas
+## Roadmap
 
-- A single Sumitsubo status line (model profile, active feature, Ponytail mode) instead of each plugin installing its own.
-- Optional MCP memory (e.g. Engram) adapter for cross-agent memory.
-- Playwright + axe + Lighthouse runner script for one-command evidence.
-- Mirror rules for other agents (Cursor, Codex) if the framework is published.
-- Evals for skills (trigger accuracy, slop rate on a fixed set of design prompts).
+See [ROADMAP.md](../ROADMAP.md) and the [milestones](https://github.com/kurodaSensei/sumitsubo/milestones).

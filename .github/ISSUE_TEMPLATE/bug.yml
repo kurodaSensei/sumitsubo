@@ -1,0 +1,22 @@
+name: Bug
+description: A skill, command, hook or agent did the wrong thing
+labels: [bug]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Which part
+      placeholder: /sumi:review, sumi-design:design-direction, guard-git hook…
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: Stack, the prompt or command, and anything in .sumi/config.json that matters.

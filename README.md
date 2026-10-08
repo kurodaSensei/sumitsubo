@@ -12,7 +12,7 @@ A Claude Code framework for web design and development: direction first, then th
 [![Claude Code plugins](https://img.shields.io/badge/Claude%20Code-6%20plugins%20%C2%B7%2034%20skills-1f2937?style=flat-square)](#whats-inside)
 [![Docs](https://img.shields.io/badge/docs-sumitsubo--docs.vercel.app-1f2937?style=flat-square)](https://sumitsubo-docs.vercel.app/en)
 
-[**Documentation**](https://sumitsubo-docs.vercel.app/en) · [Reference](https://sumitsubo-docs.vercel.app/en/reference) · [Documentación en español](https://sumitsubo-docs.vercel.app) · [Guía en español](docs/GUIA.md)
+[**Documentation**](https://sumitsubo-docs.vercel.app/en) · [Reference](https://sumitsubo-docs.vercel.app/en/reference) · [Documentación en español](https://sumitsubo-docs.vercel.app) · [Guía en español](docs/GUIA.md) · [Roadmap](ROADMAP.md)
 
 </div>
 
@@ -200,4 +200,4 @@ The [documentation site](https://sumitsubo-docs.vercel.app/en) ([source](https:/
 
 ## Credits
 
-Concepts inspired by Gentle AI (Gentleman Programming). Companions are independent projects with their own licenses. Sumitsubo is [MIT](LICENSE) licensed, by [Alfredo Romero](https://github.com/kurodaSensei).
+Concepts inspired by Gentle AI (Gentleman Programming). Companions are independent projects with their own licenses. Contributions welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Sumitsubo is [MIT](LICENSE) licensed, by [Alfredo Romero](https://github.com/kurodaSensei).
