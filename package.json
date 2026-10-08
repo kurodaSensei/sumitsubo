@@ -1,6 +1,6 @@
 {
   "name": "sumitsubo",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Installer for Sumitsubo, a Claude Code framework for web design and development: direction first, then the work.",
   "type": "module",
   "bin": {

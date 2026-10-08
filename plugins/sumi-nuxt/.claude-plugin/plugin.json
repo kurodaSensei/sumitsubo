@@ -1,6 +1,6 @@
 {
   "name": "sumi-nuxt",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Nuxt 3/4 + Vue 3 + Firebase/Firestore stack pack: composables, SSR/hydration safety, data modeling, security rules, Tailwind.",
   "author": {
     "name": "Alfredo Romero"
