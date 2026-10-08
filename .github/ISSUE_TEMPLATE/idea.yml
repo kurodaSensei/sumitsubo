@@ -1,0 +1,20 @@
+name: Idea or new skill
+description: Something Sumitsubo should do, or a skill / stack pack it lacks
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What goes wrong or takes too long today? Start from the work, not the solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you propose
+  - type: textarea
+    id: cost
+    attributes:
+      label: What it would cost
+      description: Always-on context, extra steps, tokens. Process has to justify itself.
