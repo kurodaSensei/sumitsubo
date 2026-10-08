@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.1 — 2026-10-08
+
+- Releases go through npm trusted publishing: `release.yml` runs `npm stage publish` (the permission the trusted publisher grants), and the version goes live when it is approved under **npmjs.com → sumitsubo → Staged Packages**.
+- README and GUIA document that approval as the last step of every release.
+
 ## 0.6.0 — 2026-10-07
 
 ### Install

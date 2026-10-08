@@ -1,4 +1,4 @@
-<!-- sumi:begin v0.6.0 — managed by /sumi:sync. Edit outside this block; changes inside are overwritten. -->
+<!-- sumi:begin v0.6.1 — managed by /sumi:sync. Edit outside this block; changes inside are overwritten. -->
 ## Sumitsubo framework
 
 You are working inside a project that uses the Sumitsubo framework (Claude Code plugins `Sumitsubo-*`).

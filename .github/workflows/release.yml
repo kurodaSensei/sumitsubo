@@ -41,11 +41,11 @@ jobs:
           npm install -g @anthropic-ai/claude-code
           node bin/sumitsubo.mjs --sandbox --from . --no-ssh --no-rewrite --stack nuxt,react,shopify,wordpress
 
-      # Trusted publishing (no token) once the package is linked to this repo on
-      # npmjs.com; an NPM_TOKEN secret also works until then. npm stages the new
-      # version for review: it goes live when a maintainer approves it with 2FA
-      # under npmjs.com → sumitsubo → Staged Packages.
-      - name: Publish to npm
+      # Trusted publishing (OIDC, no token). The trusted publisher on npmjs.com
+      # grants `npm stage publish` only, so the version is staged for review: it
+      # goes live when a maintainer approves it with 2FA under
+      # npmjs.com → sumitsubo → Staged Packages. Needs npm 11.15+.
+      - name: Stage on npm
         if: steps.v.outputs.published != 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -55,7 +55,7 @@ jobs:
             exit 0
           fi
           npm install -g npm@latest
-          npm publish --provenance --access public
+          npm stage publish --provenance --access public
 
       - name: Tag and GitHub release
         if: steps.v.outputs.tagged != 'true'

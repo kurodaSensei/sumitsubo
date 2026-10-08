@@ -7,7 +7,7 @@
 **Mark the line before you cut.**<br>
 A Claude Code framework for web design and development: direction first, then the work.
 
-[![Version](https://img.shields.io/badge/version-0.6.0-1f2937?style=flat-square)](.claude-plugin/marketplace.json)
+[![Version](https://img.shields.io/badge/version-0.6.1-1f2937?style=flat-square)](.claude-plugin/marketplace.json)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1f2937?style=flat-square)](LICENSE)
 [![Claude Code plugins](https://img.shields.io/badge/Claude%20Code-6%20plugins%20%C2%B7%2034%20skills-1f2937?style=flat-square)](#whats-inside)
 [![Docs](https://img.shields.io/badge/docs-sumitsubo--docs.vercel.app-1f2937?style=flat-square)](https://sumitsubo-docs.vercel.app/en)
