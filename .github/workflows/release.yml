@@ -1,0 +1,76 @@
+name: release
+
+# Merging a version bump (npm run release x.y.z) to main publishes it:
+# tag vX.Y.Z, npm package `sumitsubo`, GitHub release, and a re-sync request to
+# the docs site. Every step is skipped when that version already exists, so
+# re-running the workflow is safe.
+on:
+  push:
+    branches: [main]
+    paths: [package.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write   # npm trusted publishing + provenance
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: https://registry.npmjs.org
+
+      - id: v
+        run: |
+          version=$(node -p "require('./package.json').version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if git rev-parse -q --verify "refs/tags/v$version" >/dev/null; then echo "tagged=true" >> "$GITHUB_OUTPUT"; fi
+          if npm view "sumitsubo@$version" version >/dev/null 2>&1; then echo "published=true" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Validate
+        run: node scripts/validate.mjs
+
+      - name: Install as a stranger (no SSH, no rewrite)
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          node bin/sumitsubo.mjs --sandbox --from . --no-ssh --no-rewrite --stack nuxt,react,shopify,wordpress
+
+      # Trusted publishing (no token) once the package is linked to this repo on
+      # npmjs.com; an NPM_TOKEN secret also works until then.
+      - name: Publish to npm
+        if: steps.v.outputs.published != 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ] && ! npm view sumitsubo version >/dev/null 2>&1; then
+            echo "::warning::sumitsubo is not on npm yet. Publish it once by hand (npm login && npm publish), then link trusted publishing on npmjs.com to this workflow."
+            exit 0
+          fi
+          npm install -g npm@latest
+          npm publish --provenance --access public
+
+      - name: Tag and GitHub release
+        if: steps.v.outputs.tagged != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="v${{ steps.v.outputs.version }}"
+          git tag "$tag" && git push origin "$tag"
+          gh release create "$tag" --title "$tag" --generate-notes
+
+      # Asks kurodaSensei/sumitsubo-docs to re-sync its reference pages to this
+      # tag. Needs a fine-grained token with Contents: read & write on that repo.
+      - name: Notify the docs site
+        env:
+          GH_TOKEN: ${{ secrets.DOCS_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then echo "DOCS_DISPATCH_TOKEN not set; skipping"; exit 0; fi
+          gh api repos/kurodaSensei/sumitsubo-docs/dispatches \
+            -f event_type=sumitsubo-release \
+            -f "client_payload[ref]=v${{ steps.v.outputs.version }}"

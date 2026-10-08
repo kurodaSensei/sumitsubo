@@ -1,0 +1,37 @@
+{
+  "name": "sumitsubo",
+  "version": "0.6.0",
+  "description": "Installer for Sumitsubo, a Claude Code framework for web design and development: direction first, then the work.",
+  "type": "module",
+  "bin": {
+    "sumitsubo": "bin/sumitsubo.mjs",
+    "sumi": "bin/sumitsubo.mjs"
+  },
+  "files": [
+    "bin"
+  ],
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "test:install": "node bin/sumitsubo.mjs --sandbox --from . --no-ssh",
+    "release": "node scripts/release.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "claude-code",
+    "claude-code-plugin",
+    "web-design",
+    "accessibility",
+    "performance",
+    "design-system"
+  ],
+  "homepage": "https://sumitsubo-docs.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kurodaSensei/sumitsubo.git"
+  },
+  "bugs": "https://github.com/kurodaSensei/sumitsubo/issues",
+  "author": "Alfredo Romero (https://github.com/kurodaSensei)",
+  "license": "MIT"
+}

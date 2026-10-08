@@ -36,3 +36,18 @@ jobs:
         with:
           node-version: '24'
       - run: node scripts/check-companions.mjs
+
+  # Installs the marketplace from this checkout into a throwaway Claude profile,
+  # on a runner with no SSH keys and with ssh itself made to refuse, then checks
+  # the files on disk. --no-rewrite leaves out the installer's HTTPS rewrite, so
+  # this proves the manifest installs for a stranger through every path: npx,
+  # /plugin inside Claude Code, and a manual clone.
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install -g @anthropic-ai/claude-code
+      - run: node bin/sumitsubo.mjs --sandbox --from . --no-ssh --no-rewrite --stack nuxt,react,shopify,wordpress

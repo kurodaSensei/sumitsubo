@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Structural validation for the marketplace: manifests, frontmatter, references.
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // `.pathname` keeps the URL percent-encoding, so a checkout under a directory
@@ -25,10 +25,22 @@ const mk = json(join(root, '.claude-plugin/marketplace.json'));
 let skills = 0, agents = 0, commands = 0;
 let companions = 0;
 for (const p of mk?.plugins ?? []) {
-  if (typeof p.source !== 'string') { companions++; if (!p.description) errors.push(`${p.name}: companion without description`); continue; } // upstream reference, validated by `claude plugin validate`
+  if (typeof p.source !== 'string') {
+    companions++;
+    if (!p.description) errors.push(`${p.name}: companion without description`);
+    // `{source: "github"}` is cloned over SSH by `claude plugin install` on a
+    // normal machine, with no HTTPS fallback: without SSH keys the install fails,
+    // and everything that depends on it fails with it. `{source: "url"}` with an
+    // https URL installs for everyone (verified in a clean profile with SSH off).
+    if (p.source.source === 'github') errors.push(`${p.name}: use {"source":"url","url":"https://github.com/<repo>.git"} instead of "github" — github sources need SSH keys to install`);
+    for (const k of ['url']) if (p.source[k] && !/^https:\/\//.test(p.source[k])) errors.push(`${p.name}: ${k} must be https:// (SSH URLs fail without keys)`);
+    continue;
+  } // upstream reference, validated by `claude plugin validate`
   const dir = join(root, p.source);
   const pj = json(join(dir, '.claude-plugin/plugin.json'));
   if (!pj) continue;
+  if (pj.version !== p.version) errors.push(`${p.name}: version ${pj.version} in plugin.json != ${p.version} in marketplace.json`);
+  if (pj.version !== mk.metadata?.version) errors.push(`${p.name}: version ${pj.version} != marketplace ${mk.metadata?.version} (bump with npm run release)`);
   if (pj.name !== p.name) errors.push(`${p.name}: plugin.json name mismatch (${pj.name})`);
   for (const dep of pj.dependencies ?? []) if (!mk.plugins.some((x) => x.name === dep)) errors.push(`${p.name}: unknown dependency ${dep}`);
   const sdir = join(dir, 'skills');
@@ -83,9 +95,19 @@ function walk(d) { return readdirSync(d).flatMap((f) => { const p = join(d, f); 
 for (const f of walk(join(root, 'plugins')).filter((x) => x.endsWith('.md'))) {
   const pluginDir = f.split('/plugins/')[1].split('/')[0];
   for (const m of readFileSync(f, 'utf8').matchAll(/\$\{CLAUDE_PLUGIN_ROOT\}\/([\w./-]+[\w])/g)) {
-    if (!existsSync(join(root, 'plugins', pluginDir, m[1]))) errors.push(`${f}: broken reference ${m[1]}`);
+    const base = join(root, 'plugins', pluginDir);
+    const target = resolve(base, m[1]);
+    // An installed plugin only has its own folder: a path that climbs out of it
+    // exists in this repo but is dead for everyone who installs the plugin.
+    if (!target.startsWith(base + sep)) errors.push(`${f}: ${m[1]} escapes the plugin folder (dead once installed)`);
+    else if (!existsSync(target)) errors.push(`${f}: broken reference ${m[1]}`);
   }
 }
+// The npm installer, the marketplace and the managed CLAUDE.md block move together.
+const pkg = json(join(root, 'package.json'));
+if (pkg && pkg.version !== mk?.metadata?.version) errors.push(`package.json ${pkg.version} != marketplace ${mk?.metadata?.version}`);
+const managed = readFileSync(join(root, 'plugins/sumi/templates/CLAUDE.managed.md'), 'utf8').match(/sumi:begin v([\d.]+)/)?.[1];
+if (managed !== mk?.metadata?.version) errors.push(`CLAUDE.managed.md marker v${managed} != marketplace ${mk?.metadata?.version}`);
 console.log(`plugins: ${(mk?.plugins?.length ?? 0) - companions} local + ${companions} companions, skills: ${skills}, agents: ${agents}, commands: ${commands}`);
 if (errors.length) { console.log('ERRORS:\n- ' + errors.join('\n- ')); process.exit(1); }
 console.log('OK');

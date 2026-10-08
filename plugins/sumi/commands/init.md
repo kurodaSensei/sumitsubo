@@ -15,7 +15,7 @@ Initialize the Sumitsubo framework in this repository. Arguments (optional stack
    - If `CLAUDE.md` has a `<!-- sumi:begin` … `<!-- sumi:end -->` block, replace only that block.
    - Otherwise insert the block at the top, preserving everything else verbatim.
    - Never delete or rewrite user content outside the markers.
-4. **Recommend plugins** for what was detected (only those not already enabled): `sumi-nuxt`, `sumi-react`, `sumi-shopify`, `sumi-wordpress`, and `sumi-design` for any project with UI. Show the exact `/plugin install <name>@sumitsubo` commands.
+4. **Recommend plugins** for what was detected (only those not already enabled): `sumi-nuxt`, `sumi-react`, `sumi-shopify`, `sumi-wordpress`, and `sumi-design` for any project with UI. Show the exact `/plugin install <name>@sumitsubo` commands (or, from a terminal, `npx sumitsubo --stack <stack>`).
 5. **Models**: set `modelProfile` to `balanced` unless the user explicitly asks for another profile (`economy` for small sites or tight plan limits; `performance` only on explicit request — it is Opus-heavy). Then, with one confirmation, write `"model": "opusplan"` (or the profile's session model) to `.claude/settings.local.json` (personal, not committed), creating the file if needed and never touching other keys.
    Generated folders the project produces (e.g. a content build step) go into `review.exclude` in `.sumi/config.json`.
 6. **Status line note**: if Ponytail asks to add its status line to `~/.claude/settings.json` and the edit is blocked, explain that it is optional and cosmetic; its suggested path includes a version number and would break on update.

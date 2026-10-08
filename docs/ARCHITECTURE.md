@@ -12,7 +12,8 @@
 6. **Review** — subagent lenses with fresh context, on a budget (frozen diff and checks computed once, ≤ 3 lenses, ~12 tool calls each, slice-sized ranges): `lens-correctness`, `lens-a11y`, `lens-performance`, `lens-security` (core) and `lens-design` (design). Selected by risk; findings verified by the orchestrator; outcome recorded as a receipt in `.sumi/reviews/`, burned on approval.
 7. **Deterministic guards** — hooks (`guard-git`, `guard-edit`, `session-start`) and scripts (`ledger.mjs`, `contrast.mjs`, `validate.mjs`). Hooks are opt-in per project via `.sumi/config.json`.
 
-8. **Companions** — Impeccable, Ponytail, Taste, Emil Kowalski and Superpowers skills, referenced from upstream in the marketplace (whole plugins or single skill folders via `git-subdir`) and installed as dependencies of `sumi` / `sumi-design`. See `THIRD-PARTY.md`.
+8. **Companions** — Impeccable, Ponytail, Taste, Emil Kowalski and Superpowers skills, referenced from upstream in the marketplace (whole plugins or single skill folders via `git-subdir`) and installed as dependencies of `sumi` / `sumi-design`. Companion sources must be `url` or `git-subdir` over https — a `github` source is cloned over SSH by `claude plugin install` and fails on machines without keys (`validate.mjs` enforces this). See `THIRD-PARTY.md`.
+9. **Distribution** — `bin/sumitsubo.mjs`, published to npm as `sumitsubo` (`npx sumitsubo`). A thin wrapper over the supported `claude plugin … --json` commands: it never writes Claude Code's settings files, routes GitHub through HTTPS only for its own child processes (`GIT_CONFIG_*`), verifies installed files on disk, repairs damaged installs on `update`, and offers `--sandbox` (`CLAUDE_CONFIG_DIR`) and `--no-ssh` to test an install as a stranger. `/sumi:doctor` is its in-session counterpart. Releases: `scripts/release.mjs` bumps every version together; `release.yml` publishes on merge.
 
 ## Project state
 
@@ -32,7 +33,6 @@ design/claude-design-brief.md
 
 - A single Sumitsubo status line (model profile, active feature, Ponytail mode) instead of each plugin installing its own.
 - Optional MCP memory (e.g. Engram) adapter for cross-agent memory.
-- A `sumi` CLI (npm package `sumitsubo`) for install/sync outside Claude Code and for publishing.
 - Playwright + axe + Lighthouse runner script for one-command evidence.
 - Mirror rules for other agents (Cursor, Codex) if the framework is published.
 - Evals for skills (trigger accuracy, slop rate on a fixed set of design prompts).

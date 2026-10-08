@@ -12,14 +12,53 @@ Sumitsubo es tu framework personal de IA para diseño y desarrollo web con Claud
 
 ## Instalación (una vez)
 
-1. Agrega el marketplace desde GitHub, o desde tu carpeta local si estás editando el framework (así tus cambios se toman con `claude plugin marketplace update sumitsubo`).
-2. En Claude Code:
-   ```
-   /plugin marketplace add kurodaSensei/sumitsubo        # o: /plugin marketplace add "/Users/kurodasensei/AI Setup/sumitsubo"
-   /plugin install sumi-design@sumitsubo   # trae sumi y todos los compañeros
-   /plugin install sumi-nuxt@sumitsubo
-   ```
-3. Los compañeros se instalan solos como dependencias: Impeccable, Ponytail, 5 skills de Taste, 3 de Emil Kowalski y 5 de Superpowers. Sumitsubo no los copia: los referencia desde el repo de cada autor, así que se actualizan desde ahí y respetan sus licencias. `/sumi-design:deps` verifica que estén y detecta copias duplicadas.
+Necesitas Claude Code y git. No hacen falta llaves SSH ni cambiar tu configuración global de git.
+
+**1. Un comando (la principal).** Dentro de un proyecto, con Node 18 o superior:
+
+```bash
+npx sumitsubo                          # core + diseño + compañeros + el stack que detecte
+npx sumitsubo --stack nuxt,wordpress   # elegir los stacks en vez de detectarlos
+npx sumitsubo doctor                   # revisar la instalación
+npx sumitsubo update                   # actualizar todo y reparar lo dañado
+npx sumitsubo uninstall                # quitarlo todo
+```
+
+El instalador solo ejecuta `claude plugin …` por debajo: nunca escribe los archivos de configuración de Claude Code. Al final revisa los archivos instalados en disco, porque el mensaje de "instalado con éxito" ya mintió antes.
+
+**2. Dentro de Claude Code (la secundaria).**
+
+```text
+/plugin marketplace add kurodaSensei/sumitsubo
+/plugin install sumi-design@sumitsubo     trae sumi y todos los compañeros
+/plugin install sumi-nuxt@sumitsubo       más el stack que uses
+```
+
+**3. Desde un clon (respaldo, y para editar el framework).**
+
+```bash
+git clone https://github.com/kurodaSensei/sumitsubo.git
+claude plugin marketplace add ./sumitsubo     # o tu carpeta: "/Users/kurodasensei/AI Setup/sumitsubo"
+claude plugin install sumi-design@sumitsubo
+```
+
+Con un marketplace local, los plugins propios cargan directo desde la carpeta: lo que edites ahí aplica en la siguiente sesión.
+
+En las tres vías hay que reiniciar Claude Code al terminar. Los compañeros se instalan solos como dependencias: Impeccable, Ponytail, 5 skills de Taste, 3 de Emil Kowalski y 5 de Superpowers. Sumitsubo no los copia; los referencia desde el repo de cada autor, así que se actualizan desde ahí y respetan sus licencias. `/sumi-design:deps` verifica que estén y detecta copias duplicadas.
+
+### Probar la instalación como si fueras otra persona
+
+```bash
+npx sumitsubo --sandbox                 # perfil de Claude desechable: tu configuración no se toca
+npx sumitsubo --sandbox --no-ssh        # además simula una máquina sin llaves SSH de GitHub
+npm run test:install                    # desde el repo: instala tu copia local así, sin publicar nada
+```
+
+`--sandbox` usa `CLAUDE_CONFIG_DIR` con una carpeta temporal y al final te dice cómo abrir Claude dentro de ella y cómo borrarla. Para probar el paquete exactamente como se publicaría: `npm pack` y luego `npx --package=./sumitsubo-<versión>.tgz sumitsubo --sandbox`.
+
+### Por qué la instalación fallaba sin SSH
+
+Ponytail estaba declarado como `{"source":"github"}`. En una máquina normal, `claude plugin install` clona ese tipo de fuente por SSH y no cae a HTTPS, así que sin llaves fallaba ponytail y, con él, todo lo que depende de `sumi`. Ahora está declarado como `{"source":"url","url":"https://…"}`; se verificó en un perfil limpio con SSH bloqueado y quedan 21 plugins completos. `validate.mjs` rechaza fuentes `github` en los compañeros para que no vuelva a pasar. Además, el instalador `npx` reescribe GitHub a HTTPS solo para los comandos que ejecuta, así que también cubre versiones viejas de Claude Code.
 
 ## Flujo en un proyecto nuevo de cliente
 
@@ -80,15 +119,24 @@ Vive en `~/.sumi/design-ledger.json`, fuera de los repos, y por eso cubre a todo
 ## Actualizar
 
 ```bash
-claude plugin marketplace update sumitsubo
-for p in sumi sumi-design sumi-nuxt sumi-react sumi-shopify sumi-wordpress; do claude plugin update $p@sumitsubo; done
+npx sumitsubo update
 ```
+
+Sin Node: `claude plugin marketplace update sumitsubo` y luego `claude plugin update <plugin>@sumitsubo` por cada plugin. Desde un clon: `git pull`.
 
 Reinicia Claude Code y, en cada proyecto ya inicializado, corre `/sumi:sync` para actualizar el bloque de `CLAUDE.md` y las claves nuevas de `.sumi/config.json`.
 
 ## El sitio de documentación
 
-[sumitsubo-docs.vercel.app](https://sumitsubo-docs.vercel.app) se construyó con el propio Sumitsubo (dirección "Kumiko") y genera las páginas de referencia desde este repo. Después de cambiar skills o comandos, actualízalo con `npm run sync` en [su repo](https://github.com/kurodaSensei/sumitsubo-docs) y vuelve a desplegar.
+[sumitsubo-docs.vercel.app](https://sumitsubo-docs.vercel.app) se construyó con el propio Sumitsubo (dirección "Kumiko") y genera las páginas de referencia desde este repo. Se sincroniza solo con cada release (ver abajo). Si agregas una skill o un comando, la página en español se escribe a mano en [su repo](https://github.com/kurodaSensei/sumitsubo-docs).
+
+## Publicar una versión
+
+```bash
+npm run release 0.7.0     # sube todas las versiones juntas y valida
+```
+
+Agrega la entrada en `CHANGELOG.md`, abre el PR y haz merge. Al llegar a `main`, `release.yml` hace la prueba de instalación limpia, crea el tag `v0.7.0`, publica `sumitsubo` en npm, crea el release de GitHub y le pide al sitio de documentación que se resincronice.
 
 ## Origen del contenido
 
