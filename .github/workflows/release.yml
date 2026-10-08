@@ -42,7 +42,9 @@ jobs:
           node bin/sumitsubo.mjs --sandbox --from . --no-ssh --no-rewrite --stack nuxt,react,shopify,wordpress
 
       # Trusted publishing (no token) once the package is linked to this repo on
-      # npmjs.com; an NPM_TOKEN secret also works until then.
+      # npmjs.com; an NPM_TOKEN secret also works until then. npm stages the new
+      # version for review: it goes live when a maintainer approves it with 2FA
+      # under npmjs.com → sumitsubo → Staged Packages.
       - name: Publish to npm
         if: steps.v.outputs.published != 'true'
         env:

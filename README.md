@@ -194,7 +194,7 @@ Releasing is one command and one merge:
 npm run release 0.7.0    # bumps every version (plugins, marketplace, installer, managed block) and validates
 ```
 
-Merging that PR to `main` runs [`release.yml`](.github/workflows/release.yml): the clean install test, the `vX.Y.Z` tag, the npm package, a GitHub release and a re-sync request to the docs site. See [CHANGELOG.md](CHANGELOG.md).
+Merging that PR to `main` runs [`release.yml`](.github/workflows/release.yml): the clean install test, the `vX.Y.Z` tag, the npm package, a GitHub release and a re-sync request to the docs site. npm holds a new version for review ([staged publishing](https://docs.npmjs.com/staged-publishing/)); it goes live when a maintainer approves it under **npmjs.com → sumitsubo → Staged Packages** (or `npm stage approve <id>`) with 2FA. See [CHANGELOG.md](CHANGELOG.md).
 
 The [documentation site](https://sumitsubo-docs.vercel.app/en) ([source](https://github.com/kurodaSensei/sumitsubo-docs)) renders its reference pages from this repository; re-sync it after changing skills or commands.
 

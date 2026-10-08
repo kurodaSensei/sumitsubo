@@ -138,6 +138,8 @@ npm run release 0.7.0     # sube todas las versiones juntas y valida
 
 Agrega la entrada en `CHANGELOG.md`, abre el PR y haz merge. Al llegar a `main`, `release.yml` hace la prueba de instalación limpia, crea el tag `v0.7.0`, publica `sumitsubo` en npm, crea el release de GitHub y le pide al sitio de documentación que se resincronice.
 
+**El último paso es tuyo:** npm deja cada versión nueva en revisión (*staged publishing*) y solo la libera cuando la apruebas en **npmjs.com → sumitsubo → Staged Packages → Approve**, con tu 2FA (o `npm stage list sumitsubo` y `npm stage approve <id>`, con npm 11.15+). Mientras no la apruebes, `npx sumitsubo` sigue instalando la versión anterior.
+
 ## Origen del contenido
 
 - Lo genérico de ai-guidelines (accesibilidad, HTML, JS, SCSS, Shopify) está reescrito y generalizado. El paquete de WordPress sigue el método de tus propios temas de bloques nativos (como Summers): theme.json, patterns, bloques dinámicos sin build y auditoría de tokens. No quedó nada específico de la empresa ni de sus clientes.
