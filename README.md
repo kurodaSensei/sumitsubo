@@ -7,9 +7,9 @@
 **Mark the line before you cut.**<br>
 A Claude Code framework for web design and development: direction first, then the work.
 
-[![Version](https://img.shields.io/badge/version-0.5.1-1f2937?style=flat-square)](.claude-plugin/marketplace.json)
+[![Version](https://img.shields.io/badge/version-0.6.0-1f2937?style=flat-square)](.claude-plugin/marketplace.json)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1f2937?style=flat-square)](LICENSE)
-[![Claude Code plugins](https://img.shields.io/badge/Claude%20Code-6%20plugins%20%C2%B7%2033%20skills-1f2937?style=flat-square)](#whats-inside)
+[![Claude Code plugins](https://img.shields.io/badge/Claude%20Code-6%20plugins%20%C2%B7%2034%20skills-1f2937?style=flat-square)](#whats-inside)
 [![Docs](https://img.shields.io/badge/docs-sumitsubo--docs.vercel.app-1f2937?style=flat-square)](https://sumitsubo-docs.vercel.app/en)
 
 [**Documentation**](https://sumitsubo-docs.vercel.app/en) · [Reference](https://sumitsubo-docs.vercel.app/en/reference) · [Documentación en español](https://sumitsubo-docs.vercel.app) · [Guía en español](docs/GUIA.md)
@@ -22,16 +22,60 @@ A *sumitsubo* is the Japanese carpenter's ink line: it snaps the true line onto 
 
 Short name and command prefix: **`sumi`** (墨, ink).
 
-## Quick start
+## Install
+
+You need [Claude Code](https://docs.claude.com/en/docs/claude-code) and git. No SSH keys, no global config changes.
+
+### 1. One command (recommended)
 
 ```bash
-# in Claude Code
-/plugin marketplace add kurodaSensei/sumitsubo
-/plugin install sumi-design@sumitsubo     # core + design + all companions
-/plugin install sumi-nuxt@sumitsubo       # plus the stack pack(s) you use
+npx sumitsubo
 ```
 
-Then, in a project:
+Run it inside a project and it installs the core, the design layer, every companion and the stack pack it detects (Nuxt, Next.js, Shopify or WordPress), then checks the installed files on disk rather than trusting the success message. Needs Node 18+.
+
+```bash
+npx sumitsubo --stack nuxt,wordpress   # choose stack packs instead of detecting them
+npx sumitsubo doctor                   # check the installation
+npx sumitsubo update                   # update everything, repairing damaged installs
+npx sumitsubo uninstall                # remove it all
+```
+
+### 2. Inside Claude Code
+
+```text
+/plugin marketplace add kurodaSensei/sumitsubo
+/plugin install sumi-design@sumitsubo     core + design + all companions
+/plugin install sumi-nuxt@sumitsubo       plus the stack pack(s) you use
+```
+
+### 3. From a clone (offline copies, forks, editing the framework)
+
+```bash
+git clone https://github.com/kurodaSensei/sumitsubo.git
+claude plugin marketplace add ./sumitsubo
+claude plugin install sumi-design@sumitsubo
+```
+
+Plugins from a local marketplace load in place, so edits in the clone apply at the next session. Update with `git pull`.
+
+Restart Claude Code after installing; plugins load at startup.
+
+<details>
+<summary><strong>Try it without touching your setup</strong></summary>
+
+```bash
+npx sumitsubo --sandbox            # throwaway Claude profile, your config is never touched
+npx sumitsubo --sandbox --no-ssh   # same, on a simulated machine without GitHub SSH keys
+```
+
+The sandbox prints how to open Claude Code inside it and how to delete it.
+
+</details>
+
+## Quick start
+
+In a project:
 
 ```text
 /sumi:init                  set up .sumi/, the managed CLAUDE.md block and the model profile
@@ -123,6 +167,7 @@ Installing `sumi` and `sumi-design` also installs curated pieces of **Impeccable
 
 ```text
 .claude-plugin/marketplace.json     6 plugins + 15 upstream companions
+bin/sumitsubo.mjs                   the npx installer (wraps `claude plugin`, no dependencies)
 plugins/<plugin>/
   .claude-plugin/plugin.json
   skills/<skill>/SKILL.md           (+ references/, scripts/)
@@ -135,17 +180,21 @@ docs/ARCHITECTURE.md                layers, project state, roadmap
 ## Development
 
 ```bash
-node scripts/validate.mjs                    # structure, frontmatter, references
+node scripts/validate.mjs                    # structure, versions, companion sources, references
 node scripts/check-companions.mjs            # do the 15 companions still resolve upstream?
 claude plugin validate .                     # official marketplace validation
-claude plugin validate --strict plugins/sumi
+npm run test:install                         # install this checkout in a sandbox, without SSH
 ```
 
-Both scripts run in CI: `validate.mjs` on every push, `check-companions.mjs` on
-pull requests and weekly on a schedule. The schedule is the point — the
-companions live in repositories this project does not control, so an author
-renaming a folder breaks `/plugin install` for everyone on a day nobody here
-pushed anything.
+CI runs `validate.mjs` and a clean install (no SSH keys, no HTTPS rewrite, all four stack packs) on every push, and `check-companions.mjs` on pull requests and weekly on a schedule. The schedule is the point — the companions live in repositories this project does not control, so an author renaming a folder breaks `/plugin install` for everyone on a day nobody here pushed anything.
+
+Releasing is one command and one merge:
+
+```bash
+npm run release 0.7.0    # bumps every version (plugins, marketplace, installer, managed block) and validates
+```
+
+Merging that PR to `main` runs [`release.yml`](.github/workflows/release.yml): the clean install test, the `vX.Y.Z` tag, the npm package, a GitHub release and a re-sync request to the docs site. See [CHANGELOG.md](CHANGELOG.md).
 
 The [documentation site](https://sumitsubo-docs.vercel.app/en) ([source](https://github.com/kurodaSensei/sumitsubo-docs)) renders its reference pages from this repository; re-sync it after changing skills or commands.
 
