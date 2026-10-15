@@ -1,7 +1,21 @@
 // Injects a short status of active Sumitsubo feature files at session start.
-import { readdirSync, readFileSync, existsSync } from 'node:fs';
+import { readdirSync, readFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { homedir } from 'node:os';
+import { fileURLToPath } from 'node:url';
 import { readInput, projectRoot, loadConfig, currentBranch } from './lib.mjs';
+
+// Keep the status line at a path that survives plugin updates (the plugin's own
+// folder changes with every version), so settings can point at it once.
+try {
+  const src = readFileSync(fileURLToPath(new URL('../../scripts/statusline.mjs', import.meta.url)), 'utf8');
+  const dir = join(homedir(), '.sumi');
+  const dest = join(dir, 'statusline.mjs');
+  if (!existsSync(dest) || readFileSync(dest, 'utf8') !== src) {
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(dest, src);
+  }
+} catch { /* the status line is optional; never block a session over it */ }
 
 const input = readInput();
 const root = projectRoot(input);
