@@ -3,6 +3,7 @@
 ## Unreleased
 
 - **Evidence in one command**: `scripts/evidence.mjs <url> --routes /,/x` — screenshots (390 px and 1440 px), axe (WCAG 2.2 A/AA) and Lighthouse mobile per route, checked against `performanceBudget` (LCP, CLS, TBT as the INP lab proxy, initial JS). Writes `.sumi/evidence/<timestamp>/`, prints the table for the feature file, exits 2 when a gate fails. Its dependencies install once into `~/.sumi/evidence-runtime`, never into the project. `/sumi:ship` runs it for UI work. (#7)
+- **One status line** for the whole framework: `墨 balanced · Opus · checkout 2/3 · ponytail lite · ⎇ feat/checkout` — model profile, session model, active feature and progress, Ponytail mode, branch (protected branches highlighted). No network, no git spawn (~80 ms). The SessionStart hook keeps it at `~/.sumi/statusline.mjs`, a path that survives plugin updates; `/sumi:init` offers to enable it in `.claude/settings.local.json`. (#11)
 - `sumi-react:react-spa`: Vite single-page apps — React Router v7 data mode, lazy routes, auth in one loader, Zustand with granular selectors, TanStack Query for server state, `VITE_` env safety, SPA rewrites, PWA, Tauri/Capacitor shells. The installer and `/sumi:init` now detect Vite + React projects. (#10)
 - `sumi-nuxt:tailwind-craft`: guidance for projects still on Tailwind v3. (#10)
 - Installer: `--json` for `install`, `doctor` and `update` — human output goes to stderr and stdout carries one JSON line (`ok`, `plugins`, `problems`, `marketplace`). (#16)
