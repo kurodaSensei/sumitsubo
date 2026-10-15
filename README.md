@@ -9,7 +9,7 @@ A Claude Code framework for web design and development: direction first, then th
 
 [![Version](https://img.shields.io/badge/version-0.6.1-1f2937?style=flat-square)](.claude-plugin/marketplace.json)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1f2937?style=flat-square)](LICENSE)
-[![Claude Code plugins](https://img.shields.io/badge/Claude%20Code-6%20plugins%20%C2%B7%2034%20skills-1f2937?style=flat-square)](#whats-inside)
+[![Claude Code plugins](https://img.shields.io/badge/Claude%20Code-6%20plugins%20%C2%B7%2035%20skills-1f2937?style=flat-square)](#whats-inside)
 [![Docs](https://img.shields.io/badge/docs-sumitsubo--docs.vercel.app-1f2937?style=flat-square)](https://sumitsubo-docs.vercel.app/en)
 
 [**Documentation**](https://sumitsubo-docs.vercel.app/en) · [Reference](https://sumitsubo-docs.vercel.app/en/reference) · [Documentación en español](https://sumitsubo-docs.vercel.app) · [Guía en español](docs/GUIA.md) · [Roadmap](ROADMAP.md)
@@ -129,7 +129,7 @@ Switch per project with `/sumi:models balanced | economy | performance`. → [Mo
 | [`sumi`](https://sumitsubo-docs.vercel.app/en/skills/sumi/workflow) | core | Adaptive workflow, scope check, line budgets, risk gates, budgeted receipt-based reviews, model routing, standards for HTML, CSS, JS/TS, accessibility (WCAG 2.2 AA) and performance (Core Web Vitals), git and secret guard hooks |
 | [`sumi-design`](https://sumitsubo-docs.vercel.app/en/skills/sumi-design/design-direction) | core | Creative direction, anti-slop catalog, design ledger, `DESIGN.md` tokens with contrast checker, motion rules, design lens, Claude Design bridge |
 | [`sumi-nuxt`](https://sumitsubo-docs.vercel.app/en/skills/sumi-nuxt/nuxt-architecture) | stack | Nuxt 4, Vue 3.5, Firebase/Firestore, Tailwind v4 |
-| [`sumi-react`](https://sumitsubo-docs.vercel.app/en/skills/sumi-react/next-app-router) | stack | React 19, Next.js App Router, caching, Server Actions, testing |
+| [`sumi-react`](https://sumitsubo-docs.vercel.app/en/skills/sumi-react/next-app-router) | stack | React 19: Next.js App Router, caching, Server Actions, and Vite SPAs with React Router, Zustand and TanStack Query; testing |
 | [`sumi-shopify`](https://sumitsubo-docs.vercel.app/en/skills/sumi-shopify/shopify-liquid) | stack | Online Store 2.0 themes: Liquid, sections and blocks, storefront JS, e-commerce accessibility |
 | [`sumi-wordpress`](https://sumitsubo-docs.vercel.app/en/skills/sumi-wordpress/wp-block-theme) | stack | Native block themes with no build step: `theme.json` design system, dynamic blocks, core APIs over plugins, token audit |
 
