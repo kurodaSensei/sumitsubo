@@ -13,7 +13,8 @@
     "lcpMs": 2500,
     "inpMs": 200,
     "cls": 0.1,
-    "jsKbGzipInitial": 170
+    "jsKbGzipInitial": 170,
+    "tbtMs": 200
   },
   "a11yLevel": "WCAG22-AA",
   "delivery": "single",

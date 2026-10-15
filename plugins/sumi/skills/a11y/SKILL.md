@@ -63,7 +63,7 @@ Accessibility is part of "done", not a later audit. Native HTML gets you most of
 
 ## Testing (required evidence)
 
-1. **Automated**: axe (browser extension, `@axe-core/playwright`, or Lighthouse a11y) → 0 critical/serious on affected views. Automation catches ~30–40%; it is the floor, not the bar.
+1. **Automated**: axe (browser extension, `@axe-core/playwright`, Lighthouse a11y, or `${CLAUDE_PLUGIN_ROOT}/scripts/evidence.mjs`, which runs WCAG 2.2 A/AA rules per route and fails on critical/serious) → 0 critical/serious on affected views. Automation catches ~30–40%; it is the floor, not the bar.
 2. **Keyboard pass**: complete the main task with Tab/Shift+Tab/Enter/Space/Esc/arrows only; focus always visible and logical.
 3. **Zoom/reflow**: 200% zoom and 320px width.
 4. **Screen reader smoke test** for new widgets: VoiceOver (Safari) or NVDA (Firefox/Chrome) — name, role and state announced correctly.
