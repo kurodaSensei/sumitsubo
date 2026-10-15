@@ -185,6 +185,9 @@ node scripts/validate.mjs                    # structure, versions, companion so
 node scripts/check-companions.mjs            # do the 15 companions still resolve upstream?
 claude plugin validate .                     # official marketplace validation
 npm run test:install                         # install this checkout in a sandbox, without SSH
+npm run evals -- -- --tag trigger            # skill evals: do the right skills fire? (costs tokens)
+npm run evals -- sumi-design -- --tag slop --ablation with-without --allow-tools Write
+                                             # slop rate with and without the design layer
 ```
 
 CI runs `validate.mjs` and a clean install (no SSH keys, no HTTPS rewrite, all four stack packs) on every push, and `check-companions.mjs` on pull requests and weekly on a schedule. The schedule is the point — the companions live in repositories this project does not control, so an author renaming a folder breaks `/plugin install` for everyone on a day nobody here pushed anything.

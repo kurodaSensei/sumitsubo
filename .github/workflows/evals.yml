@@ -1,0 +1,46 @@
+name: evals
+
+# Skill evals cost tokens on every run, so they only run on demand.
+# Needs an ANTHROPIC_API_KEY repository secret.
+on:
+  workflow_dispatch:
+    inputs:
+      plugins:
+        description: Plugins to evaluate (space-separated; empty = all with evals/)
+        required: false
+        default: ''
+      tag:
+        description: Case tag (trigger or slop; empty = all)
+        required: false
+        default: trigger
+      runs:
+        description: Runs per case
+        required: false
+        default: '3'
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install -g @anthropic-ai/claude-code
+      - name: Run evals
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PLUGINS: ${{ inputs.plugins }}
+          TAG: ${{ inputs.tag }}
+          RUNS: ${{ inputs.runs }}
+        run: |
+          set -- $PLUGINS
+          extra="--runs $RUNS --threshold 0"
+          [ -n "$TAG" ] && extra="$extra --tag $TAG"
+          [ "$TAG" = "slop" ] && extra="$extra --ablation with-without --allow-tools Write"
+          node scripts/run-evals.mjs "$@" -- $extra
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-results
+          path: .eval-stage/*/evals/results/

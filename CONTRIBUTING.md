@@ -18,6 +18,10 @@ npm run test:install           # installs your checkout in a throwaway Claude pr
 
 To use your checkout in Claude Code: `claude plugin marketplace add ./sumitsubo`. Plugins from a local marketplace load in place, so edits apply at the next session.
 
+## Evals
+
+Each plugin has `evals/<case>/prompt.md` + `graders/*.md` for `claude plugin eval`. Tag `trigger` cases check that the right skill fires (and `negative` ones that none does); `slop` cases judge generated UI against the anti-slop catalog, with and without the plugin. Run them with `npm run evals` (it stages each plugin with its real dependencies, which `claude plugin eval` would otherwise leave out). They cost tokens: add a case when you change a skill's description or add a skill.
+
 ## Rules of the house
 
 - **Skills:** `skills/<name>/SKILL.md`; the frontmatter `name` equals the folder name, and the `description` says *when* to use it. Keep it under ~260 lines and move depth to `references/`.
