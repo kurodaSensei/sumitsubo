@@ -47,6 +47,15 @@ Con un marketplace local, los plugins propios cargan directo desde la carpeta: l
 
 En las tres vías hay que reiniciar Claude Code al terminar. Los compañeros se instalan solos como dependencias: Impeccable, Ponytail, 5 skills de Taste, 3 de Emil Kowalski y 5 de Superpowers. Sumitsubo no los copia; los referencia desde el repo de cada autor, así que se actualizan desde ahí y respetan sus licencias. `/sumi-design:deps` verifica que estén y detecta copias duplicadas.
 
+### Otros agentes (Cursor, Codex)
+
+```bash
+npx sumitsubo rules                  # .cursor/rules y AGENTS.md en el proyecto actual
+npx sumitsubo rules --target cursor  # o codex
+```
+
+Genera las mismas reglas base y estandares para Cursor y para Codex (o cualquier agente que lea `AGENTS.md`), con las skills, plantillas y scripts en `.sumitsubo/`. No toca tus reglas ni lo que ya tengas en `AGENTS.md`; vuelve a correrlo despues de actualizar. Los comandos, hooks, subagentes y el enrutamiento de modelos son de Claude Code y no se trasladan.
+
 ### Probar la instalación como si fueras otra persona
 
 ```bash

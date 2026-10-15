@@ -8,7 +8,10 @@
     "sumi": "bin/sumitsubo.mjs"
   },
   "files": [
-    "bin"
+    "bin",
+    "plugins/**/skills/**",
+    "plugins/**/scripts/**",
+    "plugins/**/templates/**"
   ],
   "scripts": {
     "validate": "node scripts/validate.mjs",
