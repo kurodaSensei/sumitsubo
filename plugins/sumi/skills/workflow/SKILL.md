@@ -1,6 +1,6 @@
 ---
 name: workflow
-description: The Sumitsubo adaptive workflow — how to scale process to the size and uncertainty of a request. Tiers (direct, delegated, feature file), refuting uncertainty before acting, the single feature file with acceptance criteria and evidence, the ~400-line budget per slice, pre-commit risk assessment and chained PRs. Use at the start of ANY implementation request, when planning work, when a task grows, or when the user says "feature", "plan", "implement", "build", "migrate" or "refactor".
+description: Load this FIRST, before exploring files or answering, whenever the user asks to build, add, plan, implement, migrate or refactor anything, or describes a feature — it decides how much process the request deserves. The Sumitsubo adaptive workflow - tiers (direct, delegated, feature file), refuting uncertainty before acting, the single feature file with acceptance criteria and evidence, the ~400-line budget per slice, pre-commit risk assessment and chained PRs. Also use when a task grows mid-way or when planning work.
 ---
 
 # Sumitsubo Workflow

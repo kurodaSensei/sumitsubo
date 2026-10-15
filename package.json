@@ -13,7 +13,8 @@
   "scripts": {
     "validate": "node scripts/validate.mjs",
     "test:install": "node bin/sumitsubo.mjs --sandbox --from . --no-ssh",
-    "release": "node scripts/release.mjs"
+    "release": "node scripts/release.mjs",
+    "evals": "node scripts/run-evals.mjs"
   },
   "engines": {
     "node": ">=18"
