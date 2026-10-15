@@ -62,6 +62,15 @@ Plugins from a local marketplace load in place, so edits in the clone apply at t
 
 Restart Claude Code after installing; plugins load at startup.
 
+### Other agents (Cursor, Codex)
+
+```bash
+npx sumitsubo rules                     # .cursor/rules + AGENTS.md, in the current project
+npx sumitsubo rules --target cursor     # or codex
+```
+
+Writes the same always-on rules and standards for Cursor (`.cursor/rules/*.mdc`) and for Codex or any agent that reads `AGENTS.md`, with the skills, templates and scripts in `.sumitsubo/`. Your own rules and `AGENTS.md` content are left alone; re-run it after updating. Commands, hooks, subagents and model routing are Claude Code features and don't carry over.
+
 <details>
 <summary><strong>Try it without touching your setup</strong></summary>
 
