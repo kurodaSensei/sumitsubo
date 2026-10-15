@@ -113,6 +113,14 @@ Sumitsubo está pensado para ayudarte a decidir, no para usar toda su potencia s
 
 Configúralos en `.sumi/config.json`: ramas protegidas, presupuesto de líneas y presupuestos de performance.
 
+## Evidencia en un comando
+
+```bash
+node <plugin sumi>/scripts/evidence.mjs http://localhost:3000 --routes /,/contacto
+```
+
+Capturas (390 px y 1440 px), axe (WCAG 2.2 A/AA) y Lighthouse movil por ruta, comparados con `performanceBudget` de `.sumi/config.json`. Deja todo en `.sumi/evidence/<fecha>/` e imprime la tabla para el expediente; sale con codigo 2 si algo falla. `/sumi:ship` lo corre por ti en trabajo visual. La primera vez instala Playwright, axe y Lighthouse en `~/.sumi/evidence-runtime`, nunca en el proyecto. Correlo contra un build de produccion (preview), no contra el servidor de desarrollo.
+
 ## El ledger anti-repetición
 
 Vive en `~/.sumi/design-ledger.json`, fuera de los repos, y por eso cubre a todos tus clientes. Guarda las tipografías, el tono de acento, el layout, la forma y el elemento firma de cada proyecto. Antes de cerrar una dirección se ejecuta `check`, y si choca con alguno de tus últimos 6 proyectos te avisa. Lo que impone la marca del cliente se anota como `--brand-locked` y no cuenta como repetición tuya.

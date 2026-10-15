@@ -60,6 +60,7 @@ Check the cost before adding (bundlephobia / `pkg-size`, or the bundle analyzer)
 
 ## Measuring (evidence required)
 
+- **One command**: `node ${CLAUDE_PLUGIN_ROOT}/scripts/evidence.mjs <url> --routes /,/x` runs Lighthouse (mobile), axe and screenshots per route against `performanceBudget` in `.sumi/config.json` and prints the evidence table. Run it on a production build, never a dev server.
 - **Lab**: Lighthouse (mobile, throttled) or Unlighthouse for multi-page sites; WebPageTest for waterfalls. Navigation runs can't measure INP — use TBT as its proxy, or a Lighthouse timespan run over the interaction. Record before/after numbers in the feature file.
 - **Field**: CrUX / Search Console / `web-vitals` library reporting to analytics for real p75 data. Lab passes do not guarantee field passes.
 - **Bundles**: the framework's analyzer (`nuxi analyze`, `@next/bundle-analyzer`, `vite-bundle-visualizer`).

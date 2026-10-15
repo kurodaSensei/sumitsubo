@@ -51,3 +51,22 @@ jobs:
           node-version: '24'
       - run: npm install -g @anthropic-ai/claude-code
       - run: node bin/sumitsubo.mjs --sandbox --from . --no-ssh --no-rewrite --stack nuxt,react,shopify,wordpress
+
+  # The evidence runner against a fixture site: a clean page must pass and a
+  # page with known accessibility errors must fail the gate (exit 2).
+  evidence:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: |
+          (cd scripts/fixtures/evidence-site && python3 -m http.server 8787 &) && sleep 1
+          node plugins/sumi/scripts/evidence.mjs http://localhost:8787 --routes / --out /tmp/ev-ok
+          set +e
+          node plugins/sumi/scripts/evidence.mjs http://localhost:8787 --routes /broken/ --no-lighthouse --out /tmp/ev-bad
+          code=$?
+          set -e
+          test "$code" -eq 2 || { echo "expected exit 2 for the broken fixture, got $code"; exit 1; }
