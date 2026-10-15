@@ -17,7 +17,7 @@ const WIN = process.platform === 'win32';
 // ---------- args ----------
 function parseArgs(argv) {
   const o = { cmd: 'install', stack: null, scope: 'user', from: DEFAULT_SOURCE, sandbox: false, sandboxDir: null,
-    noSsh: false, rewrite: true, dryRun: false, yes: false, core: false, keep: true };
+    noSsh: false, rewrite: true, dryRun: false, yes: false, core: false, json: false };
   const rest = [...argv];
   if (rest[0] && !rest[0].startsWith('-')) o.cmd = rest.shift();
   while (rest.length) {
@@ -32,6 +32,7 @@ function parseArgs(argv) {
     else if (a === '--dry-run') o.dryRun = true;
     else if (a === '--yes' || a === '-y') o.yes = true;
     else if (a === '--core') o.core = true;
+    else if (a === '--json') o.json = true;
     else if (a === '--help' || a === '-h') o.cmd = 'help';
     else if (a === '--version' || a === '-v') o.cmd = 'version';
     else die(`unknown option ${a} (see --help)`);
@@ -61,6 +62,8 @@ Options
   --no-rewrite                          do not route GitHub clones through HTTPS (testing)
   --dry-run                             print the commands without running them
   -y, --yes                             answer yes to confirmations
+  --json                                install, doctor, update: human output goes to stderr and one
+                                        JSON result line to stdout (for CI and scripts)
 
 Docs: https://sumitsubo-docs.vercel.app`;
 
@@ -72,7 +75,19 @@ const ok = (m) => console.log(`${green('✓')} ${m}`);
 const warn = (m) => console.log(`${yellow('!')} ${m}`);
 const bad = (m) => console.log(`${red('✗')} ${m}`);
 const step = (m) => console.log(`\n${bold(m)}`);
-function die(m) { console.error(`${red('sumitsubo:')} ${m}`); process.exit(1); }
+function die(m) { console.error(`${red('sumitsubo:')} ${m}`); emitJson({ ok: false, error: m }); process.exit(1); }
+
+// ---------- --json ----------
+// With --json every human line goes to stderr and stdout carries exactly one
+// JSON line at the end, so `npx sumitsubo doctor --json | jq .ok` just works.
+const report = { command: null, version: null, ok: false, plugins: [], problems: [] };
+let jsonMode = false, emitted = false;
+const stdoutLog = console.log;
+function emitJson(extra = {}) {
+  if (!jsonMode || emitted) return;
+  emitted = true;
+  stdoutLog(JSON.stringify({ ...report, ...extra }));
+}
 
 // ---------- environment ----------
 // GitHub sources are cloned by Claude Code itself. Older Claude Code versions
@@ -195,11 +210,14 @@ function countFiles(dir) {
 // so verification looks at the files on disk, never at the CLI's message.
 function verify(o, { quiet = false } = {}) {
   const mp = marketplaces(o).find((m) => m.name === MARKETPLACE);
-  if (!mp) { bad('the sumitsubo marketplace is not registered'); return { ok: false, count: 0 }; }
+  if (!mp) { bad('the sumitsubo marketplace is not registered'); report.problems = ['the sumitsubo marketplace is not registered']; return { ok: false, broken: [], count: 0, total: 0 }; }
   const list = installed(o).filter((p) => p.id?.endsWith(`@${MARKETPLACE}`));
   const own = list.map((p) => p.id.split('@')[0]);
   const { set, byName } = expectedSet(mp.installLocation, own);
   let good = true, count = 0; const broken = [];
+  report.plugins = [];
+  report.problems = [];
+  report.marketplace = mp.repo ?? mp.path ?? mp.url ?? mp.source;
   for (const name of [...set].sort()) {
     const entry = list.find((p) => p.id === `${name}@${MARKETPLACE}`);
     const def = byName.get(name);
@@ -226,8 +244,9 @@ function verify(o, { quiet = false } = {}) {
       return null;
     })();
     if (problem) { good = false; const depOnly = Boolean(entry?.errorDetails?.length) && entry.errorDetails.every((e) => e.type === 'dependency-unsatisfied');
-      if (!depOnly) broken.push({ name, scope: entry?.scope ?? 'user', installed: Boolean(entry) }); bad(`${name}: ${problem}`); }
-    else { count++; if (!quiet) ok(`${name} ${dim(entry.version ?? '')}`); }
+      if (!depOnly) broken.push({ name, scope: entry?.scope ?? 'user', installed: Boolean(entry) }); bad(`${name}: ${problem}`);
+      report.plugins.push({ name, version: entry?.version ?? null, ok: false, problem }); report.problems.push(`${name}: ${problem}`); }
+    else { count++; if (!quiet) ok(`${name} ${dim(entry.version ?? '')}`); report.plugins.push({ name, version: entry.version ?? null, ok: true }); }
   }
   return { ok: good && set.size > 0, broken, count, total: set.size, source: mp.repo ?? mp.path ?? mp.url ?? mp.source };
 }
@@ -256,12 +275,13 @@ function install(o) {
 
   step('Plugins');
   for (const p of plugins) claude(o, ['plugin', 'install', `${p}@${MARKETPLACE}`, '--scope', o.scope]);
-  if (o.dryRun) { console.log(dim('\n(dry run: nothing was installed)')); return; }
+  if (o.dryRun) { console.log(dim('\n(dry run: nothing was installed)')); emitJson({ ok: true, dryRun: true, plan: plugins }); return; }
 
   step('Verify (files on disk, not the CLI message)');
   const v = verify(o);
   if (!v.ok) die('the installation is incomplete — see the lines above, then run: npx sumitsubo doctor');
   step(green(`Sumitsubo is installed: ${v.count} plugins verified.`));
+  emitJson({ ok: true, stacks, sandbox: o.sandbox ? o.sandboxDir : null });
   if (o.sandbox) {
     console.log(`  Try it:   CLAUDE_CONFIG_DIR=${o.sandboxDir} claude   ${dim('(asks you to log in: it is a fresh profile)')}`);
     console.log(`  Clean up: rm -rf ${o.sandboxDir}`);
@@ -276,8 +296,9 @@ function doctor(o) {
   prerequisites(o);
   step('Installation');
   const v = verify(o);
-  if (!v.ok) { console.log(`\nFix: npx sumitsubo ${v.total ? 'update' : 'install'}`); process.exit(1); }
+  if (!v.ok) { console.log(`\nFix: npx sumitsubo ${v.total ? 'update' : 'install'}`); emitJson({ ok: false, fix: `npx sumitsubo ${v.total ? 'update' : 'install'}` }); process.exit(1); }
   step(green(`${v.count} plugins verified`) + dim(` · marketplace from ${v.source}`));
+  emitJson({ ok: true });
   console.log('  In a project, /sumi:doctor also checks .sumi/ and the managed CLAUDE.md block.');
 }
 
@@ -306,6 +327,7 @@ function update(o) {
   }
   if (!v.ok) die('some plugins are still missing or incomplete — reinstall with: npx sumitsubo uninstall -y && npx sumitsubo');
   step(green(`${v.count} plugins up to date.`) + ' Restart Claude Code, then run /sumi:sync in each project.');
+  emitJson({ ok: true });
 }
 
 async function uninstall(o) {
@@ -336,6 +358,13 @@ if (o.cmd === 'version') { console.log(PKG.version); process.exit(0); }
 if (o.sandbox) {
   o.sandboxDir = o.sandboxDir ? (isAbsolute(o.sandboxDir) ? o.sandboxDir : resolve(o.sandboxDir)) : mkdtempSync(join(tmpdir(), 'sumi-sandbox-'));
   mkdirSync(o.sandboxDir, { recursive: true });
+}
+if (o.json) {
+  if (!['install', 'doctor', 'update'].includes(o.cmd)) die('--json works with install, doctor and update');
+  jsonMode = true;
+  console.log = (...a) => console.error(...a);
+  report.command = o.cmd;
+  report.version = PKG.version;
 }
 o.env = childEnv(o);
 console.log(`${bold('Sumitsubo')} ${dim(`墨壺 · installer ${PKG.version}`)}`);

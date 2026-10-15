@@ -39,6 +39,7 @@ npx sumitsubo --stack nuxt,wordpress   # choose stack packs instead of detecting
 npx sumitsubo doctor                   # check the installation
 npx sumitsubo update                   # update everything, repairing damaged installs
 npx sumitsubo uninstall                # remove it all
+npx sumitsubo doctor --json            # one JSON result line on stdout, for CI and scripts
 ```
 
 ### 2. Inside Claude Code

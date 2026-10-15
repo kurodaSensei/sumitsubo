@@ -22,6 +22,7 @@ npx sumitsubo --stack nuxt,wordpress   # elegir los stacks en vez de detectarlos
 npx sumitsubo doctor                   # revisar la instalación
 npx sumitsubo update                   # actualizar todo y reparar lo dañado
 npx sumitsubo uninstall                # quitarlo todo
+npx sumitsubo doctor --json            # una linea JSON con el resultado, para CI o scripts
 ```
 
 El instalador solo ejecuta `claude plugin …` por debajo: nunca escribe los archivos de configuración de Claude Code. Al final revisa los archivos instalados en disco, porque el mensaje de "instalado con éxito" ya mintió antes.
