@@ -8,7 +8,7 @@ Sumitsubo es tu framework personal de IA para diseño y desarrollo web con Claud
 
 - **sumi**: cómo se trabaja (flujo, calidad, accesibilidad, performance, review, hooks).
 - **sumi-design**: cómo se diseña sin AI slop (dirección creativa, catálogo anti-slop, registro anti-repetición, tokens, movimiento).
-- **Paquetes de stack**: sumi-nuxt, sumi-react, sumi-shopify y sumi-wordpress. En cada proyecto instalas solo los que uses.
+- **Paquetes de stack**: sumi-nuxt, sumi-react (Next.js y SPAs con Vite), sumi-shopify y sumi-wordpress. En cada proyecto instalas solo los que uses.
 
 ## Instalación (una vez)
 

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- `sumi-react:react-spa`: Vite single-page apps — React Router v7 data mode, lazy routes, auth in one loader, Zustand with granular selectors, TanStack Query for server state, `VITE_` env safety, SPA rewrites, PWA, Tauri/Capacitor shells. The installer and `/sumi:init` now detect Vite + React projects. (#10)
+- `sumi-nuxt:tailwind-craft`: guidance for projects still on Tailwind v3. (#10)
 - Installer: `--json` for `install`, `doctor` and `update` — human output goes to stderr and stdout carries one JSON line (`ok`, `plugins`, `problems`, `marketplace`). (#16)
 
 ## 0.6.1 — 2026-10-08

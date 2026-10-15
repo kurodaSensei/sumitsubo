@@ -7,7 +7,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash(git:*), Bash(ls:*), Bash(cat:
 Initialize the Sumitsubo framework in this repository. Arguments (optional stack override): $ARGUMENTS
 
 1. **Detect** (read, don't guess):
-   - Stack from files: `nuxt.config.*` → nuxt; `next.config.*` or `app/layout.tsx` → react/next; `config/settings_schema.json` + `sections/` → shopify; `style.css` with `Theme Name:` / `functions.php` / `theme.json` → wordpress; `firebase.json` / `firestore.rules` → firebase.
+   - Stack from files: `nuxt.config.*` → nuxt; `next.config.*` or `app/layout.tsx` → react/next; `vite.config.*` with `react` in package.json → react (SPA, `sumi-react:react-spa`); `config/settings_schema.json` + `sections/` → shopify; `style.css` with `Theme Name:` / `functions.php` / `theme.json` → wordpress; `firebase.json` / `firestore.rules` → firebase.
    - Package manager from the lockfile (pnpm-lock.yaml, package-lock.json, yarn.lock, bun.lock).
    - Commands from `package.json` scripts (dev, build, test, lint, typecheck) or platform CLIs (shopify theme dev, wp-env).
 2. **Create `.sumi/`** if missing: copy `${CLAUDE_PLUGIN_ROOT}/templates/config.json` to `.sumi/config.json` with the detected `stack`; create `.sumi/tasks/` and `.sumi/reviews/` (with a `.gitkeep`). Ask the user once whether `.sumi/` should be committed (recommended for team/client repos so feature files travel with the code) or kept local (add to `.git/info/exclude`).

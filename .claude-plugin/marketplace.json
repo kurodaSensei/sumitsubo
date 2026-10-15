@@ -11,7 +11,7 @@
     {
       "name": "sumi",
       "source": "./plugins/sumi",
-      "description": "Engineering core: adaptive workflow (trivial → delegated → feature file), line budgets, risk gates, context-free review lenses, HTML/CSS/JS/a11y/performance standards and safety hooks.",
+      "description": "Engineering core: adaptive workflow (trivial \u2192 delegated \u2192 feature file), line budgets, risk gates, context-free review lenses, HTML/CSS/JS/a11y/performance standards and safety hooks.",
       "version": "0.6.1",
       "homepage": "https://sumitsubo-docs.vercel.app/en"
     },
@@ -32,7 +32,7 @@
     {
       "name": "sumi-react",
       "source": "./plugins/sumi-react",
-      "description": "React 19 + Next.js App Router stack pack: server/client boundaries, data fetching and caching, forms and actions, component architecture.",
+      "description": "React 19 stack pack: Next.js App Router (server/client boundaries, data fetching and caching, Server Actions) and Vite single-page apps (React Router, Zustand, TanStack Query, PWA), component architecture, performance and testing.",
       "version": "0.6.1",
       "homepage": "https://sumitsubo-docs.vercel.app/en"
     },
@@ -52,7 +52,7 @@
     },
     {
       "name": "impeccable",
-      "description": "[companion · pbakaus/impeccable · Apache-2.0] Design critique, audit, polish and anti-pattern detection. Referenced from upstream.",
+      "description": "[companion \u00b7 pbakaus/impeccable \u00b7 Apache-2.0] Design critique, audit, polish and anti-pattern detection. Referenced from upstream.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/pbakaus/impeccable.git",
@@ -62,7 +62,7 @@
     },
     {
       "name": "ponytail",
-      "description": "[companion · DietrichGebert/ponytail · MIT] Minimalism rules against over-engineering; origin of the ponytail: comment convention. Referenced from upstream.",
+      "description": "[companion \u00b7 DietrichGebert/ponytail \u00b7 MIT] Minimalism rules against over-engineering; origin of the ponytail: comment convention. Referenced from upstream.",
       "source": {
         "source": "url",
         "url": "https://github.com/DietrichGebert/ponytail.git"
@@ -71,7 +71,7 @@
     },
     {
       "name": "taste",
-      "description": "[companion · Leonxlnx/taste-skill · MIT] design-taste-frontend: brief-driven anti-slop frontend design with variance/motion/density dials.",
+      "description": "[companion \u00b7 Leonxlnx/taste-skill \u00b7 MIT] design-taste-frontend: brief-driven anti-slop frontend design with variance/motion/density dials.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Leonxlnx/taste-skill.git",
@@ -85,7 +85,7 @@
     },
     {
       "name": "taste-minimalist",
-      "description": "[companion · Leonxlnx/taste-skill · MIT] minimalist-ui style family.",
+      "description": "[companion \u00b7 Leonxlnx/taste-skill \u00b7 MIT] minimalist-ui style family.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Leonxlnx/taste-skill.git",
@@ -99,7 +99,7 @@
     },
     {
       "name": "taste-brutalist",
-      "description": "[companion · Leonxlnx/taste-skill · MIT] industrial-brutalist-ui style family.",
+      "description": "[companion \u00b7 Leonxlnx/taste-skill \u00b7 MIT] industrial-brutalist-ui style family.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Leonxlnx/taste-skill.git",
@@ -113,7 +113,7 @@
     },
     {
       "name": "taste-soft",
-      "description": "[companion · Leonxlnx/taste-skill · MIT] high-end-visual-design (soft, premium) style family.",
+      "description": "[companion \u00b7 Leonxlnx/taste-skill \u00b7 MIT] high-end-visual-design (soft, premium) style family.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Leonxlnx/taste-skill.git",
@@ -127,7 +127,7 @@
     },
     {
       "name": "taste-redesign",
-      "description": "[companion · Leonxlnx/taste-skill · MIT] redesign-existing-projects: audit-first redesigns.",
+      "description": "[companion \u00b7 Leonxlnx/taste-skill \u00b7 MIT] redesign-existing-projects: audit-first redesigns.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Leonxlnx/taste-skill.git",
@@ -141,7 +141,7 @@
     },
     {
       "name": "emil-design-eng",
-      "description": "[companion · emilkowalski/skill · MIT] Design-engineering and motion taste layer.",
+      "description": "[companion \u00b7 emilkowalski/skill \u00b7 MIT] Design-engineering and motion taste layer.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/emilkowalski/skill.git",
@@ -155,7 +155,7 @@
     },
     {
       "name": "emil-review-animations",
-      "description": "[companion · emilkowalski/skill · MIT] Motion audits with before/after/why.",
+      "description": "[companion \u00b7 emilkowalski/skill \u00b7 MIT] Motion audits with before/after/why.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/emilkowalski/skill.git",
@@ -169,7 +169,7 @@
     },
     {
       "name": "emil-animation-vocabulary",
-      "description": "[companion · emilkowalski/skill · MIT] Shared vocabulary for easing, springs and duration.",
+      "description": "[companion \u00b7 emilkowalski/skill \u00b7 MIT] Shared vocabulary for easing, springs and duration.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/emilkowalski/skill.git",
@@ -183,7 +183,7 @@
     },
     {
       "name": "superpowers-debugging",
-      "description": "[companion · obra/superpowers · MIT] systematic-debugging: root cause before fixes.",
+      "description": "[companion \u00b7 obra/superpowers \u00b7 MIT] systematic-debugging: root cause before fixes.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/obra/superpowers.git",
@@ -197,7 +197,7 @@
     },
     {
       "name": "superpowers-tdd",
-      "description": "[companion · obra/superpowers · MIT] test-driven-development: red, green, refactor.",
+      "description": "[companion \u00b7 obra/superpowers \u00b7 MIT] test-driven-development: red, green, refactor.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/obra/superpowers.git",
@@ -211,7 +211,7 @@
     },
     {
       "name": "superpowers-verification",
-      "description": "[companion · obra/superpowers · MIT] verification-before-completion: evidence before claiming done.",
+      "description": "[companion \u00b7 obra/superpowers \u00b7 MIT] verification-before-completion: evidence before claiming done.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/obra/superpowers.git",
@@ -225,7 +225,7 @@
     },
     {
       "name": "superpowers-worktrees",
-      "description": "[companion · obra/superpowers · MIT] using-git-worktrees: isolated workspaces for parallel work.",
+      "description": "[companion \u00b7 obra/superpowers \u00b7 MIT] using-git-worktrees: isolated workspaces for parallel work.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/obra/superpowers.git",
@@ -239,7 +239,7 @@
     },
     {
       "name": "superpowers-review-intake",
-      "description": "[companion · obra/superpowers · MIT] receiving-code-review: verify feedback before applying it.",
+      "description": "[companion \u00b7 obra/superpowers \u00b7 MIT] receiving-code-review: verify feedback before applying it.",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/obra/superpowers.git",

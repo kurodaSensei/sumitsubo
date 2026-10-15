@@ -1,15 +1,17 @@
 {
   "name": "sumi-react",
   "version": "0.6.1",
-  "description": "React 19 + Next.js App Router stack pack: server/client boundaries, data fetching and caching, forms and actions, component architecture.",
+  "description": "React 19 stack pack: Next.js App Router (server/client boundaries, data fetching and caching, Server Actions) and Vite single-page apps (React Router, Zustand, TanStack Query, PWA), component architecture, performance and testing.",
   "author": {
     "name": "Alfredo Romero"
   },
   "license": "MIT",
   "keywords": [
-    "react",
     "nextjs",
-    "typescript"
+    "react",
+    "spa",
+    "typescript",
+    "vite"
   ],
   "dependencies": [
     "sumi"

@@ -117,6 +117,10 @@ There is no `tailwind.config.js` by default in v4; configuration lives in CSS.
 - Dark mode via the class strategy with the preference stored in a cookie or `@nuxtjs/color-mode`
   (avoids hydration flash, see `nuxt-data-ssr`). Semantic tokens mean components need no `dark:` classes.
 
+## Existing v3 projects
+
+A project still on Tailwind v3 (`tailwind.config.*` with a JS theme) keeps every rule above: tokens as CSS variables mapped in `theme.extend`, `cn()` for conditional classes, `gap` over margins, no arbitrary hex. Don't migrate in the middle of a feature: the upgrade (`npx @tailwindcss/upgrade`, then moving the theme to `@theme`) is its own slice with before/after screenshots.
+
 ## Anti-patterns (AI slop tells)
 
 - Hex codes and arbitrary values everywhere (`text-[#333]`, `p-[13px]`, `shadow-[...]`).

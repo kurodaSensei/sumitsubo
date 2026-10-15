@@ -170,7 +170,9 @@ function detectStack(dir) {
   const any = (re) => { try { return readdirSync(dir).some((f) => re.test(f)); } catch { return false; } };
   const found = [];
   if (any(/^nuxt\.config\./)) found.push('nuxt');
-  if (any(/^next\.config\./) || has('app/layout.tsx') || has('src/app/layout.tsx')) found.push('react');
+  const pkg = safeRead(join(dir, 'package.json'));
+  const viteReact = any(/^vite\.config\./) && /"react"\s*:/.test(pkg) && !any(/^nuxt\.config\./);
+  if (any(/^next\.config\./) || has('app/layout.tsx') || has('src/app/layout.tsx') || viteReact) found.push('react');
   if (has('config/settings_schema.json') && has('sections')) found.push('shopify');
   if (has('theme.json') || has('functions.php') || (has('style.css') && /Theme Name:/i.test(safeRead(join(dir, 'style.css'))))) found.push('wordpress');
   return found;
