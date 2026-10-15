@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Installer: `--json` for `install`, `doctor` and `update` — human output goes to stderr and stdout carries one JSON line (`ok`, `plugins`, `problems`, `marketplace`). (#16)
+
 ## 0.6.1 — 2026-10-08
 
 - Releases go through npm trusted publishing: `release.yml` runs `npm stage publish` (the permission the trusted publisher grants), and the version goes live when it is approved under **npmjs.com → sumitsubo → Staged Packages**.
