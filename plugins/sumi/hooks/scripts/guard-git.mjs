@@ -9,9 +9,12 @@ if (!/\bgit\b/.test(command)) process.exit(0);
 const baseRoot = projectRoot(input);
 // ponytail: a tokenizer, not a shell parser. It splits on separators outside quotes, descends into $(...),
 // backticks, heredoc bodies, `<shell> -c` strings and `eval`, and matches git by basename. A heredoc body is
-// dropped only when `cat`/`tee` reads it. It does not expand variables, aliases or git hidden in a script
-// file; extend when a real bypass shows up.
+// dropped only when `cat`/`tee` reads it and does not pipe it on. It does not expand variables, aliases or git hidden in a script
+// file; extend when a real bypass shows up. Threat model: it catches accidental pushes and commits to
+// protected branches, not a model deliberately evading it.
 const base = (t) => t.split('/').pop();
+// One shell word: quoted runs, backslash escapes and plain characters, as bash reads a heredoc delimiter.
+const WORD = String.raw`(?:'[^']*'|"[^"]*"|\\.|[^\s;&|()<>'"\\])+`;
 const SHELLS = ['bash', 'sh', 'zsh', 'dash', 'ksh', 'fish'];
 
 // Only $(...) and backticks of an unquoted-delimiter heredoc that a reader consumes can run anything.
@@ -30,7 +33,7 @@ function heredoc(s, i, h, out) {
     const line = s.slice(p, e);
     if ((h.dash ? line.replace(/^\t+/, '') : line) === h.delim) {
       const body = s.slice(i + 1, p);
-      if (!h.reader) scan(body, out);
+      if (!h.reader || h.piped) scan(body, out);
       else if (!h.quoted) substitutions(body, out);
       return e;
     }
@@ -42,9 +45,9 @@ function heredoc(s, i, h, out) {
 
 // Appends each simple command (as unquoted tokens) to `out`; returns the index where it stopped.
 function scan(s, out, i = 0, close = null) {
-  let toks = [], cur = null, q = null, pending = [];
+  let toks = [], cur = null, q = null, pending = [], hs = [];
   const word = () => { if (cur !== null) toks.push(cur); cur = null; };
-  const end = () => { word(); if (toks.length) out.push(toks); toks = []; };
+  const end = () => { word(); if (toks.length) out.push(Object.assign(toks, { hs })); toks = []; hs = []; };
   for (; i < s.length; i++) {
     const c = s[i];
     if (q !== "'" && (c === '`' || (c === '$' && s[i + 1] === '('))) {
@@ -54,13 +57,21 @@ function scan(s, out, i = 0, close = null) {
     else if (q) { if (c === q) q = null; else cur += c; }
     else if (c === '"' || c === "'") { q = c; cur ??= ''; }
     else if (c === close) { end(); return i; }
-    else if (c === '<' && s[i + 1] === '<' && s[i + 2] !== '<' && s[i - 1] !== '<') {
-      const m = s.slice(i + 2).match(/^(-?)\s*(?:'([^']*)'|"([^"]*)"|(\\?)([^\s;&|()<>]+))/);
+    else if (c === '<' && s[i + 1] === '<' && s[i - 1] !== '<') {
+      const here = s[i + 2] === '<'; // <<< here-string
+      const m = s.slice(i + (here ? 3 : 2)).match(here ? new RegExp(`^\\s*(${WORD})`) : new RegExp(`^(-?)\\s*(${WORD})`));
       if (!m) { cur = (cur ?? '') + c; continue; }
       word();
-      const first = toks.find((t) => !/^\w+=/.test(t));
-      pending.push({ dash: !!m[1], delim: m[2] ?? m[3] ?? m[5], quoted: m[5] === undefined || !!m[4], reader: ['cat', 'tee'].includes(base(first ?? '')) });
-      i += 1 + m[0].length;
+      const w = m[m.length - 1];
+      const plain = w.replace(/['"\\]/g, '');
+      if (here) { hs.push(w.replace(/^(["'])(.*)\1$/s, '$2')); substitutions(w, out); }
+      else {
+        // bash rule: the terminator is the word with quotes and backslashes removed; any of them makes the body literal.
+        const first = toks.find((t) => !/^\w+=/.test(t));
+        pending.push({ dash: !!m[1], delim: plain, quoted: plain !== w, reader: ['cat', 'tee'].includes(base(first ?? '')), piped: false });
+      }
+      i += (here ? 2 : 1) + m[0].length;
+    } else if (c === '|') { end(); pending.forEach((h) => (h.piped = true)); // a reader piped on may feed a shell
     } else if (c === '\n') {
       end();
       for (const h of pending) i = heredoc(s, i, h, out);
@@ -79,8 +90,9 @@ scan(command, cmds);
 // New commands land at the end of the list, which this loop also visits.
 for (const toks of cmds) {
   toks.forEach((t, j) => {
-    if (t === 'eval') scan(toks.slice(j + 1).join(' '), cmds);
+    if (t === 'eval') scan(toks.slice(j + 1).concat(toks.hs).join(' '), cmds);
     else if (SHELLS.includes(base(t))) {
+      toks.hs.forEach((h) => scan(h, cmds)); // here-string fed to the shell
       const c = toks.findIndex((x, k) => k > j && /^-[a-z]*c$/.test(x));
       if (c > 0) scan(toks[c + 1] ?? '', cmds);
     }
@@ -102,7 +114,7 @@ function parse(toks) {
     i += ['-c', '-C', '--git-dir', '--work-tree', '--namespace', '--config-env', '--attr-source'].includes(toks[i]) ? 2 : 1;
   }
   // Options but no subcommand: cannot tell what runs, so ask (plain `git` / `echo git` is not flagged).
-  return { root, s: toks.slice(i).join(' '), moved, noSub: i > at + 1 && i >= toks.length && !/^(--version|--help|-v|-h)$/.test(toks[i - 1]) };
+  return { root, s: toks.slice(i).join(' '), moved, noSub: i > at + 1 && i >= toks.length && !(i === at + 2 && /^(--version|--help|-v|-h)$/.test(toks[i - 1])) };
 }
 
 let createdBranch = false;
