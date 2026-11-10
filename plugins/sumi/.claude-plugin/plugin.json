@@ -21,6 +21,7 @@
     "superpowers-worktrees",
     "superpowers-review-intake"
   ],
+  "types": "./hooks/band/types.d.ts",
   "homepage": "https://sumitsubo-docs.vercel.app/en",
   "repository": "https://github.com/kurodaSensei/sumitsubo"
 }
