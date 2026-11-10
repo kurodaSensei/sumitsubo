@@ -26,15 +26,17 @@ export function loadConfig(root) {
   }
 }
 
+// symbolic-ref also works on an unborn branch (fresh repo), where rev-parse --abbrev-ref fails.
 export function currentBranch(root) {
+  const run = (args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
   try {
-    return execFileSync('git', ['rev-parse', '--abbrev-ref', 'HEAD'], {
-      cwd: root,
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    }).trim();
+    return run(['symbolic-ref', '--short', '-q', 'HEAD']);
   } catch {
-    return null;
+    try {
+      return run(['rev-parse', '--abbrev-ref', 'HEAD']); // detached HEAD
+    } catch {
+      return null;
+    }
   }
 }
 
