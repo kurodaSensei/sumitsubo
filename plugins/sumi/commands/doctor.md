@@ -46,6 +46,15 @@ read-only is one you hesitate to run.
    from an installed copy and move on. It is also the one check that needs the
    network, so never run it unasked.
 
+5b. **Optional add-ons.** From the step 1 plugin list, report
+   `context7@claude-plugins-official` and
+   `security-guidance@claude-plugins-official` as `present`, `disabled` or
+   `absent`. Context7 also counts as present when a `context7` MCP server is
+   configured (`claude mcp get context7` exits 0). Both are recommendations,
+   not requirements: an absent one is an `optional` row with its
+   `/plugin install <name>@claude-plugins-official` command, never a problem
+   and never counted among the rows needing attention.
+
 6. **This project.** Only if the working directory is a project, not the
    framework repo:
    - `.sumi/config.json` — present? `stack`, `modelProfile` and the line budget;
