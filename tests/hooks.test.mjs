@@ -37,7 +37,29 @@ function run(script, dir, tool_input) {
   return r.stdout ? JSON.parse(r.stdout).hookSpecificOutput.permissionDecision : 'allow';
 }
 
+// The way Claude Code commits; the body mentions guarded commands but only the commit itself counts.
+const heredoc = `git commit -m "$(cat <<'EOF'
+fix(sumi): close bypasses
+
+git push origin main is now denied
+git reset --hard
+EOF
+)"`;
+const feat = { branch: 'feat/x' };
 const gitCases = [
+  ['allow', heredoc, feat],
+  ['deny', heredoc],
+  ['allow', 'git commit -m "docs: never git push origin main"', feat],
+  ['allow', 'echo "git push origin main"'],
+  ['allow', 'gh pr create --body "run git push origin main"'],
+  ['deny', '/usr/bin/git push origin main'],
+  ['allow', 'git log --oneline | grep gitk'],
+  ['deny', '\\git commit -m x'],
+  ['deny', 'git --config-env=x=Y push origin main'],
+  ['deny', 'git --namespace foo push origin main'],
+  ['ask', 'git --git-dir=.git push origin main'],
+  ['ask', 'git --work-tree . commit -m x'],
+  ['ask', 'git --version'],
   ['deny', 'git -c user.name=x commit -m x'],
   ['deny', 'git --no-pager commit -m x'],
   ['deny', 'git -c core.x=y push origin main'],
