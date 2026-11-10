@@ -7,7 +7,7 @@
 **Mark the line before you cut.**<br>
 A Claude Code framework for web design and development: direction first, then the work.
 
-[![Version](https://img.shields.io/badge/version-0.6.1-1f2937?style=flat-square)](.claude-plugin/marketplace.json)
+[![Version](https://img.shields.io/badge/version-0.7.0-1f2937?style=flat-square)](.claude-plugin/marketplace.json)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1f2937?style=flat-square)](LICENSE)
 [![Claude Code plugins](https://img.shields.io/badge/Claude%20Code-6%20plugins%20%C2%B7%2035%20skills-1f2937?style=flat-square)](#whats-inside)
 [![Docs](https://img.shields.io/badge/docs-sumitsubo--docs.vercel.app-1f2937?style=flat-square)](https://sumitsubo-docs.vercel.app/en)
@@ -117,6 +117,26 @@ flowchart LR
 - **Small houses, not Eiffel towers.** About 400 changed lines per slice. Deliberate simplifications are marked with `ponytail:` comments that say when to extend them.
 - **Fresh eyes, on a budget.** Reviews run as subagents that see a frozen diff and the check results, never the author's reasoning. At most three lenses per review, each with a hard tool budget.
 
+## Evidence in one command
+
+```bash
+node <plugin sumi>/scripts/evidence.mjs http://localhost:4173 --routes /,/contact
+```
+
+Screenshots at 390 px and 1440 px, axe (WCAG 2.2 A/AA) and Lighthouse mobile for each route, checked against `performanceBudget` in `.sumi/config.json` (LCP, CLS, TBT, initial JS). Results go to `.sumi/evidence/<timestamp>/` and the table is printed for the feature file; exit code 2 means a gate failed. `/sumi:ship` runs it for UI work. Playwright, axe and Lighthouse install once into `~/.sumi/evidence-runtime`, never into your project. Run it against a production build, not the dev server.
+
+## Status line
+
+One line for the whole framework, for example `墨 balanced · Opus · checkout 2/3 · ponytail lite · ⎇ feat/checkout`: model profile, session model, active feature and its progress, Ponytail mode and branch (protected branches highlighted). It reads `.sumi/` and `.git/HEAD` directly, with no network and no git process.
+
+`/sumi:init` offers to enable it. To do it by hand, add this to `.claude/settings.local.json`:
+
+```json
+{ "statusLine": { "type": "command", "command": "node \"$HOME/.sumi/statusline.mjs\"" } }
+```
+
+The SessionStart hook keeps `~/.sumi/statusline.mjs` current, so the path survives plugin updates.
+
 ## Model routing
 
 Opus only where it changes the outcome:
@@ -176,13 +196,14 @@ Installing `sumi` and `sumi-design` also installs curated pieces of **Impeccable
 ## Repository layout
 
 ```text
-.claude-plugin/marketplace.json     6 plugins + 15 upstream companions
+.claude-plugin/marketplace.json     6 plugins + 14 upstream companions
 bin/sumitsubo.mjs                   the npx installer (wraps `claude plugin`, no dependencies)
+bin/rules.mjs                       `npx sumitsubo rules`: Cursor and Codex rules from the skills
 plugins/<plugin>/
   .claude-plugin/plugin.json
   skills/<skill>/SKILL.md           (+ references/, scripts/)
   agents/  commands/  hooks/  templates/
-scripts/validate.mjs
+scripts/validate.mjs, run-evals.mjs
 docs/GUIA.md                        Spanish guide
 docs/ARCHITECTURE.md                layers, project state, roadmap
 ```

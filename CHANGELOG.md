@@ -1,7 +1,18 @@
 # Changelog
 
-## Unreleased
+## 0.7.0 — 2026-11-10
 
+### Fixes
+- **`sumi-design` installs again.** Upstream `Leonxlnx/taste-skill` moved its classic styles to `Leonxlnx/taste-skill-classics` on 2026-10-19 and retired `redesign-existing-projects`, so the old paths were gone and every `sumi-design` install failed. `taste-minimalist`, `taste-brutalist` and `taste-soft` now point at the classics repo; `taste-redesign` is dropped (`taste` covers redesigns).
+- **Git guard bypasses closed.** `git -c … commit`, `git --no-pager …`, `bash -c "git push origin main"` (also behind `sudo`, `env`, `timeout`), `eval`, `$(…)`, heredocs and here-strings fed to a shell, `/usr/bin/git` and `\git` no longer slip past the protected-branch checks; `--git-dir`/`--work-tree` ask. The first commit on an unborn `main` is blocked too. Commit and PR messages written with `$(cat <<'EOF' … EOF)` are not mistaken for commands. The threat model is stated in the file: accidents, not a model evading it on purpose.
+
+### Security
+- **Companions are pinned.** Every third-party companion carries a commit `sha`, so installs no longer track upstream HEAD (Ponytail ships a SessionStart hook). `validate.mjs` fails on an unpinned companion; `check-companions.mjs` checks paths at the pinned commit, reports upstream drift, and `--bump` advances the pins; the weekly workflow opens a PR with the compare links for a human to review.
+
+### Tests
+- First test suite (`npm test`, `node --test`, no dependencies): 60 cases for the git and edit guards against throwaway repos, run in CI.
+
+### Added
 - **Evidence in one command**: `scripts/evidence.mjs <url> --routes /,/x` — screenshots (390 px and 1440 px), axe (WCAG 2.2 A/AA) and Lighthouse mobile per route, checked against `performanceBudget` (LCP, CLS, TBT as the INP lab proxy, initial JS). Writes `.sumi/evidence/<timestamp>/`, prints the table for the feature file, exits 2 when a gate fails. Its dependencies install once into `~/.sumi/evidence-runtime`, never into the project. `/sumi:ship` runs it for UI work. (#7)
 - **One status line** for the whole framework: `墨 balanced · Opus · checkout 2/3 · ponytail lite · ⎇ feat/checkout` — model profile, session model, active feature and progress, Ponytail mode, branch (protected branches highlighted). No network, no git spawn (~80 ms). The SessionStart hook keeps it at `~/.sumi/statusline.mjs`, a path that survives plugin updates; `/sumi:init` offers to enable it in `.claude/settings.local.json`. (#11)
 - **Skill evals** (`npm run evals`): trigger cases for every plugin (does the right skill fire; does none fire on trivia) and a slop-rate case for `sumi-design` (a generated landing hero judged against the anti-slop catalog, with and without the plugin). `scripts/run-evals.mjs` stages each plugin with its real dependencies, because `claude plugin eval` loads only the plugin under test and a plugin with unmet dependencies does not load at all. On-demand CI workflow (`evals.yml`, needs `ANTHROPIC_API_KEY`). First baseline, one run per case: 4/9 trigger cases pass (advisory questions answered without loading the skill); slop case passes with `sumi-design` (3/3 judges) and fails without it (2/3 judges flag it). `sumi:workflow` description now asks to be loaded before exploring. (#12)

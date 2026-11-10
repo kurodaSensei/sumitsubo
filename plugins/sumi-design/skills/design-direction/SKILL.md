@@ -11,7 +11,7 @@ Generic AI design is what happens when the model fills every unspecified decisio
 
 Installed automatically as dependencies of `sumi-design` (referenced from their upstream repos):
 - **Impeccable** (`impeccable`): product context (`PRODUCT.md`), critique, audit, polish, anti-pattern detectors. Stages 1 and 6.
-- **Taste** (`taste` = design-taste-frontend, plus style families `taste-minimalist`, `taste-brutalist`, `taste-soft`, `taste-redesign`): variance / motion / density dials and style references. Stage 3; `taste-redesign` for redesigns of existing sites.
+- **Taste** (`taste` = design-taste-frontend, plus the classic style families `taste-minimalist`, `taste-brutalist`, `taste-soft`, which run only when called by name): variance / motion / density dials and style references. Stage 3; `taste` also covers redesigns of existing sites.
 - **Emil Kowalski** (`emil-design-eng`, `emil-review-animations`, `emil-animation-vocabulary`): motion craft and motion audits. Stage 6 and `sumi-design:motion`.
 If any is missing (e.g. installed without dependencies), run `/sumi-design:deps`.
 

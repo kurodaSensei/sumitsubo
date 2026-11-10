@@ -7,7 +7,7 @@ Companions are declared as dependencies of `sumi` and `sumi-design`, so installi
 
 1. **Expected companions** (all from the `sumitsubo` marketplace, referenced from upstream):
    - With `sumi`: `ponytail`, `superpowers-debugging`, `superpowers-tdd`, `superpowers-verification`, `superpowers-worktrees`, `superpowers-review-intake`.
-   - With `sumi-design`: `impeccable`, `taste`, `taste-minimalist`, `taste-brutalist`, `taste-soft`, `taste-redesign`, `emil-design-eng`, `emil-review-animations`, `emil-animation-vocabulary`.
+   - With `sumi-design`: `impeccable`, `taste`, `taste-minimalist`, `taste-brutalist`, `taste-soft`, `emil-design-eng`, `emil-review-animations`, `emil-animation-vocabulary`.
 2. **Check** with `claude plugin list`: each must be installed and enabled from `@sumitsubo`. Offer `claude plugin install <name>@sumitsubo` for any missing one (ask before running).
 3. **Find duplicates** that would compete or shadow them:
    - The same projects installed from other marketplaces (`impeccable@impeccable`, `ponytail@ponytail`, `superpowers@claude-plugins-official`).
