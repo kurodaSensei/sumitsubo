@@ -48,6 +48,7 @@ Rules:
 - Mirror the tasks into the session todo list and keep both in sync as you go.
 - Every acceptance criterion must be checkable (a command, a test, a measurable value, a screenshot).
 - Append to the process log at each meaningful step, one or two lines each: what changed, what you learned, what is next. Anyone must be able to resume from the file alone; it is a log, not a report.
+- When you abandon an approach, append it under "Failed attempts" (what you tried, why it failed, what not to repeat) before trying the next one, so a resume after `/clear` doesn't walk into it again.
 - Evidence is mandatory to tick a task: test output, a command result, a Lighthouse/axe number, or a screenshot path. "Should work" is not evidence.
 - Set `status:` in the frontmatter (`active`, `blocked`, `done`). The session-start hook surfaces active files.
 
