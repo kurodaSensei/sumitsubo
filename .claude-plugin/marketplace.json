@@ -56,7 +56,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/pbakaus/impeccable.git",
-        "path": "plugin"
+        "path": "plugin",
+        "sha": "ebe9c265f416f7f9b83ed424ed5b9bd0d2684536"
       },
       "category": "companion"
     },
@@ -65,7 +66,8 @@
       "description": "[companion \u00b7 DietrichGebert/ponytail \u00b7 MIT] Minimalism rules against over-engineering; origin of the ponytail: comment convention. Referenced from upstream.",
       "source": {
         "source": "url",
-        "url": "https://github.com/DietrichGebert/ponytail.git"
+        "url": "https://github.com/DietrichGebert/ponytail.git",
+        "sha": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846"
       },
       "category": "companion"
     },
@@ -75,7 +77,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Leonxlnx/taste-skill.git",
-        "path": "skills/taste-skill"
+        "path": "skills/taste-skill",
+        "sha": "f6b76575f949707b4e3c37cd86cb44b0b98643e8"
       },
       "strict": false,
       "skills": [
@@ -89,7 +92,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Leonxlnx/taste-skill.git",
-        "path": "skills/minimalist-skill"
+        "path": "skills/minimalist-skill",
+        "sha": "f6b76575f949707b4e3c37cd86cb44b0b98643e8"
       },
       "strict": false,
       "skills": [
@@ -103,7 +107,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Leonxlnx/taste-skill.git",
-        "path": "skills/brutalist-skill"
+        "path": "skills/brutalist-skill",
+        "sha": "f6b76575f949707b4e3c37cd86cb44b0b98643e8"
       },
       "strict": false,
       "skills": [
@@ -117,7 +122,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Leonxlnx/taste-skill.git",
-        "path": "skills/soft-skill"
+        "path": "skills/soft-skill",
+        "sha": "f6b76575f949707b4e3c37cd86cb44b0b98643e8"
       },
       "strict": false,
       "skills": [
@@ -131,7 +137,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Leonxlnx/taste-skill.git",
-        "path": "skills/redesign-skill"
+        "path": "skills/redesign-skill",
+        "sha": "f6b76575f949707b4e3c37cd86cb44b0b98643e8"
       },
       "strict": false,
       "skills": [
@@ -145,7 +152,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/emilkowalski/skill.git",
-        "path": "skills/emil-design-eng"
+        "path": "skills/emil-design-eng",
+        "sha": "715c1807e08c497cfd1dc4feb450a2a3300ef2a9"
       },
       "strict": false,
       "skills": [
@@ -159,7 +167,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/emilkowalski/skill.git",
-        "path": "skills/review-animations"
+        "path": "skills/review-animations",
+        "sha": "715c1807e08c497cfd1dc4feb450a2a3300ef2a9"
       },
       "strict": false,
       "skills": [
@@ -173,7 +182,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/emilkowalski/skill.git",
-        "path": "skills/animation-vocabulary"
+        "path": "skills/animation-vocabulary",
+        "sha": "715c1807e08c497cfd1dc4feb450a2a3300ef2a9"
       },
       "strict": false,
       "skills": [
@@ -187,7 +197,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/obra/superpowers.git",
-        "path": "skills/systematic-debugging"
+        "path": "skills/systematic-debugging",
+        "sha": "22f0b463e7a5e579904dd6211a520321035526f7"
       },
       "strict": false,
       "skills": [
@@ -201,7 +212,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/obra/superpowers.git",
-        "path": "skills/test-driven-development"
+        "path": "skills/test-driven-development",
+        "sha": "22f0b463e7a5e579904dd6211a520321035526f7"
       },
       "strict": false,
       "skills": [
@@ -215,7 +227,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/obra/superpowers.git",
-        "path": "skills/verification-before-completion"
+        "path": "skills/verification-before-completion",
+        "sha": "22f0b463e7a5e579904dd6211a520321035526f7"
       },
       "strict": false,
       "skills": [
@@ -229,7 +242,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/obra/superpowers.git",
-        "path": "skills/using-git-worktrees"
+        "path": "skills/using-git-worktrees",
+        "sha": "22f0b463e7a5e579904dd6211a520321035526f7"
       },
       "strict": false,
       "skills": [
@@ -243,7 +257,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/obra/superpowers.git",
-        "path": "skills/receiving-code-review"
+        "path": "skills/receiving-code-review",
+        "sha": "22f0b463e7a5e579904dd6211a520321035526f7"
       },
       "strict": false,
       "skills": [
