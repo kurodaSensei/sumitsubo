@@ -34,6 +34,9 @@ for (const p of mk?.plugins ?? []) {
     // https URL installs for everyone (verified in a clean profile with SSH off).
     if (p.source.source === 'github') errors.push(`${p.name}: use {"source":"url","url":"https://github.com/<repo>.git"} instead of "github" — github sources need SSH keys to install`);
     for (const k of ['url']) if (p.source[k] && !/^https:\/\//.test(p.source[k])) errors.push(`${p.name}: ${k} must be https:// (SSH URLs fail without keys)`);
+    // Unpinned, every install pulls whatever upstream pushed last — including
+    // hooks that run on users' machines. scripts/check-companions.mjs --bump advances it.
+    if (!/^[0-9a-f]{40}$/.test(p.source.sha ?? '')) errors.push(`${p.name}: source.sha must be a full 40-hex commit (unpinned companions track upstream HEAD)`);
     continue;
   } // upstream reference, validated by `claude plugin validate`
   const dir = join(root, p.source);

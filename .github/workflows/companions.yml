@@ -9,6 +9,12 @@ on:
     - cron: '0 7 * * 1'   # Mondays, 07:00 UTC
   workflow_dispatch:
 
+# Companions are pinned to a commit. The weekly job proposes bumps as a PR, so a
+# human reads the upstream diff before users get it.
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   resolve:
     runs-on: ubuntu-latest
@@ -18,3 +24,20 @@ jobs:
         with:
           node-version: '24'
       - run: node scripts/check-companions.mjs
+      # Bump to upstream HEAD (only where the path still resolves); open a PR if
+      # anything moved. Note: PRs opened with GITHUB_TOKEN do not trigger other
+      # workflows, so run checks.yml by hand (or push an empty commit) on the PR.
+      - name: Bump pins and open a PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/check-companions.mjs --bump | tee bump.log || true
+          git diff --quiet .claude-plugin/marketplace.json && exit 0
+          branch=chore/bump-companions-$(date +%F)
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git checkout -b "$branch"
+          git commit -am "chore: bump companion pins"
+          git push origin "$branch"
+          { echo "Review each upstream diff before merging; users get exactly these commits."; echo; grep '^update available' bump.log | sed 's/^update available /- /'; } > body.md
+          gh pr create --title "chore: bump companion pins" --body-file body.md
