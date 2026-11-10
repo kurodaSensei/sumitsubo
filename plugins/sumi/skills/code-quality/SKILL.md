@@ -1,6 +1,6 @@
 ---
 name: code-quality
-description: Engineering quality bar for every code change — the rules that separate senior work from AI slop. Covers simplicity and scope, naming, function and file size, error handling, comments, dependencies, types, tests, dead code and verification. Use on every implementation, refactor or code review, in any language or stack, and whenever code "works" but feels generated.
+description: Engineering quality bar for every code change — the rules that separate senior work from AI slop: simplicity and scope, naming, function and file size, error handling, comments, dependencies, types, tests, dead code, verification and `ponytail:` notes for deliberate simplifications. Use when writing, editing, refactoring or reviewing code in any language or stack, when deciding whether to add a dependency or an abstraction, or when code "works" but feels generated.
 ---
 
 # Code Quality — No Slop

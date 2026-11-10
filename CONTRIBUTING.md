@@ -22,6 +22,8 @@ To use your checkout in Claude Code: `claude plugin marketplace add ./sumitsubo`
 
 Each plugin has `evals/<case>/prompt.md` + `graders/*.md` for `claude plugin eval`. Tag `trigger` cases check that the right skill fires (and `negative` ones that none does); `slop` cases judge generated UI against the anti-slop catalog, with and without the plugin. Run them with `npm run evals` (it stages each plugin with its real dependencies, which `claude plugin eval` would otherwise leave out). They cost tokens: add a case when you change a skill's description or add a skill.
 
+Before adding a trigger case, run `/skill-doctor` (or `claude -p "/skill-doctor"` from a shell) in a session with your checkout installed. It doesn't grade descriptions; it shows, per skill, what its listing costs in the system prompt and how often it ran. Read the `sumi*` rows: a context of `< 20` tokens means Claude is seeing the skill's name without its description, so no description rewrite can help it trigger on that install, and a skill at `0× never` after real use is the one whose "Use when" clause needs work. A description says what the skill covers and then, in a "Use when …" clause, the situations that should load it.
+
 ## Rules of the house
 
 - **Skills:** `skills/<name>/SKILL.md`; the frontmatter `name` equals the folder name, and the `description` says *when* to use it. Keep it under ~260 lines and move depth to `references/`.
