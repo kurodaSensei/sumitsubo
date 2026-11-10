@@ -1,6 +1,6 @@
 name: companions
 
-# Fifteen of the twenty-one marketplace entries point into repositories this
+# Fourteen of the twenty marketplace entries point into repositories this
 # project does not control. An author renaming a folder breaks every install of
 # that companion on a day when nobody here pushed anything, so the check cannot
 # only run on our commits.

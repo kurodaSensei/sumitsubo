@@ -88,12 +88,12 @@
     },
     {
       "name": "taste-minimalist",
-      "description": "[companion \u00b7 Leonxlnx/taste-skill \u00b7 MIT] minimalist-ui style family.",
+      "description": "[companion \u00b7 Leonxlnx/taste-skill-classics \u00b7 MIT] minimalist-ui style family.",
       "source": {
         "source": "git-subdir",
-        "url": "https://github.com/Leonxlnx/taste-skill.git",
+        "url": "https://github.com/Leonxlnx/taste-skill-classics.git",
         "path": "skills/minimalist-skill",
-        "sha": "f6b76575f949707b4e3c37cd86cb44b0b98643e8"
+        "sha": "5e08c9383dc4ad7fc0df70e1ac8cfa09ec356305"
       },
       "strict": false,
       "skills": [
@@ -103,12 +103,12 @@
     },
     {
       "name": "taste-brutalist",
-      "description": "[companion \u00b7 Leonxlnx/taste-skill \u00b7 MIT] industrial-brutalist-ui style family.",
+      "description": "[companion \u00b7 Leonxlnx/taste-skill-classics \u00b7 MIT] industrial-brutalist-ui style family.",
       "source": {
         "source": "git-subdir",
-        "url": "https://github.com/Leonxlnx/taste-skill.git",
+        "url": "https://github.com/Leonxlnx/taste-skill-classics.git",
         "path": "skills/brutalist-skill",
-        "sha": "f6b76575f949707b4e3c37cd86cb44b0b98643e8"
+        "sha": "5e08c9383dc4ad7fc0df70e1ac8cfa09ec356305"
       },
       "strict": false,
       "skills": [
@@ -118,27 +118,12 @@
     },
     {
       "name": "taste-soft",
-      "description": "[companion \u00b7 Leonxlnx/taste-skill \u00b7 MIT] high-end-visual-design (soft, premium) style family.",
+      "description": "[companion \u00b7 Leonxlnx/taste-skill-classics \u00b7 MIT] high-end-visual-design (soft, premium) style family.",
       "source": {
         "source": "git-subdir",
-        "url": "https://github.com/Leonxlnx/taste-skill.git",
+        "url": "https://github.com/Leonxlnx/taste-skill-classics.git",
         "path": "skills/soft-skill",
-        "sha": "f6b76575f949707b4e3c37cd86cb44b0b98643e8"
-      },
-      "strict": false,
-      "skills": [
-        "./"
-      ],
-      "category": "companion"
-    },
-    {
-      "name": "taste-redesign",
-      "description": "[companion \u00b7 Leonxlnx/taste-skill \u00b7 MIT] redesign-existing-projects: audit-first redesigns.",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/Leonxlnx/taste-skill.git",
-        "path": "skills/redesign-skill",
-        "sha": "f6b76575f949707b4e3c37cd86cb44b0b98643e8"
+        "sha": "5e08c9383dc4ad7fc0df70e1ac8cfa09ec356305"
       },
       "strict": false,
       "skills": [

@@ -3,7 +3,7 @@
 //
 //   node scripts/check-companions.mjs
 //
-// Fifteen of the twenty-one entries in marketplace.json are `git-subdir`
+// Fourteen of the twenty entries in marketplace.json are `git-subdir`
 // pointers into OTHER PEOPLE'S repositories. Nothing in this repo controls
 // them. If an author renames a folder, moves a skill or retires a repo, every
 // `/plugin install` of that companion breaks — for everyone — and no amount of

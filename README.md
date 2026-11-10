@@ -196,7 +196,7 @@ Installing `sumi` and `sumi-design` also installs curated pieces of **Impeccable
 ## Repository layout
 
 ```text
-.claude-plugin/marketplace.json     6 plugins + 15 upstream companions
+.claude-plugin/marketplace.json     6 plugins + 14 upstream companions
 bin/sumitsubo.mjs                   the npx installer (wraps `claude plugin`, no dependencies)
 bin/rules.mjs                       `npx sumitsubo rules`: Cursor and Codex rules from the skills
 plugins/<plugin>/
