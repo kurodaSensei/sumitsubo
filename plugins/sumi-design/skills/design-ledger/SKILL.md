@@ -1,6 +1,6 @@
 ---
 name: design-ledger
-description: Cross-project design memory that prevents repeating yourself across clients — records each project's typefaces, accent hues, layout signature, shape language and signature element in ~/.sumi/design-ledger.json, and checks new directions against recent work. Use during design direction (anti-references), before finalizing DESIGN.md, after a project's direction is approved, or when the user asks "what have I used before".
+description: Cross-project design memory that keeps a freelance portfolio from repeating itself — records each project's typefaces, accent hues, layout signature, shape language and signature element in ~/.sumi/design-ledger.json and checks new directions against recent work. Use when drafting anti-references or directions for a new site, before finalizing or right after approving a DESIGN.md, or when the user asks which fonts, colors or layouts they used before or whether a design looks like a past client's.
 ---
 
 # Design Ledger

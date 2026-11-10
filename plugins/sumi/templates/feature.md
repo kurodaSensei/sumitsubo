@@ -46,6 +46,10 @@ Line forecast: <~N changed lines> → <single slice | N slices>
 ## Process log
 - <yyyy-mm-dd> Created. <Initial findings>
 
+## Failed attempts
+<!-- Append when an approach is abandoned, so a resume after /clear does not retry it. -->
+- <yyyy-mm-dd> Tried: <approach>. Failed because: <evidence>. Don't repeat: <what to avoid>
+
 ## Evidence
 - <task id>: <command + result | screenshot path | metric>
 

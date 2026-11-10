@@ -83,6 +83,56 @@ const problem = (p, sha) => {
     : `${path} is gone from ${url}`;
 };
 
+// A path check proves the bump still installs, not that it is safe to ship:
+// the reviewer of the bump PR sees only a compare link to someone else's repo.
+// So for every bumped companion, list what changed under ITS path and flag what
+// can run code on a user's machine: hooks (they fire on their own), scripts, and
+// added lines that reach the network or a shell. Markdown counts too — a skill
+// that says "run curl … | sh" is an instruction the model will follow.
+const RISKY = /\bcurl\b|\bfetch\(|\bexec(?:Sync|File|FileSync)?\b|\beval\b|child_process/g;
+const diffRepos = new Map();
+const riskNotes = (p, from, to) => {
+  const url = urlOf(p.source);
+  const key = `${url}#${from}..${to}`;
+  if (!diffRepos.has(key)) {
+    const dir = join(work, encodeURIComponent(key));
+    // A named remote makes this a partial clone, so the diff below lazily
+    // fetches only the blobs it touches instead of the whole upstream repo.
+    git(['init', '-q', dir]);
+    git(['remote', 'add', 'origin', url], dir);
+    git(['fetch', '-q', '--depth', '1', '--filter=blob:none', 'origin', from, to], dir);
+    diffRepos.set(key, dir);
+  }
+  const dir = diffRepos.get(key);
+  const path = p.source.path ?? '.';
+  // File names come from upstream, so they are untrusted input: read them
+  // NUL-separated (no quoting to undo), diff each one by literal pathspec
+  // instead of parsing patch headers, and print each as a code span so a name
+  // carrying markdown or an HTML comment cannot hide the notes in the PR body.
+  const names = git(['diff', '-z', '--no-renames', '--name-status', from, to, '--', path], dir).split('\0').filter(Boolean);
+  const show = (f) => '`' + f.replace(/[`\r\n]/g, '?') + '`';
+  const flagged = [];
+  const plain = [];
+  for (let i = 0; i < names.length; i += 2) {
+    const [st, f] = [names[i], names[i + 1]];
+    const rel = path === '.' ? f : f.slice(path.length + 1);
+    const why = [];
+    if (st !== 'D' && /(^|\/)hooks\//.test(rel)) why.push(st === 'A' ? 'new hook' : 'changed hook');
+    if (st !== 'D' && /\.(sh|py|mjs|cjs|js|tsx?)$/.test(rel)) why.push(st === 'A' ? 'new script' : 'changed script');
+    const patch = git(['diff', '-U0', '--no-renames', from, to, '--', `:(literal)${f}`], dir);
+    // Added lines are the '+' lines after the first hunk header.
+    const body = patch.slice(patch.indexOf('\n@@') + 1).split('\n');
+    const words = new Set(body.filter((l) => l.startsWith('+')).flatMap((l) => [...l.matchAll(RISKY)].map(([w]) => w)));
+    if (words.size) why.push(`adds ${[...words].join(', ')}`);
+    (why.length ? flagged : plain).push(why.length ? `  - ⚠ ${st} ${show(rel)} — ${why.join('; ')}` : `  - ${st} ${show(rel)}`);
+  }
+  // ponytail: unflagged files capped at 30 to keep the PR body readable; the
+  // compare link has the rest.
+  const shown = plain.slice(0, 30);
+  if (plain.length > shown.length) shown.push(`  - … and ${plain.length - shown.length} more unflagged files`);
+  return [`  - ${names.length / 2} files changed under ${path}, ${flagged.length} flagged`, ...flagged, ...shown];
+};
+
 let out = raw;
 try {
   for (const p of companions) {
@@ -105,6 +155,7 @@ try {
     // else a half-bumped repo would ship a broken companion.
     if (bump && companions.filter((q) => q.source.sha === sha).every((q) => !problem(q, head))) {
       out = out.replaceAll(sha, head);
+      try { console.log(riskNotes(p, sha, head).join('\n')); } catch (e) { console.log(`  - ⚠ could not diff ${sha.slice(0, 7)}..${head.slice(0, 7)}: ${e.message.split('\n')[0]}`); }
     } else if (bump) console.log(`skip ${p.name}: path check fails at ${head.slice(0, 7)}, not bumped`);
   }
 } finally {

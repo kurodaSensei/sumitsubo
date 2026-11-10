@@ -39,5 +39,8 @@ jobs:
           git checkout -b "$branch"
           git commit -am "chore: bump companion pins"
           git push origin "$branch"
-          { echo "Review each upstream diff before merging; users get exactly these commits."; echo; grep '^update available' bump.log | sed 's/^update available /- /'; } > body.md
+          # Each update line is followed by its indented risk notes (files changed
+          # under the companion's path; ⚠ marks hooks, scripts and added
+          # curl/fetch/exec/eval/child_process), which nest under it as a list.
+          { echo "Review each upstream diff before merging; users get exactly these commits. Read every ⚠ file first: hooks and scripts run on users' machines."; echo; grep -E '^(update available|  - )' bump.log | sed 's/^update available /- /'; } > body.md
           gh pr create --title "chore: bump companion pins" --body-file body.md
