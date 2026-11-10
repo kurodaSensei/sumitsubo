@@ -24,6 +24,16 @@ jobs:
       # check.
       - run: node scripts/validate.mjs
 
+  # Hook tests: the git and edit guards against throwaway repos. No network.
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm test
+
   # The companions live in other people's repositories. They break without
   # anybody here touching anything, so this also runs on a schedule — see
   # companions.yml. Here it guards changes to the manifest itself.
