@@ -27,7 +27,7 @@ Each plugin has `evals/<case>/prompt.md` + `graders/*.md` for `claude plugin eva
 - **Skills:** `skills/<name>/SKILL.md`; the frontmatter `name` equals the folder name, and the `description` says *when* to use it. Keep it under ~260 lines and move depth to `references/`.
 - **Commands** end with a report per `sumi:output`. Don't restate that contract inside the command.
 - **Scripts and hooks:** Node, no dependencies, reference files with `${CLAUDE_PLUGIN_ROOT}` and never outside the plugin folder.
-- **Companions** stay upstream: reference them in `marketplace.json` with an https `url` or `git-subdir` source. Never copy their files. Each one is pinned to a full commit with `source.sha` (`validate.mjs` requires it); a weekly workflow runs `node scripts/check-companions.mjs --bump` and opens a PR with the upstream compare links, so a human reviews what users will get.
+- **Companions** stay upstream: reference them in `marketplace.json` with an https `url` or `git-subdir` source. Never copy their files. Each one is pinned to a full commit with `source.sha` (`validate.mjs` requires it); a weekly workflow runs `node scripts/check-companions.mjs --bump` and opens a PR with the upstream compare links and, per companion, the files changed under its path, flagging hooks, scripts and added `curl`/`fetch(`/`exec`/`eval`/`child_process` — so a human reviews what users will get.
 - **Commits:** [Conventional Commits](https://www.conventionalcommits.org) — `feat:`, `fix:`, `docs:`…
 - **Deliberate simplifications** get a `ponytail:` comment that says when to extend them.
 
