@@ -57,7 +57,7 @@
         "source": "git-subdir",
         "url": "https://github.com/pbakaus/impeccable.git",
         "path": "plugin",
-        "sha": "ebe9c265f416f7f9b83ed424ed5b9bd0d2684536"
+        "sha": "d41d9860b0094dcb68030657da63461212835aaa"
       },
       "category": "companion"
     },
@@ -138,7 +138,7 @@
         "source": "git-subdir",
         "url": "https://github.com/emilkowalski/skill.git",
         "path": "skills/emil-design-eng",
-        "sha": "715c1807e08c497cfd1dc4feb450a2a3300ef2a9"
+        "sha": "64eb3deb9a5fbfa041faf783e0bc3fd635872e9c"
       },
       "strict": false,
       "skills": [
@@ -153,7 +153,7 @@
         "source": "git-subdir",
         "url": "https://github.com/emilkowalski/skill.git",
         "path": "skills/review-animations",
-        "sha": "715c1807e08c497cfd1dc4feb450a2a3300ef2a9"
+        "sha": "64eb3deb9a5fbfa041faf783e0bc3fd635872e9c"
       },
       "strict": false,
       "skills": [
@@ -168,7 +168,7 @@
         "source": "git-subdir",
         "url": "https://github.com/emilkowalski/skill.git",
         "path": "skills/animation-vocabulary",
-        "sha": "715c1807e08c497cfd1dc4feb450a2a3300ef2a9"
+        "sha": "64eb3deb9a5fbfa041faf783e0bc3fd635872e9c"
       },
       "strict": false,
       "skills": [
